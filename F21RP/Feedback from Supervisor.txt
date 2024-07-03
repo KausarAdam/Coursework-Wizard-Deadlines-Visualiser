@@ -1,0 +1,32 @@
+For the F21MP dissertation, you need to re-focus the lit review from a Usability perspective, check the annotations on the PDF. Also, include a discussion on related work with one or two examples to enable you to benchmark against existing systems.
+
+
+
+
+Abstract, Introduction, Motivation (10%)
+8% Excellent
+Abstract describes the project, but the dissertation abstract should describe the document. Does the introduction identifies a meaningful problem and the tool to solve the problem of students meeting dissertation deadlines. A more detailed description of what is being proposed could have been beneficial. Aims and objectives of the project are clear.
+
+
+Literature Review (40%)
+25% Excellent
+The background section covers a large number of papers that were consulted, but often the presentation is too lengthy with little reflection on the link to the proposed work.
+References and citations are appropriate.
+Where the work is slightly deficient is in critiquing what is reviewed and establishing a link to the proposed work. A Related Work Section is missing and could include images for illustration.
+
+
+Requirements and/or Proposed Methodology (incl. Evaluation) (30%)
+21% Excellent
+Are project requirements are clearly presented. Agile Solo is identified, but not elaborated.
+The main dissertation will need to include diagrams and figures that have not been considered at this stage.
+The work will be evaluated by 3 lecturers and 3 students, but more students will allow the collection of more feedback. It would be good to identify a benchmark, maybe from a project management perspective.
+
+
+Project Plan (incl. Professional, Legal, Ethical, and Social Issues) (20%)
+16% Excellent
+Project plan, allocates time to learn tools and shows an iteration-based approach.
+Both risk and PLES are discussed.
+
+
+Comments (0%)
+The 5 journal submissions demonstrate incremental development of the project and good time management as well as reflection on progress.

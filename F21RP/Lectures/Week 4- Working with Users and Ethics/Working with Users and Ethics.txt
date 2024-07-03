@@ -1,0 +1,13 @@
+Working with Users and Ethics
+
+Learning Outcomes
+
+This week the emphasis is placed on 2 topics that should concern most projects: Working with Users and Ethics. 
+
+In a nutshell, by the end of this week, you should be able to answer the following questions:
+
+- What are the types of data we can collect from users?
+- What are the types of questions we can use in questionnaires?
+- Why do I need to anonymise data?
+- What are the rules for an Ethical Experiment?
+- How to fill in the Ethics Form
