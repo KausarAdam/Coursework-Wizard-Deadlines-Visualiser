@@ -1,17 +1,18 @@
 .homePage {
   position: relative; /* To ensure the children are positioned relative to this container */
   height: 100vh; /* Full viewport height */
+  z-index: 1;
 }
 
 .circle {
   position: absolute;
-  left: 930px; 
-  bottom: 110px;
-  width: 800px;
+  left: 970px; 
+  bottom: 80px;
+  width: 850px;
   height: 700px;
   background-color: #C8F2E1;
   border-radius: 50%; /* Makes the div a circle */
-  z-index: 10; /* Ensures the circle is above*/
+  z-index: 5; /* Ensures the circle is above*/
 }
 
 .alarmClock {
@@ -20,7 +21,7 @@
   top: 250px; 
   width: 310px; 
   height: 328px; 
-  z-index: 15; /* To ensure it's above the circle */
+  z-index: 10; /* To ensure it's above the circle */
 }
 
 .actNowText {
@@ -28,9 +29,9 @@
   left: 970px;
   top: 130px;
   color: #F8FAF4;
-  font-size: 60px;
+  font-size: 77px;
   font-weight: bold;
-  z-index: 20;
+  z-index: 10;
   text-align: center;
   line-height: 1.35;
   font-family: 'Inter', sans-serif;
@@ -38,4 +39,62 @@
 
 .actNowText div:nth-child(2) {
   margin-left: 280px; /* To add space before "NOW" */
+}
+
+.heading {
+  text-align: left;
+  color: #1F4E47;
+  z-index: 25;
+  position: relative;
+  font-family: 'Georgia', serif;
+  top: 160px;
+  line-height: 50%;
+}
+
+.heading h1 {
+  font-size: 75px;
+  margin-left: 120px;
+  font-weight: 100;
+}
+
+.heading h2 {
+  font-size: 28px;
+  margin-left: 160px;
+  font-weight: 100;
+}
+
+.content {
+  text-align: left;
+  left: 120px;
+  font-size: 22px;
+  color: #1F4E47;;
+  top: 180px; /* Space between the heading and content */
+  z-index: 25;
+  position: relative;
+  font-family: 'Verdana', sans-serif;
+}
+
+.logIn {
+  left: 120px;
+  top: 200px;
+  position: relative;
+  z-index: 25;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logIn button {
+  font-family: 'Verdana', sans-serif;
+  font-size: 22px;
+  color: #1F4E47;
+  background-color: #3BECB9;
+  border: none;
+  border-radius: 9px;
+  padding: 15px 30px;
+}
+
+.logIn button:hover {
+  background-color: #7DFFD9;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
