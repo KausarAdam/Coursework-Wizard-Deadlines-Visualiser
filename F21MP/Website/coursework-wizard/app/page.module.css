@@ -17,10 +17,10 @@
 
 .alarmClock {
   position: absolute;
-  left: 940px; 
-  top: 250px; 
-  width: 310px; 
-  height: 328px; 
+  left: 945px; 
+  top: 245px; 
+  width: 300px; 
+  height: 318px; 
   z-index: 10; /* To ensure it's above the circle */
 }
 
@@ -29,7 +29,7 @@
   left: 970px;
   top: 130px;
   color: #F8FAF4;
-  font-size: 77px;
+  font-size: 70px;
   font-weight: bold;
   z-index: 10;
   text-align: center;
@@ -47,36 +47,36 @@
   z-index: 25;
   position: relative;
   font-family: 'Georgia', serif;
-  top: 160px;
+  top: 200px;
   line-height: 50%;
 }
 
 .heading h1 {
   font-size: 75px;
-  margin-left: 120px;
+  margin-left: 100px;
   font-weight: 100;
 }
 
 .heading h2 {
   font-size: 28px;
-  margin-left: 160px;
+  margin-left: 140px;
   font-weight: 100;
 }
 
 .content {
   text-align: left;
-  left: 120px;
+  left: 100px;
   font-size: 22px;
   color: #1F4E47;;
-  top: 180px; /* Space between the heading and content */
+  top: 220px; /* Space between the heading and content */
   z-index: 25;
   position: relative;
   font-family: 'Verdana', sans-serif;
 }
 
 .logIn {
-  left: 120px;
-  top: 200px;
+  left: 100px;
+  top: 240px;
   position: relative;
   z-index: 25;
   cursor: pointer;

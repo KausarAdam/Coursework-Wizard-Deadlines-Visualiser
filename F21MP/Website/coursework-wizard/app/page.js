@@ -7,6 +7,7 @@ export default function Home() {
       <div className={styles.heading}>
         <h2>M &nbsp;&nbsp;A &nbsp;&nbsp;S &nbsp;&nbsp;T &nbsp;&nbsp;E &nbsp;&nbsp;R &nbsp;&nbsp;&nbsp;&nbsp; Y &nbsp;&nbsp;O &nbsp;&nbsp;U &nbsp;&nbsp;R &nbsp;&nbsp;&nbsp;&nbsp; C &nbsp;&nbsp;O &nbsp;&nbsp;U &nbsp;R &nbsp;&nbsp;S &nbsp;&nbsp;E</h2>
         <h1>D &nbsp;E &nbsp;A &nbsp;D &nbsp;L &nbsp;I &nbsp;N &nbsp;E &nbsp;S</h1>
+        {/* &nbsp is for space */}
       </div>
       <div className={styles.content}>
         <p>Welcome to Coursework Wizard,</p>
@@ -19,7 +20,7 @@ export default function Home() {
       <div className={styles.circle}></div>
       <div className={styles.alarmClock}>
         <Image
-          src="/alarm clock.jpg" // Path to alarm clock image
+          src="/alarm clock.jpg"
           alt="Alarm Clock"
           layout="fill"
           objectFit="contain"

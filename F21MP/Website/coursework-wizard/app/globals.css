@@ -9,6 +9,6 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevents horizontal scroll across the entire site */
-  overflow-y: hidden;
+  overflow-y: hidden; /* Prevents vertical scroll across the entire site */
   height: 100%; /* Ensures full height for the body */
 }
