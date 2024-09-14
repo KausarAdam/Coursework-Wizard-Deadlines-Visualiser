@@ -19,13 +19,13 @@ function Header() {
           <Image
             src="/logo.png"
             alt="Coursework Wizard Logo"
-            width={108}
-            height={90}
+            width={100}
+            height={82}
             priority // Preloads the image for better performance
           />
         </a>
         <div className={styles.navLinks}>
-          <a href="/help" className={styles.navLink}>Help</a>
+          <a href ="/login_student" className={styles.navLink}>Help</a>
           <a href="/contact" className={styles.navLink}>Contact Us</a>
         </div>
       </nav>
