@@ -1,4 +1,5 @@
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function LoginStudent() {
   return (
@@ -32,13 +33,17 @@ export default function LoginStudent() {
           Forgot your password?
         </a>
         
+        <Link href="/">
         <button className={styles.button}>Log In</button>
-        <button className={`${styles.button} ${styles.back}`}>Go Back</button>
+        </Link>
+        <Link href="/">
+          <button className={`${styles.button} ${styles.back}`}>Go Back</button>  
+        </Link>
       </div>
 
       <div className={styles.staffBox}>
         If you're a staff member, please visit the{" "}
-        <a href="/login_staff" className={styles.staffLink}>Staff Portal</a>.
+        <a href="/login_staff_1" className={styles.staffLink}>Staff Portal</a>.
       </div>
       
     </div>

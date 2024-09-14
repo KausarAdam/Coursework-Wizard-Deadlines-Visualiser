@@ -1,0 +1,38 @@
+import styles from "./page.module.css";
+import Link from "next/link";
+
+export default function LoginStaff() {
+  return (
+    <div className={styles.loginStaffPage}>
+      <h1 className={styles.heading}>Log in to the Staff Portal</h1>
+      
+      <h2 className={styles.subheading}>
+        Welcome back! Please enter your details!
+      </h2>
+
+      <div className={styles.box}>
+        <div className={styles.userInfo}>
+          <p className={styles.password}>Password</p>
+        </div>
+        
+        <input 
+          type="text" 
+          placeholder="Enter password here" 
+          className={styles.inputField} 
+        />
+        
+        <a href="/forgot_password" className={styles.forgotPassword}>
+          Forgot your password?
+        </a>
+        
+        <Link href="/">
+          <button className={styles.button}>Log In</button>
+        </Link>
+        <Link href="/login_staff_1">
+          <button className={`${styles.button} ${styles.back}`}>Go Back</button>
+        </Link>
+
+      </div>
+    </div>
+  );
+}
