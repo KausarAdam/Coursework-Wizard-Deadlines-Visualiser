@@ -1,4 +1,4 @@
-.forgotPassword {
+.contactUs {
   position: relative;
   height: 100vh;
   display: flex;
@@ -26,6 +26,15 @@
   color: #1F4E47;
   font-family: 'Georgia', serif;
   font-weight: lighter;
+}
+
+.subheading {
+  font-size: 18px;
+  color: #1F4E47;
+  margin-bottom: 20px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  text-align: center;
 }
 
 .button {
