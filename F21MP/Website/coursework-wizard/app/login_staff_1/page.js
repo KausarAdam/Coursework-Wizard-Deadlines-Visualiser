@@ -4,6 +4,8 @@ import Link from "next/link";
 export default function LoginStaff() {
   return (
     <div className={styles.loginStaffPage}>
+      <div className={styles.circle}></div>
+      
       <h1 className={styles.heading}>Log in to the Staff Portal</h1>
       
       <h2 className={styles.subheading}>

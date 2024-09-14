@@ -17,7 +17,7 @@
 .navLinks {
   display: flex;
   margin-top: -25px;
-  gap: 150px; /* Space between links */
+  gap: 90px; /* Space between links */
 }
 
 .navLink {

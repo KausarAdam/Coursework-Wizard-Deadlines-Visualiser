@@ -4,6 +4,8 @@ import Link from "next/link";
 export default function LoginStudent() {
   return (
     <div className={styles.loginStudentPage}>
+      <div className={styles.circle}></div>
+      
       <h1 className={styles.heading}>Log in to Coursework Wizard</h1>
       
       <h2 className={styles.subheading}>

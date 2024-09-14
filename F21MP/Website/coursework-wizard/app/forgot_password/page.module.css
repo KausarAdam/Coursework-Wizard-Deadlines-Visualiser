@@ -1,4 +1,4 @@
-.loginStudentPage {
+.forgotPassword {
   position: relative;
   height: 100vh;
   display: flex;
@@ -6,7 +6,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  
 }
 
 .circle {
@@ -17,7 +16,7 @@
   height: 700px;
   background-color: #C8F2E1;
   border-radius: 50%; /* Makes the div a circle */
-  z-index: -1; 
+  z-index: -1;
 }
 
 .heading {
@@ -34,15 +33,16 @@
   margin-bottom: 20px;
   font-family: 'Verdana', sans-serif;
   font-weight: lighter;
+  text-align: center;
 }
 
 .box {
   background-color: #F8FAF4;
   border: 1px solid #ACC8C4;
   padding: 20px;
-  padding-top: 2px;
-  width: 410px;
-  height: 348px;
+  padding-top: 8px;
+  width: 550px;
+  height: 335px;
   border-radius: 13px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -52,62 +52,49 @@
   align-items: baseline;
 }
 
-.username {
+.enter {
   font-size: 16px;
   font-weight: bold;
   color: #1F4E47;
   font-family: 'Verdana', sans-serif;
-}
-
-.email {
-  font-size: 12px;
-  color: #1F4E47;
-  margin-left: 10px;
-  font-family: 'Verdana', sans-serif;
+  margin-left: 15px;
 }
 
 .inputField {
-  width: 95%;
+  width: 90%;
   height: 20px;
   padding: 10px;
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   border-radius: 4px;
   border: 1px solid #ACC8C4;
   font-size: 11px;
   font-family: 'Verdana', sans-serif;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 15px;
 }
 
-.forgotPassword {
-  font-size: 12px;
-  color: #1F4E47;
-  text-align: right;
-  display: block;
-  margin-top: 11px;
-  margin-bottom: 16px;
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: 'Verdana', sans-serif;
-}
-
-.forgotPassword:hover {
-  color: #3BECB9;
+.recaptcha {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .button {
-  width: 100%;
+  width: 94%;
   padding: 10px;
+  height: 50px;
   font-size: 17px;
   color: #1F4E47;
   background-color: #3BECB9;
   border: none;
   border-radius: 9px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-family: 'Verdana', sans-serif;
   font-weight: lighter;
-  height: 50px;
+  margin-left: 15px;
 }
 
 .button:hover {
@@ -117,43 +104,16 @@
   font-family: 'Verdana', sans-serif;
 }
 
-.button.back {
+.button.cancel {
   background-color: #1F4E47;
   color: #F8FAF4;
   font-family: 'Verdana', sans-serif;
 }
 
-.button.back:hover {
+.button.cancel:hover {
   background-color: #7DFFD9;
   color: #1F4E47;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Verdana', sans-serif;
-}
-
-.staffBox {
-  margin-top: 20px;
-  background-color: #F8FAF4;
-  padding: 0px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 445px;
-  border-radius: 0px;
-  text-align: center;
-  font-family: 'Verdana', sans-serif;
-  border: 1px solid #ACC8C4;
-  color: #1F4E47;
-  font-size: 14px;
-}
-
-.staffLink {
-  color: #1F4E47;
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: 'Verdana', sans-serif;
-  font-size: 15px;
-}
-
-.staffLink:hover {
-  color: #3BECB9;
 }
