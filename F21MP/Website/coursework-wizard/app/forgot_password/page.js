@@ -42,7 +42,7 @@ export default function ForgotPassword() {
 
         {recaptchaLoaded && (
           <ReCAPTCHA
-            sitekey="6Lc6tkMqAAAAAPxluHPrR7PjKG4yRVfLMNAR7p6X"
+            sitekey="6Lc_t0QqAAAAAGMnTvnHgQHSnaZ59h3Dcqrl1fxk"
             className={styles.recaptcha}
           />
         )}
