@@ -39,7 +39,7 @@ export default function LoginStudent() {
             Forgot your password?
           </a>
           
-          <Link href="/">
+          <Link href="/Student/dashboard">
           <button className={styles.button}>Log In</button>
           </Link>
           <Link href="/">

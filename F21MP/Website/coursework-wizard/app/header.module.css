@@ -43,3 +43,7 @@
 .navLink:hover::before {
   width: 100%;
 }
+
+.logo:hover {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+}
