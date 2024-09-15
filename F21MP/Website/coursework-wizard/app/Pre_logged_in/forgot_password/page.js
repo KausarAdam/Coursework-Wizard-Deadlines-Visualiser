@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import styles from "./page.module.css";
 import Link from "next/link";
+import Header from "../../Header";
 
 // Dynamically import the ReCAPTCHA component
 const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
@@ -18,41 +19,46 @@ export default function ForgotPassword() {
   }, []);
 
   return (
-    <div className={styles.forgotPassword}>
-      <div className={styles.circle}></div>
-      
-      <h1 className={styles.heading}>Reset Password</h1>
+    <div>
+      <Header/>
 
-      <h2 className={styles.subheading}>
-        <div>Step 1 of 4</div>
-        <div>To recover your account, begin by entering your student username or staff ID</div>
-        <div>and the characters in the picture or audio below.</div>
-      </h2>
-
-      <div className={styles.box}>
-        <div className={styles.userInfo}>
-          <p className={styles.enter}>Student Username or Staff ID</p>
-        </div>
+      <div className={styles.forgotPassword}>
         
-        <input 
-          type="text" 
-          placeholder="Enter student username or staff ID here" 
-          className={styles.inputField} 
-        />
+        <div className={styles.circle}></div>
+        
+        <h1 className={styles.heading}>Reset Password</h1>
 
-        {recaptchaLoaded && (
-          <ReCAPTCHA
-            sitekey="6Lc_t0QqAAAAAGMnTvnHgQHSnaZ59h3Dcqrl1fxk"
-            className={styles.recaptcha}
+        <h2 className={styles.subheading}>
+          <div>Step 1 of 4</div>
+          <div>To recover your account, begin by entering your student username or staff ID</div>
+          <div>and the characters in the picture or audio below.</div>
+        </h2>
+
+        <div className={styles.box}>
+          <div className={styles.userInfo}>
+            <p className={styles.enter}>Student Username or Staff ID</p>
+          </div>
+          
+          <input 
+            type="text" 
+            placeholder="Enter student username or staff ID here" 
+            className={styles.inputField} 
           />
-        )}
-        
-        <Link href="/Pre_logged_in/forgot_password_2">
-          <button className={styles.button}>Next</button>
-        </Link>
-        <Link href="/">
-          <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
-        </Link>
+
+          {recaptchaLoaded && (
+            <ReCAPTCHA
+              sitekey="6Lc_t0QqAAAAAGMnTvnHgQHSnaZ59h3Dcqrl1fxk"
+              className={styles.recaptcha}
+            />
+          )}
+          
+          <Link href="/Pre_logged_in/forgot_password_2">
+            <button className={styles.button}>Next</button>
+          </Link>
+          <Link href="/">
+            <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
+          </Link>
+        </div>
       </div>
     </div>
   );

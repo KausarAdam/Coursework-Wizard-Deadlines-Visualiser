@@ -89,38 +89,14 @@
   display: flex;
   gap: 50px;
   padding: 0px;
-  margin-left:10px;
+  margin-left:11px;
   border: none;
   font-size: 13px;
   font-family: 'Verdana', sans-serif;
 }
 
 .radioInput {
-  appearance: none;
-  position: relative;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #ACC8C4;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.radioInput:checked {
-  background-color: #3BECB9;
-  border-color: #1F4E47;
-}
-
-.radioInput:checked::before {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background-color  : #1F4E47;
-  border-radius: 50%;
-  top: 1.75px;
-  left: 1.75px;
+  accent-color: #3BECB9;
 }
 
 .inputFieldEnquiry {

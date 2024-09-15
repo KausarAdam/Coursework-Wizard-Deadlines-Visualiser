@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from 'next/link';
+import Header from "./Header.js";
 
 export default function Home() {
   return (
     <div className={styles.homePage}>
+      <Header/>
       <div className={styles.heading}>
         <h2>M &nbsp;&nbsp;A &nbsp;&nbsp;S &nbsp;&nbsp;T &nbsp;&nbsp;E &nbsp;&nbsp;R &nbsp;&nbsp;&nbsp;&nbsp; Y &nbsp;&nbsp;O &nbsp;&nbsp;U &nbsp;&nbsp;R &nbsp;&nbsp;&nbsp;&nbsp; C &nbsp;&nbsp;O &nbsp;&nbsp;U &nbsp;R &nbsp;&nbsp;S &nbsp;&nbsp;E</h2>
         <h1>D &nbsp;E &nbsp;A &nbsp;D &nbsp;L &nbsp;I &nbsp;N &nbsp;E &nbsp;S</h1>

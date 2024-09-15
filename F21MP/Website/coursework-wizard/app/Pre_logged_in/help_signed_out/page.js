@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from "./page.module.css";
 import Link from "next/link";
+import Header from "../../Header";
 
 export default function HelpPage() {
   const [expanded, setExpanded] = useState(null);
@@ -35,32 +36,36 @@ export default function HelpPage() {
   ];
 
   return (
-    <div className={styles.helpPage}>
-      <div className={styles.circle}></div>
-      
-      <h1 className={styles.heading}>Frequently Asked Questions (FAQs)</h1>
+    <div>
+      <Header/>
+      <div className={styles.helpPage}>
+        
+        <div className={styles.circle}></div>
+        
+        <h1 className={styles.heading}>Frequently Asked Questions (FAQs)</h1>
 
-      <div className={styles.box}>
-        {faqItems.map((item, index) => (
-          <div key={index} className={styles.faqItem}>
-            <div className={styles.question} onClick={() => toggleExpand(index)}>
-              <span>{item.question}</span>
-              <span className={`${styles.arrow} ${expanded === index ? styles.arrowExpanded : ''}`}>
-                {expanded === index ? '▲' : '▼'}
-              </span>
-            </div>
-            {expanded === index && (
-              <div className={styles.answer}>
-                <p>{item.answer}</p>
+        <div className={styles.box}>
+          {faqItems.map((item, index) => (
+            <div key={index} className={styles.faqItem}>
+              <div className={styles.question} onClick={() => toggleExpand(index)}>
+                <span>{item.question}</span>
+                <span className={`${styles.arrow} ${expanded === index ? styles.arrowExpanded : ''}`}>
+                  {expanded === index ? '▲' : '▼'}
+                </span>
               </div>
-            )}
-            <hr className={styles.separator} />
-          </div>
-        ))}
+              {expanded === index && (
+                <div className={styles.answer}>
+                  <p>{item.answer}</p>
+                </div>
+              )}
+              <hr className={styles.separator} />
+            </div>
+          ))}
 
-        <Link href="/">
-          <button className={styles.button}>Home</button>
-        </Link>
+          <Link href="/">
+            <button className={styles.button}>Home</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
