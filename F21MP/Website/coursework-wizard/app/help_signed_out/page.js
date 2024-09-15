@@ -23,6 +23,14 @@ export default function HelpPage() {
     {
       question: "How can I reset my password?",
       answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+    },
+    {
+      question: "I can’t find an answer to my question, what should I do?",
+      answer: (
+        <>
+          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="/contact_us" className={styles.link}>click here</a> to submit your enquiry.
+        </>
+      )
     }
   ];
 
@@ -31,10 +39,6 @@ export default function HelpPage() {
       <div className={styles.circle}></div>
       
       <h1 className={styles.heading}>Frequently Asked Questions (FAQs)</h1>
-
-      <h2 className={styles.subheading}>
-        <div>If the following do not answer your question, <a href="/contact_us" className={styles.link}>click here</a> to submit your enquiry.</div>
-      </h2>
 
       <div className={styles.box}>
         {faqItems.map((item, index) => (
@@ -54,7 +58,7 @@ export default function HelpPage() {
           </div>
         ))}
 
-        <Link href="/forgot_password_5">
+        <Link href="/">
           <button className={styles.button}>Home</button>
         </Link>
       </div>

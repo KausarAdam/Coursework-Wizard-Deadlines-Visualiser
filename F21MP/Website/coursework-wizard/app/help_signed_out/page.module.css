@@ -28,15 +28,6 @@
   font-weight: lighter;
 }
 
-.subheading {
-  font-size: 18px;
-  color: #1F4E47;
-  margin-bottom: 20px;
-  font-family: 'Verdana', sans-serif;
-  font-weight: lighter;
-  text-align: center;
-}
-
 .link {
   color: #3BECB9;
   text-decoration: underline;
@@ -103,7 +94,12 @@
   font-weight: bold;
   color: #1F4E47;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.question:hover {
+  transition: color 0.3s ease;
+  color: #3BECB9;
 }
 
 .arrow {
