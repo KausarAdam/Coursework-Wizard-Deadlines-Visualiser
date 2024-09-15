@@ -25,8 +25,8 @@ function Header() {
           />
         </a>
         <div className={styles.navLinks}>
-          <a href ="/help_signed_out" className={styles.navLink}>Help</a>
-          <a href="/contact_us_signed_out" className={styles.navLink}>Contact Us</a>
+          <a href ="/Pre_logged_in/help_signed_out" className={styles.navLink}>Help</a>
+          <a href="/Pre_logged_in/contact_us_signed_out" className={styles.navLink}>Contact Us</a>
         </div>
       </nav>
     </header>

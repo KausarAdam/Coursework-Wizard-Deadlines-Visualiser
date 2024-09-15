@@ -59,7 +59,7 @@ export default function ForgotPassword() {
                 then receive a text message with a verification code which can
                 be used to reset your password.
               </p><input
-                  type="text"
+                  type="tel"
                   placeholder="Enter your mobile phone number"
                   className={styles.inputField} /></>
             ) : (
@@ -69,14 +69,14 @@ export default function ForgotPassword() {
                   then receive an email with a verification code which can
                   be used to reset your password.
                 </p><input
-                    type="text"
+                    type="email"
                     placeholder="Enter your email address"
                     className={styles.inputField} /></>
             )}
           </div>
         </div>
 
-        <Link href="/forgot_password_3">
+        <Link href="/Pre_logged_in/forgot_password_3">
           <button className={styles.button}>Next</button>
         </Link>
         <Link href="/">

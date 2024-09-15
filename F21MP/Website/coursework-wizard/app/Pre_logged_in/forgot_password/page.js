@@ -47,7 +47,7 @@ export default function ForgotPassword() {
           />
         )}
         
-        <Link href="/forgot_password_2">
+        <Link href="/Pre_logged_in/forgot_password_2">
           <button className={styles.button}>Next</button>
         </Link>
         <Link href="/">

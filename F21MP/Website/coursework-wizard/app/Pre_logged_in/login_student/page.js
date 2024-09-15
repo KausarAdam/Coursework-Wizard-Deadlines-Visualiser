@@ -31,7 +31,7 @@ export default function LoginStudent() {
           className={styles.inputField} 
         />
         
-        <a href="/forgot_password" className={styles.forgotPassword}>
+        <a href="/Pre_logged_in/forgot_password" className={styles.forgotPassword}>
           Forgot your password?
         </a>
         
@@ -45,7 +45,7 @@ export default function LoginStudent() {
 
       <div className={styles.staffBox}>
         If you're a staff member, please visit the{" "}
-        <a href="/login_staff_1" className={styles.staffLink}>Staff Portal</a>.
+        <a href="/Pre_logged_in/login_staff_1" className={styles.staffLink}>Staff Portal</a>.
       </div>
       
     </div>

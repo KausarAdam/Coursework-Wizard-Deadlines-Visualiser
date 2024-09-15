@@ -19,7 +19,7 @@ export default function ForgotPassword() {
         </div>
         
         <input 
-          type="text" 
+          type="password" 
           placeholder="Enter new password here" 
           className={styles.inputField} 
         />
@@ -29,12 +29,12 @@ export default function ForgotPassword() {
         </div>
         
         <input 
-          type="text" 
+          type="password" 
           placeholder="Re-enter password to confirm" 
           className={styles.inputField} 
         />
         
-        <Link href="/forgot_password_5">
+        <Link href="/Pre_logged_in/forgot_password_5">
           <button className={styles.button}>Next</button>
         </Link>
         <Link href="/">

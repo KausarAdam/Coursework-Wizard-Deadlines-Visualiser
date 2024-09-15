@@ -18,19 +18,19 @@ export default function LoginStaff() {
         </div>
         
         <input 
-          type="text" 
+          type="password" 
           placeholder="Enter password here" 
           className={styles.inputField} 
         />
         
-        <a href="/forgot_password" className={styles.forgotPassword}>
+        <a href="/Pre_logged_in/forgot_password" className={styles.forgotPassword}>
           Forgot your password?
         </a>
         
         <Link href="/">
           <button className={styles.button}>Log In</button>
         </Link>
-        <Link href="/login_staff_1">
+        <Link href="/Pre_logged_in/login_staff_1">
           <button className={`${styles.button} ${styles.back}`}>Go Back</button>
         </Link>
 

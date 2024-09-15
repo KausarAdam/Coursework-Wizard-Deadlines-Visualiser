@@ -28,7 +28,7 @@ export default function HelpPage() {
       question: "I can’t find an answer to my question, what should I do?",
       answer: (
         <>
-          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="/contact_us" className={styles.link}>click here</a> to submit your enquiry.
+          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="/Pre_logged_in/contact_us_signed_out" className={styles.link}>click here</a> to submit your enquiry.
         </>
       )
     }

@@ -24,7 +24,7 @@ export default function ForgotPassword() {
           className={styles.inputField} 
         />
         
-        <Link href="/forgot_password_4">
+        <Link href="/Pre_logged_in/forgot_password_4">
           <button className={styles.button}>Next</button>
         </Link>
         <Link href="/">

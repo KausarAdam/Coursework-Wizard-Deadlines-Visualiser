@@ -23,10 +23,10 @@ export default function LoginStaff() {
           className={styles.inputField} 
         />
         
-        <Link href="/login_staff_2">
+        <Link href="/Pre_logged_in/login_staff_2">
           <button className={styles.button}>Next</button>
         </Link>
-        <Link href="/login_student">
+        <Link href="/Pre_logged_in/login_student">
           <button className={`${styles.button} ${styles.back}`}>Go Back</button>  
         </Link>
       </div>
