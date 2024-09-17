@@ -6,6 +6,8 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .navItem {
@@ -44,7 +46,7 @@
 
 .navItem:hover {
   font-weight: bolder;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 1));
+  
 }
 
 .active {
@@ -61,6 +63,10 @@
 
 .inactiveText {
   color: white;
+}
+
+.inactiveText:hover {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 1));
 }
 
 .navLogout {
