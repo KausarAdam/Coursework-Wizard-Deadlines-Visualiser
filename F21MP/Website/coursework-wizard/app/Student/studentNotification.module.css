@@ -1,0 +1,74 @@
+.notificationContainer {
+    position: relative;
+    display: inline-block;
+    padding-top: 10px;
+  }
+  
+  .bellIcon {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .bell {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+  
+  .notificationDropdown {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    border-radius: 13px;
+    background-color: #E9F2EC;
+    border: 1px solid #ACC8C4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 350px;
+  }
+  
+  .notificationHeader {
+    margin: 0;
+    padding: 10px;
+    margin-top: 5px;
+    padding-bottom: 0px;
+    font-family: 'Georgia', serif;
+    background-color: transparent;
+    font-size: 25px;
+    color: #1F4E47;
+    font-weight: 400;
+  }
+  
+  .notificationList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .notificationItem {
+    padding: 10px;
+    font-family: 'Verdana', sans-serif;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+    color: #1F4E47;
+  }
+  
+  .notificationItem:last-child {
+    border-bottom: none;
+  }
+  
+  .notificationItem:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

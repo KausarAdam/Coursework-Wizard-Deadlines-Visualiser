@@ -1,6 +1,7 @@
 import StudentMenu from "../student_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
+import Notification from "../student_notification";
 
 export default function Dashboard() {
     return (
@@ -9,11 +10,14 @@ export default function Dashboard() {
 
         <div className={styles.dashboardPage}>
 
+          <div className={styles.header}>
+            <h1 className={styles.heading}>Dashboard</h1>
+            <Notification />
+          </div>
+
           <div className={styles.withoutFooter}>
 
-            <h1 className={styles.heading}>Dashboard</h1>
-
-            <hr style={{ width: "98.2%", marginLeft: "0" }} />
+            <hr style={{ width: "100.5%", marginLeft: "0" }} />
           
             <h2 className={styles.subheading}>Hello, John Doe!</h2>
 

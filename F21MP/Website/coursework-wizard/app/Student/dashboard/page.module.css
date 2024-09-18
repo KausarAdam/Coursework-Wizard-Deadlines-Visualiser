@@ -10,6 +10,13 @@
   padding-top:0px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
 .heading {
     font-size: 38px;
     margin-bottom: 10px;
@@ -31,7 +38,7 @@
     border: 1px solid #ACC8C4;
     padding: 20px;
     padding-top: 2px;
-    width: 900px;
+    width: 78%;
     height: 150px;
     border-radius: 13px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -63,16 +70,18 @@
     border: 1px solid #ACC8C4;
     padding: 20px;
     padding-top: 30px;
-    width: 290px;
+    width: 28%;
     height: 122px;
     border-radius: 13px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    margin-right: -6px;
   }
 
   .firstSetOfBoxes {
     display: flex;
-    gap: 60px;
+    gap: 50px;
+    width: 100%;
   }
 
   .box3 {
@@ -81,7 +90,7 @@
     padding: 20px;
     padding-top: 2px;
     margin-top: 25px;
-    width: 95.25%;
+    width: 97.5%;
     height: 250px;
     border-radius: 13px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -119,5 +128,5 @@
 }
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one dix*/
-  height: 610px;
+  height: 555px;
 }

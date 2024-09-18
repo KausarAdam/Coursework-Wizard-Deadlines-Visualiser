@@ -21,7 +21,7 @@
   font-family: 'Verdana', sans-serif;
   color: #1F4E47;
   font-size: 17px;
-  margin-right: 800px;
+  margin-right: 840px;
 }
 
 .navDashboard:hover {
@@ -31,7 +31,7 @@
 .navLinks {
   display: flex;
   margin-top: -25px;
-  gap: 90px; /* Space between links */
+  gap: 100px; /* Space between links */
 }
 
 .navLink {
