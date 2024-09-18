@@ -11,7 +11,7 @@ const menuItems = [
   { id: 3, name: "Courses", icon: "/White/courses.png", iconActive: "/Black/courses.png", link: "/Student/dashboard" },
   { id: 4, name: "Timeline", icon: "/White/timeline.png", iconActive: "/Black/timeline.png", link: "/Student/dashboard" },
   { id: 5, name: "Board", icon: "/White/board.png", iconActive: "/Black/board.png", link: "/Student/dashboard" },
-  { id: 6, name: "Contact Us", icon: "/White/contact.png", iconActive: "/Black/contact.png", link: "/Student/dashboard" },
+  { id: 6, name: "Contact Us", icon: "/White/contact.png", iconActive: "/Black/contact.png", link: "/Student/contact_us" },
   { id: 7, name: "Log Out", icon: "/White/logout.png", iconActive: "/Black/logout.png", link: "/" }
 ];
 
@@ -24,7 +24,8 @@ const accountLinks = [
 const courseLinks = [
   { name: "Course 1", link: "/Student/courses/course1" },
   { name: "Course 2", link: "/Student/courses/course2" },
-  { name: "Course 2", link: "/Student/courses/course2" },
+  { name: "Course 3", link: "/Student/courses/course3" },
+  { name: "Course 4", link: "/Student/courses/course4" },
 ];
 
 export default function StudentMenu() {

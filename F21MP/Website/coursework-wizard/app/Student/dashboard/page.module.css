@@ -127,6 +127,6 @@
   font-weight: bold;
 }
 
-.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one dix*/
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
   height: 555px;
 }
