@@ -1,0 +1,59 @@
+.footer {
+  position: absolute; /* Absolute positioning to overlap content */
+  padding-left: 2px;
+  padding-top: 10px;
+  padding-right: 0px;
+  margin-top: auto;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10; /* To overlap other content */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navDashboard {
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Verdana', sans-serif;
+  color: #1F4E47;
+  font-size: 17px;
+  margin-right: 800px;
+}
+
+.navDashboard:hover {
+  color: #3BECB9;
+}
+
+.navLinks {
+  display: flex;
+  margin-top: -25px;
+  gap: 90px; /* Space between links */
+}
+
+.navLink {
+  text-decoration: none;
+  position: relative;
+  font-family: 'Verdana', sans-serif;
+  color: #1F4E47;
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+.navLink::before {
+  content: "";
+  background-color: black;
+  transition: 0.2s ease-out;
+  width: 0%;
+  height: 1.5px;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+}
+
+.navLink:hover::before {
+  width: 100%;
+}
