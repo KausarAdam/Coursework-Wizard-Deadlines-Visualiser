@@ -6,7 +6,7 @@
   margin-top: auto;
   width: 100%;
   background-color: transparent;
-  z-index: 10; /* To overlap other content */
+  z-index: 1;
 }
 
 .nav {

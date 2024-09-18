@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  position: relative;
+}
+
 .navbar {
   width: 100px;
   height: 100vh;
@@ -58,6 +63,7 @@
 }
 
 .active p, .active .navIcon {
+  margin-top: 5px;
   color: black;
 }
 
@@ -71,4 +77,51 @@
 
 .navLogout {
   margin-top: 35px;
+}
+
+.sidebar {
+  position: absolute;
+  width: 250px;
+  background-color: #E9F2EC;
+  padding: 20px;
+  padding-top: 0px;
+  padding-left: 40px;
+  margin-left: 120px;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-color: #ACC8C4;
+  display: flex;
+  z-index: 10;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 50px;
+}
+
+.sidebarLink {
+  text-decoration: underline;
+  font-size: 16px;
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
+}
+
+.sidebarLink:hover {
+  font-weight: bold;
+}
+
+.sidebarHeading {
+  text-align: left;
+  font-size: 38px;
+  margin-bottom: 0px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight:400;
 }
