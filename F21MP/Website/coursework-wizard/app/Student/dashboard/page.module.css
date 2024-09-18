@@ -81,7 +81,7 @@
     padding: 20px;
     padding-top: 2px;
     margin-top: 25px;
-    width: 95%;
+    width: 95.25%;
     height: 250px;
     border-radius: 13px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -93,9 +93,12 @@
     border: 1px solid #EED482;
     padding: 10px;
     width: 46.5%;
-    height: 70px;
+    height: 90px;
     border-radius: 9px;
     text-align: left;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 0 0 0 #EED482;
+    box-sizing: border-box;
   }
 
   .secondSetOfBoxes {
@@ -103,3 +106,14 @@
     gap: 23px;
     margin-bottom: 10px;
   }
+
+  .box4:hover {
+    background-color: #F8FAF4;
+    box-shadow: inset 0 0 0 3px #EED482;
+    font-weight: bold;
+  }
+
+  .box4:hover .subheading, 
+.box4:hover .text {
+  font-weight: bold;
+}
