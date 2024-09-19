@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import Notification from "../student_notification";
 import Link from "next/link";
 
-export default function contactUs() {
+export default function ContactUs() {
     return (
       <div className={styles.container}>
         <StudentMenu/>

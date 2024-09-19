@@ -20,8 +20,8 @@ export default function Home() {
           <p>made simple and effective.</p>
         </div>
         <div className={styles.logIn}>
-          <Link href="/Pre_logged_in/login_student" passHref>
-          <button>Log In</button>
+          <Link href="/Pre_logged_in/login_student">
+            <button>Log In</button>
           </Link>
         </div>
         <div className={styles.circle}></div>

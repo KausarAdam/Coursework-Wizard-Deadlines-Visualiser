@@ -108,6 +108,7 @@
     transition: all 0.2s ease;
     box-shadow: inset 0 0 0 0 #EED482;
     box-sizing: border-box;
+    cursor: pointer;
   }
 
   .secondSetOfBoxes {

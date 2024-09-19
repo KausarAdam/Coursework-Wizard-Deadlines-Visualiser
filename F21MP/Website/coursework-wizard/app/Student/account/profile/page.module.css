@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.contactUsPage {
+.profilePage {
   flex-grow: 1;
   padding: 30px;
   padding-top:0px;
@@ -23,75 +23,64 @@
     color: #1F4E47;
     font-family: 'Georgia', serif;
     font-weight:400;
-  }
-  
+}
+
+.name {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 45px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight:400;
+}
+
 .subheading {
   font-size: 17px;
   color: #1F4E47;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   font-family: 'Verdana', sans-serif;
   font-weight: lighter;
+}
+
+.circle {
+  background-color: #D9D9D9;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+}
+
+.profilePicture {
+  width: 180px;
+  height:180px;
+  padding-left: 10px;
 }
 
 .box {
   background-color: #F8FAF4;
   border: 1px solid #ACC8C4;
-  padding: 20px;
-  padding-top: 2px;
-  width: 97.5%;
-  height: 520px;
+  padding: 30px;
+  width: 93.9%;
+  height: 480px;
   border-radius: 13px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.heading3 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  margin-top: 12px;
-  color: #1F4E47;
-  font-family: 'Georgia', serif;
-  font-weight: lighter;
-}
-
-.subheading2 {
-  margin-bottom: 8px;
-}
-
-.text {
-  color: #1F4E47;
-  margin-bottom: 5px;
-  font-weight: lighter;
-  font-family: 'Verdana', sans-serif;
-  font-size: 10px;
-  text-align: left;
+  display: flex;
+  gap: 120px;
+  padding-right: 50px;
+  padding-left: 40px;
 }
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
   height: 555px;
 }
 
-.inputField {
-  width: 98.5%;
-  height: 30px;
-  padding: 10px;
-  margin-top: -10px;
-  margin-bottom: 15px;
-  border-radius: 13px;
-  border: 1px solid #ACC8C4;
-  font-size: 12px;
-  font-family: 'Verdana', sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.inputFieldEnquiry {
-  height: 200px;
-  resize: none;
-  margin-top: -7px;
-  margin-bottom: 10px;
+.thirdColumn {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
 }
 
 .button {
-  width: 9%;
+  width: 150px;
   padding: 10px;
   height: 45px;
   font-size: 17px;
@@ -102,9 +91,9 @@
   cursor: pointer;
   font-family: 'Verdana', sans-serif;
   font-weight: lighter;
-  display: block;
-  margin: auto;
   margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Link {
@@ -118,3 +107,37 @@
   font-family: 'Verdana', sans-serif;
 }
 
+.heading3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  margin-top: 12px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight: lighter;
+}
+
+.text {
+  color: #1F4E47;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  font-family: 'Verdana', sans-serif;
+  font-size: 10px;
+  text-align: left;
+}
+
+.socialMedia {
+  display: flex;
+  gap: 55px;
+  margin-top: 15px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #1F4E47;
+  width: 43px;
+  height: 43px;
+}
+
+.icon:hover {
+  color: #3BECB9;
+}

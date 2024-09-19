@@ -22,7 +22,7 @@
 
 .heading {
   font-size: 33px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   color: #1F4E47;
   font-family: 'Georgia', serif;
   font-weight: lighter;
@@ -42,6 +42,7 @@
   background-color: #F8FAF4;
   border: 1px solid #ACC8C4;
   padding: 20px;
+  padding-top:15px;
   width: 900px;
   height: 400px;
   border-radius: 13px;
@@ -93,7 +94,7 @@
   cursor: pointer;
   font-weight: bold;
   color: #1F4E47;
-  padding-top: 20px;
+  padding-top: 15px;
   padding-bottom: 10px;
 }
 
