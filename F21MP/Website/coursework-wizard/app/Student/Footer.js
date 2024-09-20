@@ -7,7 +7,7 @@ export default function Footer() {
 
         <nav className={styles.nav}>
           <div className={styles.navLinks}>
-            <div className={styles.navDashboard}>Coursework Wizard</div>
+            <div className={styles.navDashboard}>&copy; {new Date().getFullYear()} Coursework Wizard</div>
             <a href ="/Student/help" className={styles.navLink}>Help</a>
             <a href="/Student/contact_us" className={styles.navLink}>Contact Us</a>
           </div>
