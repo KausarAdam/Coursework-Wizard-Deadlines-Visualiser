@@ -78,9 +78,9 @@
 }
 
 .thirdColumn {
-  display: flex;
   justify-content: flex-end;
   flex-grow: 1;
+  text-align: right;
 }
 
 .button {
@@ -166,4 +166,10 @@
 .inputFieldArea {
   height: 50px;
   resize: none;
+}
+
+.button.cancel {
+  background-color: #1F4E47;
+  color: #F8FAF4;
+  font-family: 'Verdana', sans-serif;
 }

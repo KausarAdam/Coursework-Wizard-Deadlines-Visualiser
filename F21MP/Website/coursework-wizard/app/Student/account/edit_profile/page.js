@@ -6,6 +6,7 @@ import Footer from "../../Footer";
 import Notification from "../../student_notification";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function EditProfile() {
   const [preferredName, setPreferredName] = useState("");
@@ -106,7 +107,12 @@ export default function EditProfile() {
             </div>
 
             <div className={styles.thirdColumn}>
-              <button type="submit" className={styles.button}>Save Changes</button>
+              <Link href="./profile">
+                <button type="submit" className={styles.button}>Save Changes</button>
+              </Link>
+              <Link href="./profile">
+                <button type="cancel" className={`${styles.button} ${styles.cancel}`}>Cancel</button>
+              </Link>
             </div>
           </form>
         </div>
