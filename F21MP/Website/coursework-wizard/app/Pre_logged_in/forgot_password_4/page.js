@@ -1,8 +1,29 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 
 export default function ForgotPassword() {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleNext = () => {
+
+    if (!newPassword || !confirmPassword) {
+      alert("Please fill in both fields.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+
+    console.log('New Password:', newPassword);
+  };
+
   return (
     <div>
       <Header/>
@@ -26,6 +47,8 @@ export default function ForgotPassword() {
             type="password" 
             placeholder="Enter new password here" 
             className={styles.inputField} 
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
 
           <div className={styles.userInfo}>
@@ -36,9 +59,11 @@ export default function ForgotPassword() {
             type="password" 
             placeholder="Re-enter password to confirm" 
             className={styles.inputField} 
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           
-          <Link href="/Pre_logged_in/forgot_password_5">
+          <Link href="/Pre_logged_in/forgot_password_5" onClick={handleNext}>
             <button className={styles.button}>Next</button>
           </Link>
           <Link href="/">

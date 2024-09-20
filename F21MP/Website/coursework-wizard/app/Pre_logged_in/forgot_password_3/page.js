@@ -1,8 +1,27 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 
 export default function ForgotPassword() {
+  const [verificationCode, setVerificationCode] = useState("");
+
+  const handleInputChange = (e) => {
+    setVerificationCode(e.target.value);
+  };
+
+  const handleNext = () => {
+
+    if (!verificationCode) {
+      alert("Please enter the verification code.");
+      return;
+    }
+
+    console.log('Verification Code:', verificationCode);
+  };
+
   return (
     <div>
       <Header/>
@@ -25,10 +44,12 @@ export default function ForgotPassword() {
           <input 
             type="text" 
             placeholder="Enter verification code here" 
-            className={styles.inputField} 
+            className={styles.inputField}
+            value={verificationCode}
+            onChange={handleInputChange}
           />
           
-          <Link href="/Pre_logged_in/forgot_password_4">
+          <Link href="/Pre_logged_in/forgot_password_4" onClick={handleNext}>
             <button className={styles.button}>Next</button>
           </Link>
           <Link href="/">

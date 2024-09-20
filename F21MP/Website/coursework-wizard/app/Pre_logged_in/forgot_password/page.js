@@ -11,12 +11,27 @@ const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false }
 
 export default function ForgotPassword() {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setRecaptchaLoaded(true);
     }
   }, []);
+
+  const handleInputChange = (e) => {
+    setUserId(e.target.value);
+  };
+
+  const handleNext = () => {
+    if (!userId || !recaptchaValue) {
+      alert("Please enter your ID and complete the CAPTCHA.");
+      return;
+    }
+
+    console.log('User ID:', userId);
+  };
 
   return (
     <div>
@@ -42,17 +57,21 @@ export default function ForgotPassword() {
           <input 
             type="text" 
             placeholder="Enter student username or staff ID here" 
-            className={styles.inputField} 
+            className={styles.inputField}
+            aria-label="Student Username or Staff ID"
+            value={userId}
+            onChange={handleInputChange}
           />
 
           {recaptchaLoaded && (
             <ReCAPTCHA
               sitekey="6Lc_t0QqAAAAAGMnTvnHgQHSnaZ59h3Dcqrl1fxk"
               className={styles.recaptcha}
+              onChange={setRecaptchaValue}
             />
           )}
           
-          <Link href="/Pre_logged_in/forgot_password_2">
+          <Link href="/Pre_logged_in/forgot_password_2" onClick={handleNext}>
             <button className={styles.button}>Next</button>
           </Link>
           <Link href="/">

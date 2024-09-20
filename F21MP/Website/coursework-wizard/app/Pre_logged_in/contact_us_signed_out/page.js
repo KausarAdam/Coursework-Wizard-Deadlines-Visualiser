@@ -1,8 +1,52 @@
+"use client";
+
 import styles from "./page.module.css";
-import Link from "next/link";
+import { useState } from "react";
 import Header from "../../Header";
+import Router from "next/router";
 
 export default function ContactUs() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    enrolled: "",
+    enquiry: ""
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully');
+        Router.push('/Pre_logged_in/contact_us_signed_out_2');
+      } else {
+        console.error('Error submitting form');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+
   return (
     <div>
     <Header/>
@@ -18,66 +62,99 @@ export default function ContactUs() {
         </h2>
 
         <div className={styles.box}>
-        <div className={styles.userInfo}>
-          <p className={styles.name}>Full name</p>
-        </div>
 
-        <div className={styles.nameFields}>
-          <input 
-            type="text" 
-            placeholder="First name" 
-            className={`${styles.inputField} ${styles.inputFieldName}`}
-          />
-          <input 
-            type="text" 
-            placeholder="Last name" 
-            className={`${styles.inputField} ${styles.inputFieldName}`}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.userInfo}>
+            <p className={styles.name}>Full name</p>
+          </div>
 
-          <p className={styles.name}>Email Address</p>
+          <div className={styles.nameFields}>
+            <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                placeholder="First name"
+                className={`${styles.inputField} ${styles.inputFieldName}`}
+                required
+              />
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                placeholder="Last name"
+                className={`${styles.inputField} ${styles.inputFieldName}`}
+                required
+              />
+          </div>
 
-          <input 
-            type="email"
-            placeholder="Enter email address here" 
-            className={styles.inputField} 
-          />
+            <p className={styles.name}>Email Address</p>
 
-          <p className={styles.name}>Contact Phone Number</p>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Enter email address here"
+              className={styles.inputField}
+              required
+            />
 
-          <input 
-            type="tel"
-            placeholder="Enter contact phone number here" 
-            className={styles.inputField} 
-          />
+            <p className={styles.name}>Contact Phone Number</p>
 
-          <p className={styles.name}>Are you currently enrolled at Heriot-Watt?</p>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              placeholder="Enter contact phone number here"
+              className={styles.inputField}
+              required
+            />
 
-          <fieldset className={styles.radioGroup}>
-            <label>
-              <input type="radio" name="enrolled" value="yes" className={styles.radioInput}/>
-              Yes
-            </label>
-            <label>
-              <input type="radio" name="enrolled" value="no" className={styles.radioInput}/>
-              No
-            </label>
-          </fieldset>
+            <p className={styles.name}>Are you currently enrolled at Heriot-Watt?</p>
 
-          <p className={styles.name}>Enquiry</p>
+            <fieldset className={styles.radioGroup}>
+              <label>
+                <input
+                  type="radio"
+                  name="enrolled"
+                  value="yes"
+                  onChange={handleInputChange}
+                  checked={formData.enrolled === "yes"}
+                  className={styles.radioInput}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="enrolled"
+                  value="no"
+                  onChange={handleInputChange}
+                  checked={formData.enrolled === "no"}
+                  className={styles.radioInput}
+                />
+                No
+              </label>
+            </fieldset>
 
-          <textarea 
-            placeholder="Enter enquiry details here" 
-            className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
-          />
-          
-          <Link href="/Pre_logged_in/contact_us_signed_out_2">
-            <button className={styles.button}>Submit</button>
-          </Link>
-          <Link href="/Pre_logged_in/login_student">
-            <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
-          </Link>
-        </div>
+            <p className={styles.name}>Enquiry</p>
+
+            <textarea
+              name="enquiry"
+              value={formData.enquiry}
+              onChange={handleInputChange}
+              placeholder="Enter enquiry details here"
+              className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
+              required
+            />
+            
+            <button type="submit" className={styles.button}>Submit</button>
+            <button type="button" className={`${styles.button} ${styles.cancel}`} onClick={() => window.history.back()}>Cancel</button>
+            </form>
+          </div>
         
       </div>
     </div>

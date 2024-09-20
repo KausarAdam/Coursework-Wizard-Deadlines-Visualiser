@@ -7,6 +7,15 @@ import Header from "../../Header";
 
 export default function ForgotPassword() {
   const [verificationMethod, setVerificationMethod] = useState("phone");
+  const [contactInfo, setContactInfo] = useState("");
+
+  const handleInputChange = (e) => {
+    setContactInfo(e.target.value);
+  };
+
+  const handleNext = () => {
+    console.log('Contact Info:', contactInfo);
+  };
 
   return (
     <div>
@@ -58,30 +67,42 @@ export default function ForgotPassword() {
             {/* Right Column: Message based on selection */}
             <div className={styles.rightColumn}>
               {verificationMethod === "phone" ? (
-                <><p>
-                  In order to protect your account, we need you to enter your
-                  complete mobile phone number (050*****74) below. You will
-                  then receive a text message with a verification code which can
-                  be used to reset your password.
-                </p><input
+                <>
+                  <p>
+                    In order to protect your account, we need you to enter your
+                    complete mobile phone number (050*****74) below. You will
+                    then receive a text message with a verification code which can
+                    be used to reset your password.
+                  </p>
+                  <input
                     type="tel"
                     placeholder="Enter your mobile phone number"
-                    className={styles.inputField} /></>
+                    className={styles.inputField}
+                    value={contactInfo}
+                    onChange={handleInputChange}
+                  />
+                </>
               ) : (
-                <><p>
+                <>
+                  <p>
                     In order to protect your account, we need you to enter your
                     complete email address (kau*********@gmail.com) below. You will
                     then receive an email with a verification code which can
                     be used to reset your password.
-                  </p><input
-                      type="email"
-                      placeholder="Enter your email address"
-                      className={styles.inputField} /></>
+                  </p>
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className={styles.inputField}
+                    value={contactInfo}
+                    onChange={handleInputChange}
+                  />
+                </>
               )}
             </div>
           </div>
 
-          <Link href="/Pre_logged_in/forgot_password_3">
+          <Link href="/Pre_logged_in/forgot_password_3" onClick={handleNext}>
             <button className={styles.button}>Next</button>
           </Link>
           <Link href="/">

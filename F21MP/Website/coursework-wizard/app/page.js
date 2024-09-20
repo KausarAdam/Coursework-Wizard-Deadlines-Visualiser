@@ -26,12 +26,13 @@ export default function Home() {
         </div>
         <div className={styles.circle}></div>
         <div className={styles.alarmClock}>
-          <Image
-            src="/alarm clock.jpg"
-            alt="Alarm Clock"
-            layout="fill"
-            objectFit="contain"
-          />
+        <Image
+          src="/alarm clock.jpg"
+          alt="Alarm Clock"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'contain' }}
+        />
         </div>
         <div className={styles.actNowText}>
           <div>ACT -</div>
