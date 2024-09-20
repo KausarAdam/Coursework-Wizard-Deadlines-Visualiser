@@ -1,8 +1,7 @@
-import StudentMenu from "../student_menu";
+import StudentMenu from "../../student_menu";
 import styles from "./page.module.css";
-import Footer from "../Footer";
-import Notification from "../student_notification";
-import Link from "next/link";
+import Footer from "../../Footer";
+import Notification from "../../student_notification";
 
 export default function ContactUs() {
     return (

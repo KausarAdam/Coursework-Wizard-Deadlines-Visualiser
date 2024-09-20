@@ -1,7 +1,7 @@
-import StudentMenu from "../student_menu";
+import StudentMenu from "../../student_menu";
 import styles from "./page.module.css";
-import Footer from "../Footer";
-import Notification from "../student_notification";
+import Footer from "../../Footer";
+import Notification from "../../student_notification";
 import Link from "next/link";
 
 export default function ContactUs() {
@@ -35,7 +35,7 @@ export default function ContactUs() {
                 className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
               />
               <p className={styles.text}>*Required Fields</p>
-              <Link href="/Student/contact_us_submitted" className={styles.Link}>
+              <Link href="/Student/contact/contact_us_submitted" className={styles.Link}>
                 <button className={styles.button}>Submit</button>
               </Link>
             </div>
