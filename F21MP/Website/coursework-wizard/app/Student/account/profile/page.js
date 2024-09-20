@@ -53,12 +53,6 @@ export default function Profile() {
                 <a href="https://github.com" target="_blank">
                   <FontAwesomeIcon icon={faGithub} className={styles.icon} />
                 </a>
-                <a href="https://facebook.com" target="_blank">
-                  <FontAwesomeIcon icon={faFacebook} className={styles.icon} />
-                </a>
-                <a href="https://twitter.com" target="_blank">
-                  <FontAwesomeIcon icon={faTwitter} className={styles.icon} />
-                </a>
               </div>
             </div>
 
