@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.coursePage {
+  flex-grow: 1;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.heading {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #1F4E47;
+    font-family: 'Georgia', serif;
+    font-weight:400;
+  }
+  
+  .subheading {
+    font-size: 17px;
+    color: #1F4E47;
+    margin-bottom: 20px;
+    font-family: 'Verdana', sans-serif;
+    font-weight: lighter;
+  }
+  
+  .box {
+    background-color: #F8FAF4;
+    border: 1px solid #ACC8C4;
+    padding: 20px;
+    padding-top: 2px;
+    width: 97.5%;
+    height: 150px;
+    border-radius: 13px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .heading3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    margin-top: 12px;
+    color: #1F4E47;
+    font-family: 'Georgia', serif;
+    font-weight: lighter;
+  }
+
+  .subheading2 {
+    margin-bottom: 8px;
+  }
+
+  .text {
+    font-size: 14px;
+    color: #1F4E47;
+    margin-bottom: 5px;
+    font-family: 'Verdana', sans-serif;
+    font-weight: lighter;
+  }
+
+  .box3 {
+    background-color: #F8FAF4;
+    border: 1px solid #ACC8C4;
+    padding: 20px;
+    padding-top: 2px;
+    margin-top: 25px;
+    width: 97.5%;
+    height: 250px;
+    border-radius: 13px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+  }
+
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
+  height: 555px;
+}

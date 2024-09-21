@@ -32,10 +32,10 @@ export default function StudentMenu() {
   ];
 
   const courseLinks = [
-    { name: "Course 1", link: "/Student/courses/course1" },
-    { name: "Course 2", link: "/Student/courses/course2" },
-    { name: "Course 3", link: "/Student/courses/course3" },
-    { name: "Course 4", link: "/Student/courses/course4" },
+    { name: "Course 1", link: "/Student/courses/course" },
+    { name: "Course 2", link: "/Student/courses/course" },
+    { name: "Course 3", link: "/Student/courses/course" },
+    { name: "Course 4", link: "/Student/courses/course" },
   ];
 
   useEffect(() => {

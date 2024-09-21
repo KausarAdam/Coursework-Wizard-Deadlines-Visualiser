@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.timelinePage {
+  flex-grow: 1;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.heading {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #1F4E47;
+    font-family: 'Georgia', serif;
+    font-weight:400;
+}
+
+.box {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 15px;
+  width: 93.9%;
+  height: 490px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 120px;
+  padding-right: 50px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 30px;
+}
+
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
+  height: 555px;
+}
