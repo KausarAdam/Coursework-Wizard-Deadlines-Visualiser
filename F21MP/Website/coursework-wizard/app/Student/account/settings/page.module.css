@@ -116,3 +116,31 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
+
+.button {
+  width: 160px;
+  padding: 10px;
+  height: 45px;
+  font-size: 17px;
+  color: #1F4E47;
+  background-color: #3BECB9;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saveButton {
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #7DFFD9;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Verdana', sans-serif;
+}

@@ -6,32 +6,37 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
-const menuItems = [
-  { id: 1, name: "Account", icon: "/White/account.png", iconActive: "/Black/account.png", link: null },
-  { id: 2, name: "Dashboard", icon: "/White/dashboard.png", iconActive: "/Black/dashboard.png", link: "/Student/dashboard" },
-  { id: 3, name: "Courses", icon: "/White/courses.png", iconActive: "/Black/courses.png", link: null },
-  { id: 4, name: "Timeline", icon: "/White/timeline.png", iconActive: "/Black/timeline.png", link: "/Student/timeline" },
-  { id: 5, name: "Board", icon: "/White/board.png", iconActive: "/Black/board.png", link: "/Student/board" },
-  { id: 6, name: "Contact Us", icon: "/White/contact.png", iconActive: "/Black/contact.png", link: "/Student/contact/contact_us" },
-  { id: 7, name: "Log Out", icon: "/White/logout.png", iconActive: "/Black/logout.png", link: "/" }
-];
-
-const accountLinks = [
-  { name: "Profile", link: "/Student/account/profile" },
-  { name: "Settings", link: "/Student/account/settings" },
-];
-
-const courseLinks = [
-  { name: "Course 1", link: "/Student/courses/course1" },
-  { name: "Course 2", link: "/Student/courses/course2" },
-  { name: "Course 3", link: "/Student/courses/course3" },
-  { name: "Course 4", link: "/Student/courses/course4" },
-];
-
 export default function StudentMenu() {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState(2);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for sidebar
+
+  const handleLogout = () => {
+    // Perform any necessary logout actions here (like clearing session data)
+    router.push("/"); // Redirect to homepage after logout
+  };
+
+  const menuItems = [
+    { id: 1, name: "Account", icon: "/White/account.png", iconActive: "/Black/account.png", link: null },
+    { id: 2, name: "Dashboard", icon: "/White/dashboard.png", iconActive: "/Black/dashboard.png", link: "/Student/dashboard" },
+    { id: 3, name: "Courses", icon: "/White/courses.png", iconActive: "/Black/courses.png", link: null },
+    { id: 4, name: "Timeline", icon: "/White/timeline.png", iconActive: "/Black/timeline.png", link: "/Student/timeline" },
+    { id: 5, name: "Board", icon: "/White/board.png", iconActive: "/Black/board.png", link: "/Student/board" },
+    { id: 6, name: "Contact Us", icon: "/White/contact.png", iconActive: "/Black/contact.png", link: "/Student/contact/contact_us" },
+    { id: 7, name: "Log Out", icon: "/White/logout.png", iconActive: "/Black/logout.png", link: handleLogout }
+  ];
+
+  const accountLinks = [
+    { name: "Profile", link: "/Student/account/profile" },
+    { name: "Settings", link: "/Student/account/settings" },
+  ];
+
+  const courseLinks = [
+    { name: "Course 1", link: "/Student/courses/course1" },
+    { name: "Course 2", link: "/Student/courses/course2" },
+    { name: "Course 3", link: "/Student/courses/course3" },
+    { name: "Course 4", link: "/Student/courses/course4" },
+  ];
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -58,8 +63,10 @@ export default function StudentMenu() {
     // Toggle sidebar for Account and Courses
     if (id === 1 || id === 3) {
       setIsSidebarOpen(prev => !prev);
-    } else if (link) {
+    } else if (typeof link === 'string' && link) {
       router.push(link);
+    } else if (link === handleLogout) {
+      handleLogout();
     }
   };
 

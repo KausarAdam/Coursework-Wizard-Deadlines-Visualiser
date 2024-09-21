@@ -6,6 +6,7 @@ import Footer from "../../Footer";
 import Notification from "../../student_notification";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function EditProfile() {
@@ -17,6 +18,7 @@ export default function EditProfile() {
     github: ""
   });
   const [dp, setDp] = useState(null);
+  const router = useRouter(); // Initialize router
 
   const handleDpChange = (e) => {
     setDp(URL.createObjectURL(e.target.files[0]));
@@ -29,8 +31,31 @@ export default function EditProfile() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const formData = {
+      preferredName,
+      bio,
+      socialLinks,
+      dp
+    };
+
+    const response = await fetch('/api/profile/edit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+      // Redirect to the profile page after successful submission
+      router.push('/Student/profile');
+    } else {
+      // Handle error
+      console.error("Failed to update profile");
+    }
   };
 
   return (
@@ -107,11 +132,9 @@ export default function EditProfile() {
             </div>
 
             <div className={styles.thirdColumn}>
+              <button type="submit" className={styles.button}>Save Changes</button>
               <Link href="./profile">
-                <button type="submit" className={styles.button}>Save Changes</button>
-              </Link>
-              <Link href="./profile">
-                <button type="cancel" className={`${styles.button} ${styles.cancel}`}>Cancel</button>
+                <button type="button" className={`${styles.button} ${styles.cancel}`}>Cancel</button>
               </Link>
             </div>
           </form>

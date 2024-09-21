@@ -84,7 +84,7 @@
 }
 
 .inputFieldEnquiry {
-  height: 200px;
+  height: 150px;
   resize: none;
   margin-top: -7px;
   margin-bottom: 10px;
@@ -117,4 +117,3 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Verdana', sans-serif;
 }
-

@@ -1,37 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StudentMenu from "../../student_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../student_notification";
-import Link from "next/link";
 
 export default function Settings() {
-
   const [fontSizeEnabled, setFontSizeEnabled] = useState(true);
   const [publicProfileEnabled, setPublicProfileEnabled] = useState(false);
   const [darkEnabled, setDarkEnabled] = useState(false);
   const [shortcutsEnabled, setShortcutsEnabled] = useState(false);
 
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/settings');
+        if (!response.ok) throw new Error('Failed to fetch settings');
+        const data = await response.json();
+        
+        setFontSizeEnabled(data.fontSizeEnabled);
+        setPublicProfileEnabled(data.publicProfileEnabled);
+        setDarkEnabled(data.darkEnabled);
+        setShortcutsEnabled(data.shortcutsEnabled);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchSettings();
+  }, []);
+
   const handleToggleFontSize = () => {
     setFontSizeEnabled(!fontSizeEnabled);
-    console.log("Font size increased:", !fontSizeEnabled);
   };
 
   const handleTogglePublicProfile = () => {
     setPublicProfileEnabled(!publicProfileEnabled);
-    console.log("Public profile enabled:", !publicProfileEnabled);
   };
 
   const handleToggleDark = () => {
     setDarkEnabled(!darkEnabled);
-    console.log("Dark theme enabled:", !darkEnabled);
   };
 
   const handleToggleShortcuts = () => {
     setShortcutsEnabled(!shortcutsEnabled);
-    console.log("Shortcuts disabled:", !shortcutsEnabled);
+  };
+
+  const handleSaveChanges = async () => {
+    const settingsData = {
+      fontSizeEnabled,
+      publicProfileEnabled,
+      darkEnabled,
+      shortcutsEnabled
+    };
+  
+    const response = await fetch('/api/settings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(settingsData)
+    });
+  
+    if (response.ok) {
+      console.log("Settings saved successfully");
+    } else {
+      console.error("Failed to save settings");
+    }
   };
 
   return (
@@ -109,6 +145,11 @@ export default function Settings() {
                   <span className={styles.slider}></span>
                 </label>
               </div>
+
+              <div className={styles.saveButton}>
+                <button onClick={handleSaveChanges} className={styles.button}>Save Changes</button>
+              </div>
+
             </div>
           </div>
         </div>
