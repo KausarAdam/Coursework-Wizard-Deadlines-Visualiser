@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.boardPage {
+  flex-grow: 1;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.heading {
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight:400;
+}
+  
+.kanbanContainer {
+  padding: 0px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.flexColumns {
+  display: flex;
+  width: 101%;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.column {
+  width: 29.2%;
+  background-color: #F8FAF4;
+  padding: 15px;
+  padding-top: 5px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ACC8C4;
+}
+
+.column h3 {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
+  font-weight: bold;
+}
+
+.task {
+  background-color: #F5F5F5;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ACC8C4;
+}
+
+.locked {
+  background-color: #F8FAF4;
+  cursor: not-allowed;
+}
+
+.lockedTasks {
+  width: 99%;
+  margin-top: 20px;
+  background-color: #F8FAF4;
+  padding: 15px;
+  padding-top: 5px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ACC8C4;
+}
+
+.taskLocked {
+  background-color: #F5F5F5;
+  padding: 10px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ACC8C4;
+  width: 15%;
+}
+
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
+  height: 555px;
+}
+
+.lockedTasks h3 {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
+  font-weight: bold;
+}
+
+.lockedTasksContainer {
+  display: flex;
+  gap: 20px;
+  background-color: #F8FAF4;
+  flex-wrap: wrap; /* Allows the tasks to wrap to the next line */
+  justify-content: flex-start; /* Aligns the tasks to the left */
+  align-items: flex-start; /* Ensures tasks align at the top */
+}
