@@ -18,25 +18,18 @@ export default function KanbanBoard() {
     inProgress: [],
     done: [],
     locked: [
-      { id: 1, text: "Locked Task 1", isLocked: true, unlockTime: new Date("2024-10-01T00:00:00") },
-      { id: 2, text: "Locked Task 2", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 3, text: "Locked Task 3", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 4, text: "Locked Task 4", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 5, text: "Locked Task 5", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 6, text: "Locked Task 6", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 2, text: "Locked Task 2", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 2, text: "Locked Task 2", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
-      { id: 2, text: "Locked Task 2", isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
+      { id: 1, text: "F21SF - Subtask 1", details: "Details for Subtask 1", dueDate: new Date("2024-09-24"), isLocked: true, unlockTime: new Date("2024-10-01T00:00:00") },
+      { id: 2, text: "F21SF - Subtask 2", details: "Details for Subtask 2", dueDate: new Date("2024-09-25"), isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
+      { id: 3, text: "F21SF - Subtask 3", details: "Details for Subtask 3", dueDate: new Date("2024-09-26"), isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
+      { id: 4, text: "F21SF - Subtask 4", details: "Details for Subtask 4", dueDate: new Date("2024-09-27"), isLocked: true, unlockTime: new Date("2024-10-05T00:00:00") },
     ],
   });
 
-  // Example of variable coursework weeks
   const courseworkWeeks = [
-    { week: 1, subtasks: [{ id: 1, text: "Subtask 1.1" }, { id: 2, text: "Subtask 1.2" }] },
-    { week: 2, subtasks: [{ id: 3, text: "Subtask 2.1" }] },
+    { week: 1, subtasks: [{ id: 1, text: "F21SF - Subtask 1.1", details: "Subtask details", dueDate: new Date("2024-09-20") }] },
+    { week: 2, subtasks: [{ id: 2, text: "F21SF - Subtask 2.1", details: "Subtask details", dueDate: new Date("2024-09-27") }] },
   ];
 
-  // Automatically unlock tasks based on the current date
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
@@ -52,14 +45,12 @@ export default function KanbanBoard() {
     return () => clearInterval(interval);
   }, [tasks.locked]);
 
-  // Add coursework tasks to the todo column only once
   useEffect(() => {
-    // Check if there are already subtasks in todo to prevent duplicate additions
     if (tasks.todo.length === 0) {
       const allSubtasks = courseworkWeeks.flatMap(coursework => coursework.subtasks);
       setTasks((prev) => ({
         ...prev,
-        todo: allSubtasks.map(subtask => ({ id: subtask.id, text: subtask.text, isLocked: false })),
+        todo: allSubtasks.map(subtask => ({ id: subtask.id, text: subtask.text, details: subtask.details, dueDate: subtask.dueDate, isLocked: false })),
       }));
     }
   }, []); // Empty dependency array ensures it runs only on mount
@@ -67,7 +58,6 @@ export default function KanbanBoard() {
   const moveTask = (taskId, fromColumn, toColumn) => {
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
 
-    // Prevent moving the task to the same column
     if (!taskToMove || fromColumn === toColumn) {
       return;
     }
@@ -83,12 +73,21 @@ export default function KanbanBoard() {
     const [, drag] = useDrag(() => ({
       type: ItemTypes.TASK,
       item: { id: task.id, fromColumn },
-      canDrag: !task.isLocked, // Prevent dragging locked tasks
+      canDrag: !task.isLocked,
     }));
 
     return (
       <div ref={drag} className={`${styles.task} ${task.isLocked ? styles.locked : ""}`}>
-        {task.text}
+        <div className={styles.taskTitle}>{task.text}</div>
+        <div className={styles.taskDetails}>
+          {task.details}
+          <br />
+          Due on {task.dueDate.toLocaleDateString('en-GB', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'short',
+          })}
+        </div>
       </div>
     );
   };
@@ -98,7 +97,7 @@ export default function KanbanBoard() {
       accept: ItemTypes.TASK,
       drop: (item) => moveTask(item.id, item.fromColumn, columnName),
     });
-  
+
     return (
       <div className={styles.column} ref={drop}>
         <h3>{title}</h3>
@@ -113,16 +112,13 @@ export default function KanbanBoard() {
   return (
     <div className={styles.container}>
       <StudentMenu />
-
       <div className={styles.boardPage}>
         <div className={styles.header}>
           <h1 className={styles.heading}>Board</h1>
           <Notification />
         </div>
-
         <div className={styles.withoutFooter}>
           <hr style={{ width: "100.5%", marginLeft: "0" }} />
-
           <DndProvider backend={HTML5Backend}>
             <div className={styles.kanbanContainer}>
               <div className={styles.flexColumns}>
@@ -132,10 +128,11 @@ export default function KanbanBoard() {
               </div>
               <div className={styles.lockedTasks}>
                 <h3>Locked Subtasks</h3>
+                <hr style={{ width: "100.5%", marginLeft: "0" }}/>
                 <div className={styles.lockedTasksContainer}>
                   {tasks.locked.map((task) => (
                     <div key={task.id} className={styles.taskLocked}>
-                      {task.text} (Unlocks on {task.unlockTime.toLocaleDateString("en-GB")}) {/* Ensure consistent date format */}
+                      {task.text} (Unlocks on {task.unlockTime.toLocaleDateString("en-GB")})
                     </div>
                   ))}
                 </div>
@@ -143,7 +140,6 @@ export default function KanbanBoard() {
             </div>
           </DndProvider>
         </div>
-
         <Footer />
       </div>
     </div>

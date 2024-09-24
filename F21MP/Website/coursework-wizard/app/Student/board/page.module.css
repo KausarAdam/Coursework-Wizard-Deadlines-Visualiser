@@ -36,16 +36,18 @@
   width: 101%;
   gap: 20px;
   justify-content: space-around;
+  height: 370px;
 }
 
 .column {
-  width: 29.2%;
+  width: 29.4%;
   background-color: #F8FAF4;
   padding: 15px;
   padding-top: 5px;
   border-radius: 13px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid #ACC8C4;
+  display: relative;
 }
 
 .column h3 {
@@ -72,8 +74,26 @@
   cursor: not-allowed;
 }
 
+.task.locked {
+  background-color: #F8FAF4;
+  cursor: not-allowed;
+}
+
+.taskTitle {
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
+  font-size: 15px;
+}
+
+.taskDetails {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
+}
+
 .lockedTasks {
-  width: 99%;
+  width: 98.7%;
   margin-top: 20px;
   background-color: #F8FAF4;
   padding: 15px;
@@ -90,6 +110,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid #ACC8C4;
   width: 15%;
+  font-size: 15px;
+  color: #1F4E47;
+  font-family: 'Verdana', sans-serif;
 }
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
