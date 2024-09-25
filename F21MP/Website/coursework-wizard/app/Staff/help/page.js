@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import StudentMenu from "../student_menu";
+import StaffMenu from "../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
-import Notification from "../student_notification";
+import Notification from "../staff_notification";
 import Link from "next/link";
 
 export default function Help() {
@@ -24,7 +24,7 @@ export default function Help() {
       answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
     },
     {
-      question: "How can I reset my password?",
+      question: "How do I upload coursework?",
       answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
     },
     {
@@ -39,7 +39,7 @@ export default function Help() {
 
     return (
       <div className={styles.container}>
-        <StudentMenu/>
+        <StaffMenu/>
 
         <div className={styles.helpPage}>
 

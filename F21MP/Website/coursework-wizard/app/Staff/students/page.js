@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import StudentMenu from "../student_menu";
+import StaffMenu from "../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
-import Notification from "../student_notification";
+import Notification from "../staff_notification";
 import Link from "next/link";
 
 export default function Help() {
@@ -31,7 +31,7 @@ export default function Help() {
       question: "I can’t find an answer to my question, what should I do?",
       answer: (
         <>
-          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="./contact/contact_us" className={styles.link}>click here</a> to submit your enquiry.
+          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="/Pre_logged_in/contact/contact_us_signed_out" className={styles.link}>click here</a> to submit your enquiry.
         </>
       )
     }
@@ -39,7 +39,7 @@ export default function Help() {
 
     return (
       <div className={styles.container}>
-        <StudentMenu/>
+        <StaffMenu/>
 
         <div className={styles.helpPage}>
 

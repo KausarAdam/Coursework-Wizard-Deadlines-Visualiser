@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.helpPage {
+  flex-grow: 1;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.heading {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #1F4E47;
+    font-family: 'Georgia', serif;
+    font-weight:400;
+  }
+
+.box {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 8px;
+  width: 97.5%;
+  height: 520px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
+  height: 555px;
+}
+
+.faqItem {
+  margin-bottom: 10px;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: #1F4E47;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.question:hover {
+  transition: color 0.3s ease;
+  color: #3BECB9;
+}
+
+.arrow {
+  transition: color 0.3s ease;
+  font-size: 16px;
+  color: #1F4E47;
+}
+
+.arrowExpanded {
+  color: #3BECB9;
+}
+
+.answer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #1F4E47;
+}
+
+.separator {
+  border: 0;
+  border-top: 1px solid #ACC8C4;
+  margin: 10px 0;
+}
+
+.link {
+  color: #3BECB9;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.link:hover {
+  color: #1F4E47;
+}
