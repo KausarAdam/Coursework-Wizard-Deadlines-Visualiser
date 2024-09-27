@@ -30,7 +30,7 @@ export default function Dashboard() {
               </div>
 
               <div className={styles.box2}>
-                <h3 className={styles.heading3}>24th September</h3>
+                <h3 className={`${styles.heading3} ${styles.heading33}`}>24th September</h3>
                 <br></br>
                 <div className={styles.subheading}>Next Subtask Deadline</div>
               </div>
