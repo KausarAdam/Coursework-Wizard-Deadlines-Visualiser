@@ -62,14 +62,17 @@ export default function Timeline() {
   }, [months]);
 
   const subtasks = [
-    // Example subtasks for each course
-    { title: "ST 1", courseId: 1, start: new Date(2024, 8, 5), end: new Date(2024, 9, 10), color: styles.course1 },
-    { title: "ST 3", courseId: 2, start: new Date(2024, 9, 5), end: new Date(2024, 9, 10), color: styles.course2 },
-    { title: "ST 4", courseId: 2, start: new Date(2024, 9, 8), end: new Date(2024, 9, 12), color: styles.course2 },
-    { title: "ST 5", courseId: 3, start: new Date(2024, 10, 6), end: new Date(2024, 10, 10), color: styles.course3 },
-    { title: "ST 6", courseId: 4, start: new Date(2024, 11, 3), end: new Date(2024, 11, 18), color: styles.course4 },
-    { title: "ST 2", courseId: 1, start: new Date(2024, 9, 11), end: new Date(2024, 9, 20), color: styles.course1 },
-    { title: "ST 2", courseId: 1, start: new Date(2024, 9, 22), end: new Date(2024, 9, 30), color: styles.course1 },
+    { title: "ST 1", courseId: 1, start: new Date(2024, 8, 5), end: new Date(2024, 9, 10), color: styles.course1, type: 'dependent' },
+    { title: "ST 2", courseId: 1, start: new Date(2024, 9, 11), end: new Date(2024, 9, 20), color: styles.course1, type: 'independent' },
+    { title: "ST 3", courseId: 2, start: new Date(2024, 9, 5), end: new Date(2024, 9, 10), color: styles.course2, type: 'dependent' },
+    { title: "ST 4", courseId: 2, start: new Date(2024, 9, 8), end: new Date(2024, 9, 12), color: styles.course2, type: 'independent' },
+    { title: "ST 5", courseId: 3, start: new Date(2024, 10, 6), end: new Date(2024, 10, 10), color: styles.course3, type: 'independent' },
+    { title: "ST 6", courseId: 4, start: new Date(2024, 11, 3), end: new Date(2024, 11, 18), color: styles.course4, type: 'dependent' },
+    { title: "ST 7", courseId: 1, start: new Date(2024, 11, 3), end: new Date(2024, 11, 18), color: styles.course1, type: 'dependent' },
+    { title: "ST 8", courseId: 1, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course1, type: 'dependent' },
+    { title: "ST 8", courseId: 4, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course4, type: 'independent' },
+    { title: "ST 8", courseId: 2, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course2, type: 'dependent' },
+    { title: "ST 8", courseId: 2, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course2, type: 'independent' },
   ];
 
   // Function to calculate width of a subtask
@@ -97,7 +100,7 @@ export default function Timeline() {
     
     subtasks.forEach(subtask => {
       let weekIndex = -1;
-  
+
       // Determine which week the subtask starts in
       months.forEach((month) => {
         month.weeks.forEach((week, index) => {
@@ -106,19 +109,19 @@ export default function Timeline() {
           }
         });
       });
-  
+
       // Check if weekIndex was found
       if (weekIndex === -1) return; // Skip if not found
-  
+
       // Ensure courseId is valid
-      const courseLineIndex = (subtask.courseId - 1) * 2 + (weekIndex % 2); // Assign two lines for each course
+      const courseLineIndex = (subtask.courseId - 1) * 2 + (subtask.type === 'dependent' ? 0 : 1); // Assign based on dependency type
       if (courseLineIndex >= 0 && courseLineIndex < organizedSubtasks.length) {
         organizedSubtasks[courseLineIndex].push(subtask);
       } else {
         console.error(`Invalid courseLineIndex: ${courseLineIndex} for subtask: ${subtask.title}`);
       }
     });
-  
+
     return organizedSubtasks;
   };
   

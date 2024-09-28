@@ -114,10 +114,12 @@
 }
 
 .courseLine {
+  display: flex;
   height: 25px;
   margin-bottom: 10px;
   border-radius: 5px;
   background-color: #DEECE6;
+  position: relative;
 }
 
 .verticalLine {
@@ -192,7 +194,7 @@
 }
 
 .subTask {
-  position: relative; /* Change this to 'absolute' if using absolute positioning */
+  position: absolute; /* PLEASE DONT CHANGE THIS 😭 */
   left: calc(var(--start-offset) * 100%); /* Use a CSS variable for dynamic offset */
   border-radius: 3px;
   font-size: 10px;
