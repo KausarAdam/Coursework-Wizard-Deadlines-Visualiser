@@ -161,7 +161,10 @@
 
 .progressBar {
   height: 100%;
+  width: calc(100% - 2px); /* when 6 tasks are completed, 100% does not show the bar so we reduce the width a little */
   transition: width 0.4s ease;
+  background-color: #52E032;
+  box-sizing: border-box;
 }
 
 .progressBarContainer {
@@ -171,6 +174,7 @@
   overflow: hidden;
   height: 25px;
   margin-top: 15px;
+  box-sizing: border-box;
 }
 
 .onTime .progressBar {

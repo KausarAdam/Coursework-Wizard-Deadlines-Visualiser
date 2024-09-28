@@ -5,6 +5,7 @@ import StudentMenu from "../../student_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../student_notification";
+import Link from "next/link";
 
 export default function Course({ params }) {
   const { courseId } = params;
@@ -48,9 +49,9 @@ export default function Course({ params }) {
                 <div className={styles.progressBar} style={{ width: '75%' }}></div>
               </div>
               <div className={styles.third}>
-                <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>
-                  View/<br />Submit
-                </button>
+                <Link href="/Student/courses/coursework" className={styles.Link}>
+                  <button className={styles.button}>View/<br/>Submit</button>
+                </Link>
               </div>
             </div>
 
@@ -64,8 +65,11 @@ export default function Course({ params }) {
                 <div className={styles.progressBar} style={{ width: '5%' }}></div>
               </div>
               <div className={styles.third}>
-                <button onClick={handleSubmit} className={styles.button}>View/<br/>Submit</button>
+                <Link href="/Student/courses/coursework" className={styles.Link}>
+                  <button className={styles.button}>View/<br/>Submit</button>
+                </Link>
               </div>
+
             </div>
           </div>
         </div>
