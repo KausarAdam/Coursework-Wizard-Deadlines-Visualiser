@@ -5,13 +5,16 @@ import StaffMenu from "../../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../staff_notification";
+import Link from "next/link";
 
 export default function Course({ params }) {
   const { courseId } = params;
   const router = useRouter();
   
-  const handleSubmit = (courseworkFile) => {
-    window.open(courseworkFile, "_blank");
+  const handleSubmit = (courseworkFile, action) => {
+    if (action === "delete") {
+      console.log("Deleting coursework:", courseworkFile);
+    }
   };
 
   return (
@@ -30,13 +33,19 @@ export default function Course({ params }) {
           <h2 className={styles.subheading}>Course Details</h2>
 
           <div className={styles.box}>
-            <h3 className={styles.heading3}>Course Announcement</h3>
+            <div className={styles.insideBox}>
+              <h3 className={styles.heading3}>Course Announcement</h3>
+              <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>+ New</button>
+            </div>
             <hr />
             <div className={styles.subheading}>Announcement Details</div>
           </div>
 
           <div className={styles.box3}>
-            <h3 className={styles.heading3}>Pending Coursework</h3>
+            <div className={styles.insideBox3}>
+              <h3 className={styles.heading3}>Coursework</h3>
+              <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>+ New</button>
+            </div>
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
             <div className={styles.boxCourse}>
               <div className={styles.first}>
@@ -44,13 +53,11 @@ export default function Course({ params }) {
                 <p className={styles.text}>Details</p>
                 <p className={styles.text}>Due on Tuesday, 21st October</p>
               </div>
-              <div className={`${styles.progressBarContainer} ${styles.onTime}`}>
-                <div className={styles.progressBar} style={{ width: '75%' }}></div>
-              </div>
               <div className={styles.third}>
-                <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>
-                  View/<br />Submit
-                </button>
+                <Link href={`/Staff/courses/coursework`} className={styles.Link}>
+                  <button className={styles.button}>View</button>
+                </Link>
+                <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
               </div>
             </div>
 
@@ -60,11 +67,11 @@ export default function Course({ params }) {
                 <p className={styles.text}>Details</p>
                 <p className={styles.text}>Due on Tuesday, 26th November</p>
               </div>
-              <div className={`${styles.progressBarContainer} ${styles.late}`}>
-                <div className={styles.progressBar} style={{ width: '5%' }}></div>
-              </div>
               <div className={styles.third}>
-                <button onClick={handleSubmit} className={styles.button}>View/<br/>Submit</button>
+                <Link href={`/Staff/courses/coursework`} className={styles.Link}>
+                  <button className={styles.button}>View</button>
+                </Link>
+                <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
               </div>
             </div>
           </div>
