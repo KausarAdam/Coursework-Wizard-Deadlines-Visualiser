@@ -159,12 +159,6 @@
   width: 95%;
   margin-left: 30px;
   gap: 4px;
-  background-color: white;
-  cursor: grab;
-}
-
-.subtaskRow:hover {
-  background-color: #f0f0f0; /* Change color on hover */
 }
 
 .deleteButton {

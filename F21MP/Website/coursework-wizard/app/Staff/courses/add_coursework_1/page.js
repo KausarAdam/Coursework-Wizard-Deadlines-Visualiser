@@ -6,6 +6,8 @@ import StaffMenu from "../../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../staff_notification";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function AddCoursework() {
   const [courseworkName, setCourseworkName] = useState("");
@@ -78,12 +80,15 @@ export default function AddCoursework() {
             />
             
             <div className={styles.subheading}>Submission Date</div>
-            <input
-              type="date"
-              value={submissionDate}
-              onChange={(e) => setSubmissionDate(e.target.value)}
+            <DatePicker
+              selected={submissionDate ? new Date(submissionDate) : null}
+              onChange={(date) => setSubmissionDate(date)}
               className={`${styles.inputField} ${styles.inputFieldDate}`}
               required
+              placeholderText="Select submission date"
+              minDate={new Date()}
+              portalId="date-picker-portal" // Use portal to render above other elements
+              popperPlacement="top"
             />
             
             <div className={styles.subheading}>Coursework Details</div>

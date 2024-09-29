@@ -6,7 +6,6 @@ import StaffMenu from "../../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../staff_notification";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -98,16 +97,7 @@ export default function AddCoursework() {
     } else {
       window.alert("Independent subtasks must be either 0 or 1.");
     }
-  };
-  
-
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const reorderedSubtasks = Array.from(dependentSubtasks);
-    const [moved] = reorderedSubtasks.splice(result.source.index, 1);
-    reorderedSubtasks.splice(result.destination.index, 0, moved);
-    setDependentSubtasks(reorderedSubtasks);
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -275,72 +265,57 @@ export default function AddCoursework() {
             />
             
             {dependentSubtasks.length > 0 && (
-              <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId="subtasks">
-                  {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {dependentSubtasks.map((subtask, index) => (
-                        <Draggable key={index} draggableId={`subtask-${index}`} index={index}>
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              className={styles.subtaskRow}
-                            >
-                              <input
-                                type="text"
-                                placeholder="Subtask Name"
-                                value={subtask.name}
-                                onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-                                className={`${styles.inputField2} ${styles.inputName}`}
-                                required
-                              />
-                              <input
-                                type="number"
-                                placeholder="Weight"
-                                value={subtask.weight}
-                                onChange={(e) => handleInputChange(index, 'weight', e.target.value)}
-                                className={`${styles.inputField2} ${styles.inputWeight}`}
-                                required
-                              />
-                              <DatePicker
-                                selected={subtask.from ? new Date(subtask.from) : null}
-                                onChange={(date) => handleInputChange(index, "from", date)}
-                                minDate={today} // Prevent selection of past dates
-                                placeholderText="From (date)"
-                                className={`${styles.inputField2} ${styles.inputDate}`}
-                                required
-                                portalId="date-picker-portal" // Use portal to render above other elements
-                                popperPlacement = "top"
-                              />
-                              <DatePicker
-                                selected={subtask.to ? new Date(subtask.to) : null}
-                                onChange={(date) => handleInputChange(index, "to", date)}
-                                minDate={today} // Prevent selection of past dates
-                                placeholderText="To (date)"
-                                className={`${styles.inputField2} ${styles.inputDate}`}
-                                required
-                                portalId="date-picker-portal" // Use portal to render above other elements
-                                popperPlacement = "top"
-                              />
-                              <input
-                                type="file"
-                                onChange={(e) => handleInputChange(index, 'attachment', e.target.files[0])}
-                                className={`${styles.inputField2} ${styles.inputFile}`}
-                                required
-                              />
-                              <button onClick={() => handleDeleteRow(index)} className={styles.deleteButton}>-</button>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+              <div>
+                {dependentSubtasks.map((subtask, index) => (
+                  <div key={index} className={styles.subtaskRow}>
+                    <input
+                      type="text"
+                      placeholder="Subtask Name"
+                      value={subtask.name}
+                      onChange={(e) => handleInputChange(index, 'name', e.target.value)}
+                      className={`${styles.inputField2} ${styles.inputName}`}
+                      required
+                    />
+                    <input
+                      type="number"
+                      placeholder="Weight"
+                      value={subtask.weight}
+                      onChange={(e) => handleInputChange(index, 'weight', e.target.value)}
+                      className={`${styles.inputField2} ${styles.inputWeight}`}
+                      required
+                    />
+                    <DatePicker
+                      selected={subtask.from ? new Date(subtask.from) : null}
+                      onChange={(date) => handleInputChange(index, "from", date)}
+                      minDate={today} // Prevent selection of past dates
+                      placeholderText="From (date)"
+                      className={`${styles.inputField2} ${styles.inputDate}`}
+                      required
+                      portalId="date-picker-portal" // Use portal to render above other elements
+                      popperPlacement="top"
+                    />
+                    <DatePicker
+                      selected={subtask.to ? new Date(subtask.to) : null}
+                      onChange={(date) => handleInputChange(index, "to", date)}
+                      minDate={today} // Prevent selection of past dates
+                      placeholderText="To (date)"
+                      className={`${styles.inputField2} ${styles.inputDate}`}
+                      required
+                      portalId="date-picker-portal" // Use portal to render above other elements
+                      popperPlacement="top"
+                    />
+                    <input
+                      type="file"
+                      onChange={(e) => handleInputChange(index, 'attachment', e.target.files[0])}
+                      className={`${styles.inputField2} ${styles.inputFile}`}
+                      required
+                    />
+                    <button onClick={() => handleDeleteRow(index)} className={styles.deleteButton}>-</button>
+                  </div>
+                ))}
+              </div>
             )}
+
 
             <div className={`${styles.subheading} ${styles.subheadingMargin}`}>Total Number of Independent Subtasks</div>
             <input
