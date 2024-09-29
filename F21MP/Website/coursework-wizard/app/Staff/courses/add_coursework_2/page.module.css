@@ -1,0 +1,214 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.addCourseworkPage {
+  flex-grow: 1;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.heading {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #1F4E47;
+    font-family: 'Georgia', serif;
+    font-weight:400;
+  }
+  
+.subheading {
+  font-size: 14px;
+  color: #1F4E47;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: bold;
+}
+
+.subheadingMargin {
+  margin-top: 15px;
+}
+
+.box {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 12px;
+  width: 97.5%;
+  height: 520px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.heading3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  margin-top: 12px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight: lighter;
+}
+
+.subheading2 {
+  margin-bottom: 8px;
+}
+
+.text {
+  color: #1F4E47;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  font-family: 'Verdana', sans-serif;
+  font-size: 10px;
+  text-align: left;
+}
+
+.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
+  height: 555px;
+}
+
+.inputField {
+  width: 60%;
+  height: 15px;
+  padding: 10px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  border: 1px solid #ACC8C4;
+  font-size: 12px;
+  font-family: 'Verdana', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.inputField2 {
+  height: 10px;
+  padding: 10px;
+  margin-bottom: 2px;
+  border-radius: 13px;
+  margin-top: -5px;
+  border: 1px solid #ACC8C4;
+  font-size: 12px;
+  font-family: 'Verdana', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.inputFieldDate {
+  width: 20%;
+}
+
+.inputFieldEnquiry {
+  height: 100px;
+  resize: none;
+  margin-top: -7px;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.button {
+  width: 9%;
+  padding: 10px;
+  height: 45px;
+  font-size: 17px;
+  color: #1F4E47;
+  background-color: #3BECB9;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  display: block;
+  margin-top: 15px;
+}
+
+.Link {
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #7DFFD9;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Verdana', sans-serif;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.subtaskRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Space between rows */
+  width: 95%;
+  margin-left: 30px;
+  gap: 4px;
+  background-color: white;
+  cursor: grab;
+}
+
+.subtaskRow:hover {
+  background-color: #f0f0f0; /* Change color on hover */
+}
+
+.deleteButton {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.deleteButton:hover {
+  background-color: darkred; /* Change color on hover */
+}
+
+.inputName {
+  width: 500px;
+}
+
+.inputWeight {
+  width: 80px;
+}
+
+.inputDate {
+  width: 150px;
+}
+
+.inputFile {
+  width: 180px;
+  border: none;
+  box-shadow: none;
+}
+
+.date-picker {
+  position: absolute; /* or absolute, depending on your layout */
+  z-index: 1;
+}
+
+.date-picker-container {
+  margin-bottom: 20px; /* Adjust as needed */
+}

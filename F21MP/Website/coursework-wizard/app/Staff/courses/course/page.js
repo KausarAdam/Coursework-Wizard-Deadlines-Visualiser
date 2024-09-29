@@ -44,7 +44,9 @@ export default function Course({ params }) {
           <div className={styles.box3}>
             <div className={styles.insideBox3}>
               <h3 className={styles.heading3}>Coursework</h3>
-              <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>+ New</button>
+              <Link href={`/Staff/courses/add_coursework_1`} className={styles.Link}>
+                <button className={styles.button}>+ New</button>
+              </Link>
             </div>
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
             <div className={styles.boxCourse}>
