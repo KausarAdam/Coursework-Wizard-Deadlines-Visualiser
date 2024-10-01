@@ -20,6 +20,20 @@ export default function AddCoursework() {
   const [subtaskIndependent, setSubtaskIndependent] = useState("");
   const [dependentSubtasks, setDependentSubtasks] = useState([]);
 
+  const moveUp = (index) => {
+    if (index === 0) return; // Prevent moving the first item up
+    const newSubtasks = [...dependentSubtasks];
+    [newSubtasks[index - 1], newSubtasks[index]] = [newSubtasks[index], newSubtasks[index - 1]];
+    setDependentSubtasks(newSubtasks);
+  };
+
+  const moveDown = (index) => {
+    if (index === dependentSubtasks.length - 1) return; // Prevent moving the last item down
+    const newSubtasks = [...dependentSubtasks];
+    [newSubtasks[index], newSubtasks[index + 1]] = [newSubtasks[index + 1], newSubtasks[index]];
+    setDependentSubtasks(newSubtasks);
+  };
+
   // Define the state for independent subtask row
   const [independentSubtaskRow, setIndependentSubtaskRow] = useState({
     name: "",
@@ -265,9 +279,19 @@ export default function AddCoursework() {
             />
             
             {dependentSubtasks.length > 0 && (
-              <div>
+              <div className={styles.draggableContainer}>
                 {dependentSubtasks.map((subtask, index) => (
                   <div key={index} className={styles.subtaskRow}>
+                    <button onClick={() => moveUp(index)} className={styles.arrowButton}>
+                      <svg width="15" height="15" viewBox="0 0 24 24">
+                        <path d="M12 2L2 12h5v8h10v-8h5L12 2z" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <button onClick={() => moveDown(index)} className={styles.arrowButton}>
+                      <svg width="15" height="15" viewBox="0 0 24 24">
+                        <path d="M12 22l10-10h-5v-8H7v8H2l10 10z" fill="currentColor" />
+                      </svg>
+                    </button>
                     <input
                       type="text"
                       placeholder="Subtask Name"
@@ -287,22 +311,18 @@ export default function AddCoursework() {
                     <DatePicker
                       selected={subtask.from ? new Date(subtask.from) : null}
                       onChange={(date) => handleInputChange(index, "from", date)}
-                      minDate={today} // Prevent selection of past dates
+                      minDate={new Date()} // Prevent selection of past dates
                       placeholderText="From (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
                       required
-                      portalId="date-picker-portal" // Use portal to render above other elements
-                      popperPlacement="top"
                     />
                     <DatePicker
                       selected={subtask.to ? new Date(subtask.to) : null}
                       onChange={(date) => handleInputChange(index, "to", date)}
-                      minDate={today} // Prevent selection of past dates
+                      minDate={new Date()} // Prevent selection of past dates
                       placeholderText="To (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
                       required
-                      portalId="date-picker-portal" // Use portal to render above other elements
-                      popperPlacement="top"
                     />
                     <input
                       type="file"
@@ -330,13 +350,13 @@ export default function AddCoursework() {
             />
 
             {subtaskIndependent === "1" && (
-              <div className={styles.subtaskRow}>
+              <div className={styles.subtaskRow2}>
                 <input
                   type="text"
                   placeholder="Independent Subtask Name"
                   value={independentSubtaskRow.name}
                   onChange={(e) => setIndependentSubtaskRow({ ...independentSubtaskRow, name: e.target.value })}
-                  className={`${styles.inputField2} ${styles.inputName}`}
+                  className={`${styles.inputField2} ${styles.inputName2}`}
                   required
                 />
                 <input
