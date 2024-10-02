@@ -8,17 +8,34 @@ import Footer from "../../Footer";
 import Notification from "../../staff_notification";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { useSearchParams } from 'next/navigation';
 
 // Get today's date formatted as YYYY-MM-DD for date inputs
 const today = new Date();
 const formattedToday = today.toISOString().split("T")[0];
 
 export default function AddCoursework() {
+
+  const searchParams = useSearchParams();
+  const courseworkName = searchParams.get('courseworkName');
+  const submissionDate = searchParams.get('date');
+  const courseworkDetails = searchParams.get('details');
+
   const [subtaskTotal, setSubtaskTotal] = useState("");
   const [subtaskDependent, setSubtaskDependent] = useState("");
   const [subtaskIndependent, setSubtaskIndependent] = useState("");
   const [dependentSubtasks, setDependentSubtasks] = useState([]);
+
+  // Define the state for independent subtask row
+  const [independentSubtaskRow, setIndependentSubtaskRow] = useState({
+    name: "",
+    weight: "",
+    from: "",
+    to: "",
+    attachment: null,
+  });
+
+  const router = useRouter();
 
   const moveUp = (index) => {
     if (index === 0) return; // Prevent moving the first item up
@@ -33,20 +50,6 @@ export default function AddCoursework() {
     [newSubtasks[index], newSubtasks[index + 1]] = [newSubtasks[index + 1], newSubtasks[index]];
     setDependentSubtasks(newSubtasks);
   };
-
-  // Define the state for independent subtask row
-  const [independentSubtaskRow, setIndependentSubtaskRow] = useState({
-    name: "",
-    weight: "",
-    from: "",
-    to: "",
-    attachment: null,
-  });
-
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
-
-  const router = useRouter();
 
   const handleDependentChange = (e) => {
     const value = e.target.value;
@@ -115,7 +118,7 @@ export default function AddCoursework() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validation logic
     if (!subtaskTotal || subtaskDependent === "" || !subtaskIndependent) {
       window.alert("Total, dependent, and independent subtasks are required.");
@@ -193,32 +196,36 @@ export default function AddCoursework() {
       window.alert("The sum of dependent and independent subtasks must equal 7 or less.");
       return;
     }
-  
-    // Prepare coursework data
-    const courseworkData = {
-      subtaskTotal,
-      subtaskDependent,
-      subtaskIndependent,
-      dependentSubtasks: JSON.stringify(dependentSubtasks), // Stringified
-      independentSubtaskRow: JSON.stringify(independentSubtaskRow), // Stringified
+
+    // Collect the dependent and independent subtask data
+    const dependentSubtasksData = dependentSubtasks.map(subtask => ({
+      name: subtask.name,
+      weight: subtask.weight,
+      from: subtask.from,
+      to: subtask.to,
+      attachment: subtask.attachment,
+    }));
+
+    const independentSubtaskData = {
+      name: independentSubtaskRow.name,
+      weight: independentSubtaskRow.weight,
+      from: independentSubtaskRow.from,
+      to: independentSubtaskRow.to,
+      attachment: independentSubtaskRow.attachment,
     };
   
-
-    try {
-      // Navigate to add_coursework_3 with coursework data
-      const queryParams = new URLSearchParams({
-        subtaskTotal,
-        subtaskDependent,
-        subtaskIndependent,
-        dependentSubtasks: JSON.stringify(dependentSubtasks), // Pass as JSON string
-        independentSubtaskRow: JSON.stringify(independentSubtaskRow), // Pass as JSON string
-      });
-  
-      // Navigate to add_coursework_3 with coursework data
-      router.push(`/Staff/courses/add_coursework_3?${queryParams}`);
-    } catch (err) {
-      window.alert("An error occurred: " + err.message);
-    }
+    // Manually append query params to the URL
+    router.push(
+      `/Staff/courses/add_coursework_3?` +
+      `courseworkName=${encodeURIComponent(courseworkName)}&` +
+      `date=${encodeURIComponent(new Date(submissionDate).toISOString())}&` +
+      `details=${encodeURIComponent(courseworkDetails)}&` +
+      `subtaskTotal=${encodeURIComponent(subtaskTotal)}&` +
+      `subtaskDependent=${encodeURIComponent(subtaskDependent)}&` +
+      `dependentSubtasks=${encodeURIComponent(JSON.stringify(dependentSubtasksData))}&` +
+      `subtaskIndependent=${encodeURIComponent(subtaskIndependent)}&` +
+      `independentSubtask=${encodeURIComponent(JSON.stringify(independentSubtaskData))}`
+    );
   };
   
   

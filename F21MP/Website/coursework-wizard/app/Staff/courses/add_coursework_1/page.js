@@ -17,6 +17,18 @@ export default function AddCoursework() {
   const [success, setSuccess] = useState(null);
   const router = useRouter();
 
+  const handleNameChange = (e) => {
+    setCourseworkName(e.target.value);
+  };
+
+  const handleDateChange = (date) => {
+    setSubmissionDate(date);
+  };
+
+  const handleDetailsChange = (e) => {
+    setCourseworkDetails(e.target.value);
+  };
+
   const handleNext = async (e) => {
     e.preventDefault();
     setError(null);
@@ -28,27 +40,18 @@ export default function AddCoursework() {
       return;
     }
 
-    // Store data for the next page
-    const courseworkData = {
-      courseworkName,
-      submissionDate,
-      courseworkDetails,
-    };
-
-    try {
-      // Storing data, pass it to next page
-      localStorage.setItem("courseworkData", JSON.stringify(courseworkData));
-
-      // Navigate to the next page
-      router.push("/Staff/courses/add_coursework_2");
-    } catch (err) {
-      setError(err.message);
-    }
+    // Manually append query params to the URL
+    router.push(
+      `/Staff/courses/add_coursework_2?courseworkName=${encodeURIComponent(courseworkName)}&date=${encodeURIComponent(submissionDate.toISOString())}&details=${encodeURIComponent(courseworkDetails)}`
+    );
   };
 
   const handleBack = () => {
     router.push("/Staff/courses/course");
   };
+
+  // ---------------------heereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-------
+  // checkpointttttttttttttttttttttttt
 
   return (
     <div className={styles.container}>
@@ -74,7 +77,7 @@ export default function AddCoursework() {
               type="text"
               placeholder="Enter coursework name here"
               value={courseworkName}
-              onChange={(e) => setCourseworkName(e.target.value)}
+              onChange= {handleNameChange}
               className={styles.inputField}
               required
             />
@@ -82,7 +85,7 @@ export default function AddCoursework() {
             <div className={styles.subheading}>Submission Date</div>
             <DatePicker
               selected={submissionDate ? new Date(submissionDate) : null}
-              onChange={(date) => setSubmissionDate(date)}
+              onChange={handleDateChange}
               className={`${styles.inputField} ${styles.inputFieldDate}`}
               required
               placeholderText="Select submission date"
@@ -95,7 +98,7 @@ export default function AddCoursework() {
             <textarea
               placeholder="Enter details about the coursework here"
               value={courseworkDetails}
-              onChange={(e) => setCourseworkDetails(e.target.value)}
+              onChange={handleDetailsChange}
               className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
               required
             />

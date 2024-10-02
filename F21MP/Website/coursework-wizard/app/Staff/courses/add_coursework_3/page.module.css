@@ -58,6 +58,11 @@
   font-weight: lighter;
 }
 
+.heading4 {
+  font-weight: bold;
+  width: 1050px;
+}
+
 .subheading2 {
   font-weight: lighter;
   font-size: 16px;
@@ -65,7 +70,7 @@
 
 .subheading3{
   margin-top: 23px;
-  margin-left: 750px;;
+  font-weight: bold;
 }
 
 .text {
