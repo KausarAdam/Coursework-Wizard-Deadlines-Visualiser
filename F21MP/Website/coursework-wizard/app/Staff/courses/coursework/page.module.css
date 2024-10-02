@@ -77,6 +77,19 @@
   text-align: left;
 }
 
+.box33 {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 2px;
+  margin-top: 25px;
+  width: 97.5%;
+  height: 230px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
   height: 555px;
 }
@@ -141,6 +154,7 @@
   margin-right: -6px;
 }
 
+
 .boxCourse {
   width: 32.4%;
   margin-bottom: 5px;;
@@ -159,34 +173,3 @@
   margin-bottom: 5px;
 }
 
-.progressBar {
-  height: 100%;
-  width: calc(100% - 2px); /* when 6 tasks are completed, 100% does not show the bar so we reduce the width a little */
-  transition: width 0.4s ease;
-  background-color: #52E032;
-  box-sizing: border-box;
-}
-
-.progressBarContainer {
-  width: 30%;
-  background-color: #D9D9D9;
-  border-radius: 0px;
-  overflow: hidden;
-  height: 25px;
-  margin-top: 15px;
-  box-sizing: border-box;
-}
-
-.onTime .progressBar {
-  background-color: #52E032;
-}
-
-.late .progressBar {
-  background-color: #E07E32;
-}
-
-.courseworkProgressBox {
-  display: flex;
-  justify-content: space-between; /* Space between heading and progress bar */
-  height: 44px;
-}

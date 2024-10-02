@@ -36,7 +36,7 @@ export default function AddCoursework() {
     };
 
     try {
-      // Storing data, assuming you will handle it in local storage or pass it to next page
+      // Storing data, pass it to next page
       localStorage.setItem("courseworkData", JSON.stringify(courseworkData));
 
       // Navigate to the next page

@@ -18,114 +18,106 @@
 }
 
 .heading {
-    font-size: 38px;
-    margin-bottom: 10px;
-    color: #1F4E47;
-    font-family: 'Georgia', serif;
-    font-weight:400;
-  }
-  
-  .subheading {
-    font-size: 17px;
-    color: #1F4E47;
-    margin-bottom: 20px;
-    font-family: 'Verdana', sans-serif;
-    font-weight: lighter;
-  }
-  
-  .box {
-    background-color: #F8FAF4;
-    border: 1px solid #ACC8C4;
-    padding: 20px;
-    padding-top: 2px;
-    width: 78%;
-    height: 150px;
-    border-radius: 13px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight:400;
+}
 
-  .heading3 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    margin-top: 12px;
-    color: #1F4E47;
-    font-family: 'Georgia', serif;
-    font-weight: lighter;
-  }
+.subheading {
+  font-size: 17px;
+  color: #1F4E47;
+  margin-bottom: 20px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+}
 
-  .subheading2 {
-    margin-bottom: 8px;
-  }
+.subheadingSmall {
+  font-size: 16px;
+  color: #1F4E47;
+  margin-bottom: 5px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  text-align: center;
+}
 
-  .text {
-    font-size: 14px;
-    color: #1F4E47;
-    margin-bottom: 5px;
-    font-family: 'Verdana', sans-serif;
-    font-weight: lighter;
-  }
+.subheadingSmaller {
+  font-size: 13px;
+  color: #1F4E47;
+  margin-bottom: 20px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  text-align: center;
+}
 
-  .box2 {
-    background-color: #F8FAF4;
-    border: 1px solid #ACC8C4;
-    padding: 20px;
-    padding-top: 30px;
-    width: 28%;
-    height: 122px;
-    border-radius: 13px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-right: -6px;
-  }
+.box {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 29px;
+  width: 78%;
+  height: 70px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  .firstSetOfBoxes {
-    display: flex;
-    gap: 50px;
-    width: 100%;
-  }
+.box2 {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 8px;
+  width: 28%;
+  height: 90px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-right: -6px;
+}
 
-  .box3 {
-    background-color: #F8FAF4;
-    border: 1px solid #ACC8C4;
-    padding: 20px;
-    padding-top: 2px;
-    margin-top: 25px;
-    width: 97.5%;
-    height: 250px;
-    border-radius: 13px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: left;
-  }
+.graphBoxMain {
+  display: flex;
+  gap: 175px;
+}
 
-  .box4 {
-    background-color: #F4EBCF;
-    border: 1px solid #EED482;
-    padding: 10px;
-    width: 49%;
-    height: 90px;
-    border-radius: 9px;
-    text-align: left;
-    transition: all 0.2s ease;
-    box-shadow: inset 0 0 0 0 #EED482;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
+.heading3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  margin-top: 12px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight: lighter;
+}
 
-  .secondSetOfBoxes {
-    display: flex;
-    gap: 23px;
-    margin-bottom: 10px;
-  }
+.subheading2 {
+  margin-bottom: 8px;
+}
 
-  .box4:hover {
-    background-color: #F8FAF4;
-    box-shadow: inset 0 0 0 3px #EED482;
-    font-weight: bold;
-  }
+.text {
+  font-size: 14px;
+  color: #1F4E47;
+  margin-bottom: 5px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+}
 
-  .box4:hover .subheading, 
-.box4:hover .text {
-  font-weight: bold;
+.firstSetOfBoxes {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+}
+
+.box3 {
+  background-color: #F8FAF4;
+  border: 1px solid #ACC8C4;
+  padding: 20px;
+  padding-top: 2px;
+  margin-top: 25px;
+  width: 97.5%;
+  height: 300px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/

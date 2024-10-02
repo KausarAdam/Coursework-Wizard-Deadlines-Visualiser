@@ -19,14 +19,12 @@ export default function Dashboard() {
 
             <hr style={{ width: "100.5%", marginLeft: "0" }} />
           
-            <h2 className={styles.subheading}>Hello, John Doe!</h2>
+            <h2 className={styles.subheading}>Hello, Professor John Doe!</h2>
 
             <div className= {styles.firstSetOfBoxes}>
 
               <div className={styles.box}>
-                <h3 className={styles.heading3}>Important Announcement</h3>
-                <hr></hr>
-                <div className={styles.subheading}>Announcement Details</div>
+                <h3 className={styles.heading3}>Students with zero submissions: 14</h3>
               </div>
 
               <div className={styles.box2}>
@@ -38,31 +36,27 @@ export default function Dashboard() {
             </div>
 
             <div className={styles.box3}>
-              <h3 className={styles.heading3}>Upcoming Coursework</h3>
+              <h3 className={styles.heading3}>Coursework Submissions</h3>
               <hr style={{ width: "99.5%", marginLeft: "0" }} />
-              <div className= {styles.secondSetOfBoxes}>
-                <div className={styles.box4}>
-                  <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
-                  <div className={styles.text}>F21SF - Software Engineering Foundations</div>
-                  <div className={styles.text}>Due on Tuesday, 21st October</div>
+              <div className={styles.graphBoxMain}>
+                <div className={styles.graphBox}>
+                  <div className={styles.subheadingSmall}>Competitor Application</div>
+                  <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
                 </div>
-                <div className={styles.box4}>
-                  <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
-                  <div className={styles.text}>F21SF - Software Engineering Foundations</div>
-                  <div className={styles.text}>Due on Tuesday, 21st October</div>
-                </div>
-              </div>
 
-              <div className= {styles.secondSetOfBoxes}>
-                <div className={styles.box4}>
-                  <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
-                  <div className={styles.text}>F21SF - Software Engineering Foundations</div>
-                  <div className={styles.text}>Due on Tuesday, 21st October</div>
+                <div className={styles.graphBox}>
+                  <div className={styles.subheadingSmall}>Competitor Application</div>
+                  <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
                 </div>
-                <div className={styles.box4}>
-                  <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
-                  <div className={styles.text}>F21SF - Software Engineering Foundations</div>
-                  <div className={styles.text}>Due on Tuesday, 21st October</div>
+
+                <div className={styles.graphBox}>
+                  <div className={styles.subheadingSmall}>Competitor Application</div>
+                  <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
+                </div>
+
+                <div className={styles.graphBox}>
+                  <div className={styles.subheadingSmall}>Competitor Application</div>
+                  <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
                 </div>
               </div>
             </div>

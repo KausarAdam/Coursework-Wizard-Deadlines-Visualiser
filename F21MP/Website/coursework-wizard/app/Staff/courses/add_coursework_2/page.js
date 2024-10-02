@@ -116,7 +116,7 @@ export default function AddCoursework() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Validation logic for total, dependent, and independent subtasks
+    // Validation logic
     if (!subtaskTotal || subtaskDependent === "" || !subtaskIndependent) {
       window.alert("Total, dependent, and independent subtasks are required.");
       return;
@@ -148,13 +148,13 @@ export default function AddCoursework() {
         return;
       }
   
-      // Check if 'from' date is older than 'to' date
+      // Check if 'from' date is older than 'to' date (unchanged)
       if (new Date(subtask.from) >= new Date(subtask.to)) {
         window.alert("The 'From' date for dependent subtasks must be earlier than the 'To' date.");
         return;
       }
   
-      // Ensure neither date can be before today
+      // Ensure neither date can be before today (unchanged)
       if (new Date(subtask.from) < today || new Date(subtask.to) < today) {
         window.alert("Dependent subtask dates cannot be before today.");
         return;
@@ -169,13 +169,13 @@ export default function AddCoursework() {
         return;
       }
   
-      // Check if 'from' date is older than 'to' date
+      // Check if 'from' date is older than 'to' date (unchanged)
       if (new Date(independentSubtask.from) >= new Date(independentSubtask.to)) {
         window.alert("The 'From' date for the independent subtask must be earlier than the 'To' date.");
         return;
       }
   
-      // Ensure neither date can be before today
+      // Ensure neither date can be before today (unchanged)
       if (new Date(independentSubtask.from) < today || new Date(independentSubtask.to) < today) {
         window.alert("Independent subtask dates cannot be before today.");
         return;
@@ -194,45 +194,30 @@ export default function AddCoursework() {
       return;
     }
   
+    // Prepare coursework data
     const courseworkData = {
       subtaskTotal,
       subtaskDependent,
       subtaskIndependent,
-      dependentSubtasks,
-      independentSubtaskRow,
+      dependentSubtasks: JSON.stringify(dependentSubtasks), // Stringified
+      independentSubtaskRow: JSON.stringify(independentSubtaskRow), // Stringified
     };
   
+
     try {
-      const response = await fetch("/api/add-coursework", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(courseworkData),
+      // Navigate to add_coursework_3 with coursework data
+      const queryParams = new URLSearchParams({
+        subtaskTotal,
+        subtaskDependent,
+        subtaskIndependent,
+        dependentSubtasks: JSON.stringify(dependentSubtasks), // Pass as JSON string
+        independentSubtaskRow: JSON.stringify(independentSubtaskRow), // Pass as JSON string
       });
   
-      if (!response.ok) {
-        window.alert("Failed to add coursework.");
-        return; // Return early otherwise alert pops twice
-      }
-  
-      // Reset input fields
-      setSubtaskTotal("");
-      setSubtaskDependent(0);
-      setSubtaskIndependent("");
-      setDependentSubtasks([]);
-      setIndependentSubtaskRow({
-        name: "",
-        weight: "",
-        from: "",
-        to: "",
-        attachment: null,
-      });
-  
-      // Navigate to add_coursework_3
-      router.push("/Staff/courses/add_coursework_3");
+      // Navigate to add_coursework_3 with coursework data
+      router.push(`/Staff/courses/add_coursework_3?${queryParams}`);
     } catch (err) {
-      window.alert("An error occurred: " + err.message); // Handle any other errors
+      window.alert("An error occurred: " + err.message);
     }
   };
   

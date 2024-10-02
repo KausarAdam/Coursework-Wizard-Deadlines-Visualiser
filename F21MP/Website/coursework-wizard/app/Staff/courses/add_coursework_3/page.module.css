@@ -59,7 +59,13 @@
 }
 
 .subheading2 {
-  margin-bottom: 8px;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.subheading3{
+  margin-top: 23px;
+  margin-left: 750px;;
 }
 
 .text {
@@ -73,43 +79,6 @@
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
   height: 555px;
-}
-
-.inputField {
-  width: 60%;
-  height: 15px;
-  padding: 10px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  border-radius: 13px;
-  border: 1px solid #ACC8C4;
-  font-size: 12px;
-  font-family: 'Verdana', sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.inputField2 {
-  height: 10px;
-  padding: 10px;
-  margin-bottom: 2px;
-  border-radius: 13px;
-  margin-top: -5px;
-  border: 1px solid #ACC8C4;
-  font-size: 12px;
-  font-family: 'Verdana', sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.inputFieldDate {
-  width: 20%;
-}
-
-.inputFieldEnquiry {
-  height: 100px;
-  resize: none;
-  margin-top: -7px;
-  margin-bottom: 10px;
-  width: 90%;
 }
 
 .button {
@@ -126,10 +95,6 @@
   font-weight: lighter;
   display: block;
   margin-top: 15px;
-}
-
-.Link {
-  text-decoration: none;
 }
 
 .button:hover {
@@ -152,82 +117,6 @@
   z-index: 1000;
 }
 
-.subtaskRow {
+.headingBox {
   display: flex;
-  align-items: center;
-  margin-bottom: 5px; /* Space between rows */
-  width: 95%;
-  margin-left: 30px;
-  gap: 5px;
-}
-
-.subtaskRow2 {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px; /* Space between rows */
-  width: 95%;
-  margin-left: 75px;
-  gap: 5px;
-}
-
-.deleteButton {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.deleteButton:hover {
-  background-color: darkred;
-}
-
-.inputName {
-  width: 500px;
-}
-
-.inputName2 {
-  width: 495px;
-}
-
-.inputWeight {
-  width: 80px;
-}
-
-.inputDate {
-  width: 150px;
-}
-
-.inputFile {
-  width: 180px;
-  border: none;
-  box-shadow: none;
-}
-
-.date-picker {
-  position: absolute;
-  z-index: 1;
-}
-
-.date-picker-container {
-  margin-bottom: 20px;
-}
-
-.arrowButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: -10px;
-}
-
-.arrowButton:hover {
-  color: #7DFFD9;
 }
