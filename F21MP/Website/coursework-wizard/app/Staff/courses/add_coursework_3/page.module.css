@@ -125,3 +125,39 @@
 .headingBox {
   display: flex;
 }
+
+.table {
+  font-size: 14px;
+  color: #1F4E47;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  font-family: 'Verdana', sans-serif;
+  font-weight: bold;
+  border: 1px solid #1F4E47;
+  width: 100%;
+  border-collapse: collapse; /* Combines borders */
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 45%; /* subtask name */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 8%; /* weight */
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3),
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 12%; /* dates */
+}
+
+.table th,
+.table td {
+  border: 1px solid #1F4E47;
+  text-align: left;
+  padding: 5px;
+}

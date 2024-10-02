@@ -9,6 +9,9 @@ import Notification from "../../staff_notification";
 
 
 export default function AddCoursework() {
+
+  const router = useRouter();
+  
   const handleSubmit = async (e) => {
     router.push("/Staff/timeline");
   };

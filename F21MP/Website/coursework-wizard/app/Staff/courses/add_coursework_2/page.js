@@ -12,7 +12,6 @@ import { useSearchParams } from 'next/navigation';
 
 // Get today's date formatted as YYYY-MM-DD for date inputs
 const today = new Date();
-const formattedToday = today.toISOString().split("T")[0];
 
 export default function AddCoursework() {
 
@@ -25,14 +24,13 @@ export default function AddCoursework() {
   const [subtaskDependent, setSubtaskDependent] = useState("");
   const [subtaskIndependent, setSubtaskIndependent] = useState("");
   const [dependentSubtasks, setDependentSubtasks] = useState([]);
-
-  // Define the state for independent subtask row
   const [independentSubtaskRow, setIndependentSubtaskRow] = useState({
-    name: "",
-    weight: "",
-    from: "",
-    to: "",
-    attachment: null,
+    name: '',
+    weight: '',
+    from: null,
+    to: null,
+    attachment: null, 
+    fileNameInd: ''
   });
 
   const router = useRouter();
@@ -95,7 +93,13 @@ export default function AddCoursework() {
 
   const handleInputChange = (index, field, value) => {
     const newSubtasks = [...dependentSubtasks];
-    newSubtasks[index][field] = value;
+    // If the field is 'attachment', store the file name
+    if (field === 'attachment') {
+      newSubtasks[index][field] = value; // Store the file object
+      newSubtasks[index].fileName = value.name; // Store the file name separately
+    } else {
+        newSubtasks[index][field] = value; // For other fields
+    }
     setDependentSubtasks(newSubtasks);
   };
 
@@ -212,8 +216,11 @@ export default function AddCoursework() {
       from: independentSubtaskRow.from,
       to: independentSubtaskRow.to,
       attachment: independentSubtaskRow.attachment,
+      fileNameInd: independentSubtaskRow.fileNameInd
     };
-  
+    
+    const fileNames = dependentSubtasks.map(subtask => subtask.fileName || 'No file provided');
+
     // Manually append query params to the URL
     router.push(
       `/Staff/courses/add_coursework_3?` +
@@ -224,7 +231,9 @@ export default function AddCoursework() {
       `subtaskDependent=${encodeURIComponent(subtaskDependent)}&` +
       `dependentSubtasks=${encodeURIComponent(JSON.stringify(dependentSubtasksData))}&` +
       `subtaskIndependent=${encodeURIComponent(subtaskIndependent)}&` +
-      `independentSubtask=${encodeURIComponent(JSON.stringify(independentSubtaskData))}`
+      `independentSubtask=${encodeURIComponent(JSON.stringify(independentSubtaskData))}&` +
+      `fileNames=${encodeURIComponent(JSON.stringify(fileNames))}&` +
+      `fileNameInd=${encodeURIComponent(JSON.stringify(independentSubtaskRow.fileNameInd))}&`
     );
   };
   
@@ -328,7 +337,6 @@ export default function AddCoursework() {
               </div>
             )}
 
-
             <div className={`${styles.subheading} ${styles.subheadingMargin}`}>Total Number of Independent Subtasks</div>
             <input
               type="number"
@@ -381,7 +389,14 @@ export default function AddCoursework() {
                 />
                 <input
                   type="file"
-                  onChange={(e) => setIndependentSubtaskRow({ ...independentSubtaskRow, attachment: e.target.files[0] })}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    setIndependentSubtaskRow({
+                      ...independentSubtaskRow,
+                      attachment: file,
+                      fileNameInd: file ? file.name : '' // Store the file name
+                    });
+                  }}
                   className={`${styles.inputField2} ${styles.inputFile}`}
                   required
                 />
