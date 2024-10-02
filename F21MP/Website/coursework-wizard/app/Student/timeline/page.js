@@ -6,11 +6,14 @@ import styles from "./page.module.css";
 import Footer from "../Footer";
 import Notification from "../student_notification";
 import { format, addDays, eachWeekOfInterval, endOfWeek, isToday as dateIsToday } from 'date-fns';
+import Modal from "../modal/page";
 
 export default function Timeline() {
   const [months, setMonths] = useState([]);
   const [todayPosition, setTodayPosition] = useState(null);
   const timelineRef = useRef(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedSubtask, setSelectedSubtask] = useState(null);
 
   useEffect(() => {
     // Generate weeks and days for each month
@@ -125,8 +128,13 @@ export default function Timeline() {
     return organizedSubtasks;
   };
   
-
   const organizedSubtasks = organizeSubtasks();
+
+  // Function to handle task bar click
+  const handleTaskClick = (subtask) => {
+    setSelectedSubtask(subtask);
+    setModalOpen(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -201,6 +209,7 @@ export default function Timeline() {
                           left: `${startOffset}%`,
                           width: `${widthPercentage}%`,
                         }}
+                        onClick={() => handleTaskClick(subtask)} //modal open
                       >
                         {subtask.title}
                       </div>
@@ -209,6 +218,13 @@ export default function Timeline() {
                 </div>
               ))}
             </div>
+
+            {/* Modal to show subtask details */}
+            <Modal
+              isOpen={modalOpen}
+              onClose={() => setModalOpen(false)}
+              subtask={selectedSubtask}
+            />
 
             <div className={styles.courseNames}>
               <div className={`${styles.course} ${styles.course1}`}>Advanced Interaction Design</div>

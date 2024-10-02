@@ -204,6 +204,12 @@
   height: 14px;
   padding: 5px;
   text-align: center;
+  cursor: pointer;
+}
+
+.subTask:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-width: 2px;
 }
 
 .subTask1 {
