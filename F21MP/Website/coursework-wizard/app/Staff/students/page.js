@@ -16,7 +16,7 @@ const studentData = [
   { id: 3, name: "Charles Dickens", courseName: "F21SF", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 2, remainingSubtasks: 3 },
   { id: 4, name: "Mona Lisa", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 6, remainingSubtasks: 0 },
   { id: 4, name: "Mona Lisa", courseName: "F21AD", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 4, remainingSubtasks: 2 },
-  { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 4, remainingSubtasks: 1 },
+  { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
   { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 2", status: "No Submission", completedSubtasks: 0, remainingSubtasks: 5 },
   { id: 6, name: "Elvis Presley", courseName: "F21SF", coursework: "Coursework 1", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
   { id: 6, name: "Elvis Presley", courseName: "F21SF", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 3, remainingSubtasks: 2 },

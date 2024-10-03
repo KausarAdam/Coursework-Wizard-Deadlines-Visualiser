@@ -9,11 +9,12 @@
   flex-direction: column;
   padding: 15px;
   padding-top: 0px;
-  position: relative;
+  position: fixed;
+  cursor: grab;
 }
 
 .modalOverlay {
-  position: fixed;
+  position: absolute; /* v imp to make it movable */
   top: 0;
   left: 0;
   width: 100%;
@@ -23,6 +24,7 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
+  
 }
 
 .heading {

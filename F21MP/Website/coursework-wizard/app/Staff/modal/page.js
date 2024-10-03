@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./page.module.css";
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
@@ -8,7 +8,36 @@ export default function Modal({ isOpen, onClose, subtask }) {
   const fileInputRef = useRef(null);
   const router = useRouter();
 
+  // State to track the position of the modal
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragOffset = useRef({ x: 0, y: 0 });
+
   if (!isOpen || !subtask) return null;
+
+  // Handle mouse down event to start dragging
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    dragOffset.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  // Handle mouse move event to move the modal
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      setPosition({
+        x: e.clientX - dragOffset.current.x,
+        y: e.clientY - dragOffset.current.y,
+      });
+    }
+  };
+
+  // Handle mouse up event to stop dragging
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
   // Trigger file input when "Resubmit" button is clicked
   const handleResubmitClick = () => {
@@ -34,8 +63,14 @@ export default function Modal({ isOpen, onClose, subtask }) {
   const courseName = courseNames[subtask.courseId];
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalPage}>
+    <div className={styles.modalOverlay}
+         onMouseMove={handleMouseMove}
+         onMouseUp={handleMouseUp}>
+      <div
+        className={styles.modalPage}
+        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+        onMouseDown={handleMouseDown}
+      >
         <button className={styles.closeButton} onClick={onClose}>
           &times;
         </button>
