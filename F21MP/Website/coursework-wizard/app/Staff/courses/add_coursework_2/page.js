@@ -129,9 +129,9 @@ export default function AddCoursework() {
       return;
     }
   
-    // Limit total subtasks to 7
-    if (Number(subtaskTotal) > 7) {
-      window.alert("Total subtasks cannot exceed 7.");
+    // Limit total subtasks to 6
+    if (Number(subtaskTotal) > 6) {
+      window.alert("Total subtasks cannot exceed 6.");
       return;
     }
   
@@ -190,14 +190,14 @@ export default function AddCoursework() {
     }
   
     // Adjust validation based on the independent subtask count
-    const dependentLimit = subtaskIndependent === "1" ? 6 : 7;
+    const dependentLimit = subtaskIndependent === "1" ? 5 : 6;
     if (subtaskDependent > dependentLimit) {
       window.alert(`Dependent subtasks cannot exceed ${dependentLimit}.`);
       return;
     }
   
-    if (totalSubtasks > 7) {
-      window.alert("The sum of dependent and independent subtasks must equal 7 or less.");
+    if (totalSubtasks > 6) {
+      window.alert("The sum of dependent and independent subtasks must equal 6 or less.");
       return;
     }
 
