@@ -70,7 +70,7 @@ export default function Coursework({ params }) {
             {courseworkWeeks.flatMap((week) => week.subtasks).reduce((acc, subtask, index) => 
             {
               if (index % 3 === 0) {
-                acc.push([]); // Start a new row
+                acc.push([]); // Start a new row 
               }
               acc[acc.length - 1].push(subtask); // Add subtask to the current row
               return acc;
