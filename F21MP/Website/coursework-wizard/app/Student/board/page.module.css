@@ -36,7 +36,7 @@
   width: 101%;
   gap: 20px;
   justify-content: space-around;
-  height: 370px;
+  height: 530px;
 }
 
 .column {
@@ -132,7 +132,7 @@
   display: flex;
   gap: 20px;
   background-color: #F8FAF4;
-  flex-wrap: wrap; /* Allows the tasks to wrap to the next line */
-  justify-content: flex-start; /* Aligns the tasks to the left */
-  align-items: flex-start; /* Ensures tasks align at the top */
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
