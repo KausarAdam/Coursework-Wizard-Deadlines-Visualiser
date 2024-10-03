@@ -159,3 +159,33 @@
 .subheadingGraphsRed {
   color: rgb(255, 99, 132);
 }
+
+.button {
+  width: 150px;
+  padding: 5px;
+  height: 40px;
+  font-size: 17px;
+  color: #1F4E47;
+  background-color: #3BECB9;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Verdana', sans-serif;
+  font-weight: lighter;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #7DFFD9;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Verdana', sans-serif;
+}
+
+.shareButtonContainer {
+  display: flex;
+  gap: 900px;
+}

@@ -45,7 +45,10 @@ export default function Coursework({ params }) {
           <h2 className={styles.subheading}>Coursework Details</h2>
 
           <div className={styles.box33}>
-            <h3 className={styles.heading3}>Coursework Progress</h3>
+            <div className={styles.shareButtonContainer}>
+              <h3 className={styles.heading3}>Coursework Progress</h3>
+              <button className={styles.button}>Share</button>
+            </div>
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
             <div className={styles.firstSetOfBoxes}>
               <div className={styles.box}>

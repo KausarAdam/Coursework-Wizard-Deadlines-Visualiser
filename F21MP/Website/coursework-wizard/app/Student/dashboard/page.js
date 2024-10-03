@@ -1,9 +1,19 @@
+"use client";
+
 import StudentMenu from "../student_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
 import Notification from "../student_notification";
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
+
+  const router = useRouter();
+
+  const goToCourseworkPage = () => {
+    router.push('/Student/courses/coursework');
+  };
+
     return (
       <div className={styles.container}>
         <StudentMenu/>
@@ -41,12 +51,12 @@ export default function Dashboard() {
               <h3 className={styles.heading3}>Upcoming Coursework</h3>
               <hr style={{ width: "99.5%", marginLeft: "0" }} />
               <div className= {styles.secondSetOfBoxes}>
-                <div className={styles.box4}>
+                <div className={styles.box4} onClick={goToCourseworkPage}>
                   <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
                   <div className={styles.text}>F21SF - Software Engineering Foundations</div>
                   <div className={styles.text}>Due on Tuesday, 21st October</div>
                 </div>
-                <div className={styles.box4}>
+                <div className={styles.box4} onClick={goToCourseworkPage}>
                   <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
                   <div className={styles.text}>F21SF - Software Engineering Foundations</div>
                   <div className={styles.text}>Due on Tuesday, 21st October</div>
@@ -54,12 +64,12 @@ export default function Dashboard() {
               </div>
 
               <div className= {styles.secondSetOfBoxes}>
-                <div className={styles.box4}>
+                <div className={styles.box4} onClick={goToCourseworkPage}>
                   <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
                   <div className={styles.text}>F21SF - Software Engineering Foundations</div>
                   <div className={styles.text}>Due on Tuesday, 21st October</div>
                 </div>
-                <div className={styles.box4}>
+                <div className={styles.box4} onClick={goToCourseworkPage}>
                   <div className={`${styles.subheading} ${styles.subheading2}`}>Competitor Application</div>
                   <div className={styles.text}>F21SF - Software Engineering Foundations</div>
                   <div className={styles.text}>Due on Tuesday, 21st October</div>
