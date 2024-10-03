@@ -239,7 +239,7 @@ export default function AddCoursework() {
   
   
   const handleBack = () => {
-    router.push("/Staff/courses/add_coursework_1");
+    router.push("/Staff/courses/course");
   };
 
   return (
@@ -405,7 +405,7 @@ export default function AddCoursework() {
             )}
 
             <div className={styles.buttonContainer}>
-              <button onClick={handleBack} className={styles.button}>Back</button>
+              <button onClick={handleBack} className={styles.button}>Cancek</button>
               <button onClick={handleSubmit} className={styles.button}>Next</button>
             </div>
           </div>

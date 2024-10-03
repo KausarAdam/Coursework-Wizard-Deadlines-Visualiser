@@ -104,7 +104,7 @@ export default function AddCoursework() {
             />
             
             <div className={styles.buttonContainer}>
-              <button onClick={handleBack} className={styles.button}>Back</button>
+              <button onClick={handleBack} className={styles.button}>Cancel</button>
               <button onClick={handleNext} className={styles.button}>Next</button>
             </div>
           </div>

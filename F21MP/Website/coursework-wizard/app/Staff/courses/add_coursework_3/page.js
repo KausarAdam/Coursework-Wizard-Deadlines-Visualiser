@@ -42,7 +42,7 @@ export default function AddCoursework() {
   };
 
   const handleBack = () => {
-    router.push("/Staff/courses/add_coursework_2");
+    router.push("/Staff/courses/course");
   };
 
   return (
@@ -146,7 +146,7 @@ export default function AddCoursework() {
             </table>
 
             <div className={styles.buttonContainer}>
-              <button onClick={handleBack} className={styles.button}>Back</button>
+              <button onClick={handleBack} className={styles.button}>Cancel</button>
               <button onClick={handleSubmit} className={styles.button}>Publish</button>
             </div>
           </div>
