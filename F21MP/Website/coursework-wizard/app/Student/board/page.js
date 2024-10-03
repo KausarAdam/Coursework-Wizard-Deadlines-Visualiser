@@ -37,7 +37,10 @@ export default function KanbanBoard() {
       if (unlockedTasks.length > 0) {
         setTasks((prev) => ({
           ...prev,
-          todo: [...prev.todo, ...unlockedTasks],
+          todo: [
+            ...prev.todo, 
+            ...unlockedTasks.map(task => ({ ...task, isLocked: false}))
+          ],
           locked: prev.locked.filter((task) => task.unlockTime > now),
         }));
       }
@@ -45,23 +48,32 @@ export default function KanbanBoard() {
     return () => clearInterval(interval);
   }, [tasks.locked]);
 
+  // On mount, load coursework subtasks if no tasks are in "todo"
   useEffect(() => {
     if (tasks.todo.length === 0) {
       const allSubtasks = courseworkWeeks.flatMap(coursework => coursework.subtasks);
       setTasks((prev) => ({
         ...prev,
-        todo: allSubtasks.map(subtask => ({ id: subtask.id, text: subtask.text, details: subtask.details, dueDate: subtask.dueDate, isLocked: false })),
+        todo: allSubtasks.map(subtask => ({ 
+          id: subtask.id, 
+          text: subtask.text, 
+          details: subtask.details, 
+          dueDate: subtask.dueDate, 
+          isLocked: false 
+        })),
       }));
     }
   }, []); // Empty dependency array ensures it runs only on mount
 
   const moveTask = (taskId, fromColumn, toColumn) => {
+    // Find the task to move from the current column
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
-
+  
     if (!taskToMove || fromColumn === toColumn) {
       return;
     }
-
+  
+    // Create a new task without mutating the state directly
     setTasks((prev) => ({
       ...prev,
       [fromColumn]: prev[fromColumn].filter((task) => task.id !== taskId),
@@ -95,9 +107,12 @@ export default function KanbanBoard() {
   const Column = ({ title, tasks, columnName }) => {
     const [, drop] = useDrop({
       accept: ItemTypes.TASK,
-      drop: (item) => moveTask(item.id, item.fromColumn, columnName),
+      drop: (item) => {
+        // Move the task from one column to another
+        moveTask(item.id, item.fromColumn, columnName);
+      },
     });
-
+  
     return (
       <div className={styles.column} ref={drop}>
         <h3>{title}</h3>
