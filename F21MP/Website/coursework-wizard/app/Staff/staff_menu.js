@@ -32,8 +32,8 @@ export default function StaffMenu() {
   ];
 
   const courseLinks = [
-    { name: "Course 1", link: "/Staff/courses/course" },
-    { name: "Course 2", link: "/Staff/courses/course" },
+    { name: "F21SF - Software Engineering", link: "/Staff/courses/course" },
+    { name: "F21AD - Advanced Interaction Design", link: "/Staff/courses/course" },
 
   ];
 

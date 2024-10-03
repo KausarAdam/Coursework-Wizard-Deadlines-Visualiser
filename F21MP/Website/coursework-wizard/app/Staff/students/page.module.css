@@ -7,7 +7,7 @@
 .studentsPage {
   flex-grow: 1;
   padding: 30px;
-  padding-top:0px;
+  padding-top: 0;
 }
 
 .header {
@@ -18,12 +18,12 @@
 }
 
 .heading {
-    font-size: 38px;
-    margin-bottom: 10px;
-    color: #1F4E47;
-    font-family: 'Georgia', serif;
-    font-weight:400;
-  }
+  font-size: 38px;
+  margin-bottom: 10px;
+  color: #1F4E47;
+  font-family: 'Georgia', serif;
+  font-weight: 400;
+}
 
 .box {
   background-color: #F8FAF4;
@@ -36,58 +36,77 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
-  height: 555px;
-}
-
-.faqItem {
-  margin-bottom: 10px;
-}
-
-.question {
+.filterContainer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 8px;
+  border: 1px solid #ACC8C4;
+  border-radius: 4px;
+}
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #1F4E47;
+}
+
+.dataTable th,
+.dataTable td {
+  border: 1px solid #ACC8C4;
+  padding: 10px;
+  text-align: left;
+}
+
+.dataTable th {
+  background-color: #F1F1F1;
   cursor: pointer;
-  font-weight: bold;
-  color: #1F4E47;
-  padding-top: 15px;
-  padding-bottom: 10px;
 }
 
-.question:hover {
-  transition: color 0.3s ease;
-  color: #3BECB9;
+.dataTable tr:hover {
+  background-color: #F8FAF4;
 }
 
-.arrow {
-  transition: color 0.3s ease;
-  font-size: 16px;
-  color: #1F4E47;
+.dataTable th:nth-child(2),
+.dataTable td:nth-child(2) { /* Course Name */
+  width: 200px;
 }
 
-.arrowExpanded {
-  color: #3BECB9;
+.dataTable th:nth-child(7),
+.dataTable td:nth-child(7),
+.dataTable th:nth-child(5),
+.dataTable td:nth-child(5),
+.dataTable th:nth-child(6),
+.dataTable td:nth-child(6) {
+  width: 130px;
 }
 
-.answer {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #1F4E47;
+.sortIndicator {
+  float: right;
+  margin-left: 5px;
+  font-size: 0.8em;
+  line-height: 1;
 }
 
-.separator {
-  border: 0;
-  border-top: 1px solid #ACC8C4;
-  margin: 10px 0;
+.dataTable th:nth-child(3),
+.dataTable td:nth-child(3) {
+  cursor: default;
 }
 
-.link {
-  color: #3BECB9;
-  text-decoration: underline;
-  font-weight: bold;
+.statusCompleted {
+  color: rgba(75, 192, 192);
+  background-color: rgba(75, 192, 192, 0.2);
 }
 
-.link:hover {
-  color: #1F4E47;
+.statusInProgress {
+  color: rgb(255, 206, 86);
+  background-color: rgba(255, 206, 86, 0.2);
+}
+
+.statusNoSubmission {
+  color: rgb(255, 99, 132);
+  background-color: rgba(255, 99, 132, 0.2);
 }

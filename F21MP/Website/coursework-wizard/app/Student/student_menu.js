@@ -32,10 +32,10 @@ export default function StudentMenu() {
   ];
 
   const courseLinks = [
-    { name: "Course 1", link: "/Student/courses/course" },
-    { name: "Course 2", link: "/Student/courses/course" },
-    { name: "Course 3", link: "/Student/courses/course" },
-    { name: "Course 4", link: "/Student/courses/course" },
+    { name: "F21SF - Software Engineering", link: "/Student/courses/course" },
+    { name: "F21AD - Advanced Interaction Design", link: "/Student/courses/course" },
+    { name: "F21EC - E-Commerce", link: "/Student/courses/course" },
+    { name: "F21DF - Database and Information Systems", link: "/Student/courses/course" },
   ];
 
   useEffect(() => {
