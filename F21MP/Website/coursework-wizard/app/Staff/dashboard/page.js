@@ -24,7 +24,7 @@ export default function Dashboard() {
 
       <div className={styles.dashboardPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>Dashboard</h1>
+          <h1 className={styles.heading}>Instructor Dashboard</h1>
           <Notification />
         </div>
 
@@ -66,14 +66,14 @@ export default function Dashboard() {
 
               <div className={styles.graphBox}>
                 <DoughnutChart />
-                <div className={styles.subheadingSmall}>E-Commerce Project</div>
-                <div className={styles.subheadingSmaller}>F21EC - E-Commerce</div>
+                <div className={styles.subheadingSmall}>Application GUI</div>
+                <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
               </div>
 
               <div className={styles.graphBox}>
                 <DoughnutChart />
-                <div className={styles.subheadingSmall}>Interaction Design</div>
-                <div className={styles.subheadingSmaller}>F21ID - Interaction Design</div>
+                <div className={styles.subheadingSmall}>PostgreSQL Project</div>
+                <div className={styles.subheadingSmaller}>F21DB - Database Systems</div>
               </div>
             </div>
           </div>

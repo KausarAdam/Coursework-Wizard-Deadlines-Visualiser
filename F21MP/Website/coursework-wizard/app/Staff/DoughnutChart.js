@@ -11,7 +11,7 @@ const DoughnutChart = () => {
     labels: ['Completed', 'In Progress', 'Pending'],
     datasets: [
       {
-        label: '# of Tasks',
+        label: '# of Students',
         data: [12, 19, 3], // Hardcoded
         backgroundColor: [
           'rgba(75, 192, 192, 0.2)', // Green (Completed)

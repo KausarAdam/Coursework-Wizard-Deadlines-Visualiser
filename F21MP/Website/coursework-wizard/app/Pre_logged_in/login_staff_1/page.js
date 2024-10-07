@@ -4,13 +4,30 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function LoginStaff() {
   const [staffID, setStaffID] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Staff ID submitted:", staffID);
+    
+    const res = await fetch('/api/login/staff-id', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ staffID }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      sessionStorage.setItem('staffID', staffID);
+      router.push('/Pre_logged_in/login_staff_2'); 
+    } else {
+      alert("Invalid Staff ID");
+    }
   };
 
   return (

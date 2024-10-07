@@ -4,13 +4,30 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function LoginStaff() {
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const staffID = sessionStorage.getItem('staffID');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("testing staff login");
+
+    const res = await fetch('/api/login/password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ staffID, password }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      router.push('/Staff/dashboard'); 
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (

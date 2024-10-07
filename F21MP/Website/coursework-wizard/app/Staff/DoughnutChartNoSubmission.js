@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, ...registerables);
 
 const DoughnutChartCompleted = () => {
   // Example values
-  const noSubmissionTasks = 12; // Hardcoded no submission tasks
+  const noSubmissionTasks = 16; // Hardcoded no submission tasks
   const totalTasks = 34; // Example total tasks
   const noSubmissionPercentage = ((noSubmissionTasks / totalTasks) * 100).toFixed(2); // Calculate percentage
 
@@ -16,7 +16,7 @@ const DoughnutChartCompleted = () => {
     labels: ['No Submission', 'Remaining'],
     datasets: [
       {
-        label: '# of Tasks',
+        label: '# of Students',
         data: [noSubmissionTasks, totalTasks - noSubmissionTasks], // Data for no submission and remaining tasks
         backgroundColor: [
           'rgba(255, 99, 132, 1)',  // No submission (dark)

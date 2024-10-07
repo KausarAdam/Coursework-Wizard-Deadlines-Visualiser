@@ -103,7 +103,7 @@ export default function KanbanBoard() {
       <StudentMenu />
       <div className={styles.boardPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>Board</h1>
+          <h1 className={styles.heading}>Progress Board</h1>
           <Notification />
         </div>
         <div className={styles.withoutFooter}>

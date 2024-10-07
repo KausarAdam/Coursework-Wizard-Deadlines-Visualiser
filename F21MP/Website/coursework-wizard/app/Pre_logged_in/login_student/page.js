@@ -4,14 +4,29 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function LoginStudent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", { username, password });
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      router.push('/Student/dashboard'); 
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (

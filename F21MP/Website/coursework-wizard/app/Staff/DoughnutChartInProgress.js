@@ -16,7 +16,7 @@ const DoughnutChartCompleted = () => {
     labels: ['In Progress', 'Remaining'],
     datasets: [
       {
-        label: '# of Tasks',
+        label: '# of Students',
         data: [inProgressTasks, totalTasks - inProgressTasks], // Data for in progress and remaining tasks
         backgroundColor: [
           'rgba(255, 206, 86, 1)',  // In progress (dark)

@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, ...registerables);
 
 const DoughnutChartCompleted = () => {
   // Example values
-  const completedTasks = 12; // Hardcoded completed tasks
+  const completedTasks = 6; // Hardcoded completed tasks
   const totalTasks = 34; // Example total tasks
   const completedPercentage = ((completedTasks / totalTasks) * 100).toFixed(2); // Calculate percentage
 
@@ -16,7 +16,7 @@ const DoughnutChartCompleted = () => {
     labels: ['Completed', 'Remaining'],
     datasets: [
       {
-        label: '# of Tasks',
+        label: '# of Students',
         data: [completedTasks, totalTasks - completedTasks], // Data for completed and remaining tasks
         backgroundColor: [
           'rgba(75, 192, 192, 1)',  // Completed (dark)

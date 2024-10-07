@@ -57,7 +57,7 @@ export default function Coursework({ params }) {
       <StudentMenu />
       <div className={styles.courseworkPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Competitor Application</h1>
+          <h1 className={styles.heading}>F21SF - Competitor Application Coursework</h1>
           <Notification />
         </div>
 

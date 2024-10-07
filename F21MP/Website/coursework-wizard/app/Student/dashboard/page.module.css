@@ -102,15 +102,15 @@
 }
 
 .box4 {
-  background-color: #F4EBCF;
-  border: 1px solid #EED482;
+  background-color: #f1eeee;
+  border: 3px solid;
   padding: 10px;
   width: 49%;
   height: 90px;
   border-radius: 9px;
   text-align: left;
   transition: all 0.2s ease;
-  box-shadow: inset 0 0 0 0 #EED482;
+  box-shadow: inset 0 0 0 0 var(--border-color, #f1eeee);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -123,13 +123,13 @@
 
 .box4:hover {
   background-color: #F8FAF4;
-  box-shadow: inset 0 0 0 3px #EED482;
-  font-weight: bold;
+  box-shadow: inset 0 0 0 2px var(--border-color);
+  border: 3px solid var(--border-color);
 }
 
   .box4:hover .subheading, 
 .box4:hover .text {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .withoutFooter { /* to keep the footer down we are encapsulating the main contents in one div*/
