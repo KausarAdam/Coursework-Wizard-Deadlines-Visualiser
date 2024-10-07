@@ -46,7 +46,7 @@ export default function LoginStudent() {
           <div className={styles.box}>
             <div className={styles.userInfo}>
               <p className={styles.username}>Username</p>
-              <p className={styles.email}>(Email)</p>
+              {/*<p className={styles.email}>(Email)</p>*/}
             </div>
             
             <input 
