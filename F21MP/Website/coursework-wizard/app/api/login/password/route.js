@@ -5,7 +5,7 @@ export async function POST(request) {
   const { staffID, password } = await request.json();
 
   if (staffID && password) {
-    const [rows] = await pool.query('SELECT * FROM users WHERE username = ? AND password = ?', [staffID, password]);
+    const [rows] = await pool.query('SELECT * FROM user WHERE username = ? AND password = ?', [staffID, password]);
 
     if (rows.length > 0) {
       return NextResponse.json({ success: true });

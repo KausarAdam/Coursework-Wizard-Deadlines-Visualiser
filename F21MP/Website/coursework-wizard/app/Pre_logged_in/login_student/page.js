@@ -23,7 +23,9 @@ export default function LoginStudent() {
 
     const data = await res.json();
     if (data.success) {
+      localStorage.setItem('username', username); // Save username in localStorage
       router.push('/Student/dashboard'); 
+      console.log("hello " + username); // testing
     } else {
       alert("Invalid credentials");
     }
