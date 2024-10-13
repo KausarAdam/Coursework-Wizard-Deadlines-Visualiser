@@ -10,9 +10,12 @@ export default function StudentMenu() {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState(2);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for sidebar
-
+  const [courseCodes, setCourseCodes] = useState([]); // State for course codes
+  const [courseNames, setCourseNames] = useState([]); // State for course names
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Check if in the browser
+  
   const handleLogout = () => {
-    // Perform any necessary logout actions here (like clearing session data)
+    localStorage.clear(); // Clear all temporary storage variables
     router.push("/"); // Redirect to homepage after logout
   };
 
@@ -31,12 +34,11 @@ export default function StudentMenu() {
     { name: "Settings", link: "/Student/account/settings" },
   ];
 
-  const courseLinks = [
-    { name: "F21SF - Software Engineering", link: "/Student/courses/course" },
-    { name: "F21AD - Advanced Interaction Design", link: "/Student/courses/course" },
-    { name: "F21EC - E-Commerce", link: "/Student/courses/course" },
-    { name: "F21DF - Database and Information Systems", link: "/Student/courses/course" },
-  ];
+  // Dynamically generate courseLinks from courseCodes and courseNames
+  const courseLinks = Array.isArray(courseCodes) ? courseCodes.map((code, index) => ({
+    name: courseNames[index] || "Unnamed Course", // Fallback in case courseNames doesn't have a value
+    link: `/Student/courses/course?code=${code}`, // Adjust the link as needed
+  })) : []; // Provide an empty array if courseCodes is not available
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -69,6 +71,24 @@ export default function StudentMenu() {
       handleLogout();
     }
   };
+
+  useEffect(() => {
+    const fetchCoursework = async () => {
+      const res = await fetch(`/api/getCoursework?username=${username}`);
+      if (res.ok) {
+        const data = await res.json();
+        // Set course codes and names in state
+        const codes = data.map(coursework => coursework.course_code);
+        const names = data.map(coursework => coursework.course_name);
+        setCourseCodes(codes);
+        setCourseNames(names);
+      } else {
+        console.error("Failed to fetch coursework");
+      }
+    };
+
+    fetchCoursework(); // Call fetchCoursework when the component mounts
+  }, []); // Add any dependencies as needed
 
   return (
     <div className={styles.container}>
@@ -114,7 +134,7 @@ export default function StudentMenu() {
               </li>
             ))}
 
-            {activeItem === 3 && courseLinks.map((link, index) => (
+            {activeItem === 3 && courseLinks.length > 0 && courseLinks.map((link, index) => (
               <li key={index}>
                 <Link href={link.link} className={styles.sidebarLink}>
                   {link.name}

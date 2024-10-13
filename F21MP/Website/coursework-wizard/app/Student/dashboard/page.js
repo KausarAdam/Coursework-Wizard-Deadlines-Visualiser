@@ -11,6 +11,8 @@ export default function Dashboard() {
   const router = useRouter();
   const [studentName, setStudentName] = useState("John Doe"); // Default name
   const [courseworkList, setCourseworkList] = useState([]); // State for coursework
+  const [courseCodes, setCourseCodes] = useState([]); // Temporary storage for course codes
+  const [courseNames, setCourseNames] = useState([]); // Temporary storage for course names
   const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Check if in the browser
   
   // Temporary store for border colors
@@ -41,6 +43,12 @@ export default function Dashboard() {
         if (res.ok) {
           const data = await res.json();
           setCourseworkList(data); // Set the coursework list from the response
+
+          // Set course codes and names in temporary storage
+          const codes = data.map(coursework => coursework.course_code);
+          const names = data.map(coursework => coursework.course_name);
+          setCourseCodes(codes);
+          setCourseNames(names);
         } else {
           console.error("Failed to fetch coursework");
         }
@@ -53,7 +61,7 @@ export default function Dashboard() {
   
   return (
     <div className={styles.container}>
-      <StudentMenu/>
+      <StudentMenu courseCodes={courseCodes} courseNames={courseNames} />
 
       <div className={styles.dashboardPage}>
 
