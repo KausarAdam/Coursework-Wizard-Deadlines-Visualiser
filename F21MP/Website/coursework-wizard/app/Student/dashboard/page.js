@@ -13,6 +13,8 @@ export default function Dashboard() {
   const [courseworkList, setCourseworkList] = useState([]); // State for coursework
   const [courseCodes, setCourseCodes] = useState([]); // Temporary storage for course codes
   const [courseNames, setCourseNames] = useState([]); // Temporary storage for course names
+  const [nextDeadline, setNextDeadline] = useState(null);
+  const [nextCourseCode, setNextCourseCode] = useState('');
   const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Check if in the browser
   
   // Temporary store for border colors
@@ -55,9 +57,56 @@ export default function Dashboard() {
       }
     };
 
+    const fetchNextDeadline = async () => {
+      if (username) {
+        try {
+          const res = await fetch(`/api/getSubtasks?username=${username}`);
+          if (res.ok) {
+            const subtasks = await res.json();
+            if (subtasks.length > 0) {
+              // Sort subtasks by end_date to find the next upcoming deadline
+              const upcomingDeadlines = subtasks
+                .filter(subtask => subtask.end_date) // Ensure subtasks with valid deadlines
+                .sort((a, b) => new Date(a.end_date) - new Date(b.end_date));
+  
+              // Set the first upcoming deadline and corresponding course code
+              setNextDeadline(upcomingDeadlines[0].end_date);
+              setNextCourseCode(upcomingDeadlines[0].course_code);
+            }
+          } else {
+            console.error('Failed to fetch subtasks');
+          }
+        } catch (error) {
+          console.error('Error fetching next deadline:', error);
+        }
+      }
+    };
+
     fetchStudentName();
-    fetchCoursework(); // Call fetchCoursework when the component mounts
+    fetchCoursework();
+    fetchNextDeadline(); // call fetch functions
   }, [username]);
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    
+    // Determine the ordinal suffix
+    const suffix = (day) => {
+      if (day > 3 && day < 21) return 'th'; // 4-20
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+  
+    // Format the date without the year
+    return `${day}${suffix(day)} ${date.toLocaleString('default', { month: 'long' })}`;
+  };
+  
   
   return (
     <div className={styles.container}>
@@ -85,9 +134,13 @@ export default function Dashboard() {
             </div>
 
             <div className={styles.box2}>
-              <h3 className={`${styles.heading3} ${styles.heading33}`}>24th September</h3>
+              <h3 className={`${styles.heading3} ${styles.heading33}`}>
+                {nextDeadline ? formatDate(nextDeadline) : 'No upcoming deadlines'}
+              </h3>
               <br />
-              <div className={styles.subheading}>Next Subtask Deadline</div>
+              <div className={styles.subheading}>
+                Next Subtask Deadline for {nextCourseCode ? nextCourseCode : 'N/A'}
+              </div>
             </div>
 
           </div>
@@ -107,7 +160,7 @@ export default function Dashboard() {
                 >
                   <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
                   <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
-                  <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString()}</div>
+                  <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</div>
                 </div>
               ))}
             </div>
@@ -123,7 +176,7 @@ export default function Dashboard() {
                 >
                   <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
                   <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
-                  <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString()}</div>
+                  <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</div>
                 </div>
               ))}
             </div>

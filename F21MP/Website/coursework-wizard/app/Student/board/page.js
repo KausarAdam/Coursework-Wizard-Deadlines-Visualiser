@@ -20,8 +20,8 @@ export default function KanbanBoard() {
   });
 
   const courseworkWeeks = [
-    { week: 1, subtasks: [{ id: 1, text: "F21SF - Subtask 1.1", details: "Subtask details", dueDate: new Date("2024-09-20") }] },
-    { week: 2, subtasks: [{ id: 2, text: "F21SF - Subtask 2.1", details: "Subtask details", dueDate: new Date("2024-09-27") }] },
+    { subtasks: [{ id: 1, text: "F21SF - ST1", title: "Subtask title", dueDate: new Date("2024-09-20") }] },
+    { subtasks: [{ id: 2, text: "F21SF - ST2", title: "Subtask title", dueDate: new Date("2024-09-27") }] },
   ];
 
   // On mount, load coursework subtasks if no tasks are in "todo"
@@ -33,22 +33,21 @@ export default function KanbanBoard() {
         todo: allSubtasks.map(subtask => ({ 
           id: subtask.id, 
           text: subtask.text, 
-          details: subtask.details, 
+          title: subtask.title, 
           dueDate: subtask.dueDate, 
         })),
       }));
     }
   }, []); // Empty dependency array ensures it runs only on mount
 
-  const moveTask = (taskId, fromColumn, toColumn) => {
-    // Find the task to move from the current column
+  const moveTask = async (taskId, fromColumn, toColumn) => {
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
   
     if (!taskToMove || fromColumn === toColumn) {
       return;
     }
   
-    // Create a new task without mutating the state directly
+    // Update the task state optimistically
     setTasks((prev) => ({
       ...prev,
       [fromColumn]: prev[fromColumn].filter((task) => task.id !== taskId),
@@ -66,7 +65,7 @@ export default function KanbanBoard() {
       <div ref={drag} className={styles.task}>
         <div className={styles.taskTitle}>{task.text}</div>
         <div className={styles.taskDetails}>
-          {task.details}
+          {task.title}
           <br />
           Due on {task.dueDate.toLocaleDateString('en-GB', {
             weekday: 'long',
@@ -97,6 +96,8 @@ export default function KanbanBoard() {
       </div>
     );
   };
+
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
 
   return (
     <div className={styles.container}>
