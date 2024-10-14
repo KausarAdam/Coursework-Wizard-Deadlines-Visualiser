@@ -55,9 +55,9 @@ export default function Modal({ isOpen, onClose, subtask }) {
   // Mapping of courseId to course names
   const courseNames = {
     1: "Advanced Interaction Design",
-    2: "Database and Information Systems",
-    3: "E-Commerce",
-    4: "Software Engineering"
+    2: "Software Engineering",
+    3: "Database and Information Systems",
+    4: "E-Commerce"
   };
 
   // Get the course name based on the subtask's courseId
@@ -78,7 +78,8 @@ export default function Modal({ isOpen, onClose, subtask }) {
         </button>
         <h1 className={styles.heading}>{subtask.title}</h1>
         <hr style={{ width: "100.5%", marginLeft: "0" }} />
-        <h2 className={styles.subheading}>Task for Course {courseName}</h2>
+        <h2 className={styles.subheading}>Course: {courseName}</h2>
+        <h2 className={styles.subheadingSmall}>Description: {subtask.description}</h2>
         <h2 className={styles.subheadingSmall}>Start Date: {format(subtask.start, 'dd/MM/yyyy')}</h2>
         <h2 className={styles.subheadingSmall}>End Date: {format(subtask.end, 'dd/MM/yyyy')}</h2>
 
