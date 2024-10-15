@@ -60,18 +60,15 @@ export default function Dashboard() {
     const fetchNextDeadline = async () => {
       if (username) {
         try {
-          const res = await fetch(`/api/getSubtasks?username=${username}`);
+          const res = await fetch(`/api/getSubtaskDeadline?username=${username}`);
           if (res.ok) {
             const subtasks = await res.json();
             if (subtasks.length > 0) {
-              // Sort subtasks by end_date to find the next upcoming deadline
-              const upcomingDeadlines = subtasks
-                .filter(subtask => subtask.end_date) // Ensure subtasks with valid deadlines
-                .sort((a, b) => new Date(a.end_date) - new Date(b.end_date));
-  
               // Set the first upcoming deadline and corresponding course code
-              setNextDeadline(upcomingDeadlines[0].end_date);
-              setNextCourseCode(upcomingDeadlines[0].course_code);
+              setNextDeadline(subtasks[0].end_date);
+              setNextCourseCode(subtasks[0].course_code);
+            } else {
+              console.log('No upcoming deadlines found');
             }
           } else {
             console.error('Failed to fetch subtasks');
@@ -80,7 +77,7 @@ export default function Dashboard() {
           console.error('Error fetching next deadline:', error);
         }
       }
-    };
+    };    
 
     fetchStudentName();
     fetchCoursework();
