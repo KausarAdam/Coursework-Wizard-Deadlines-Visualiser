@@ -29,14 +29,12 @@ export default function KanbanBoard() {
         const data = await response.json();
     
         if (response.ok) {
-          // Reset tasks to empty arrays
           const categorizedTasks = {
             todo: [],
             inProgress: [],
             done: [],
           };
     
-          // Categorize subtasks based on their status
           data.forEach(subtask => {
             const task = {
               id: `${subtask.subtask}-${subtask.course_code}-${subtask.coursework_id}`, // Create a unique ID
@@ -46,7 +44,6 @@ export default function KanbanBoard() {
               status_subtask: subtask.status || 'to-do', // Default to 'to-do' if status is undefined
             };
     
-            // Assign task to the correct column based on submission status
             switch (task.status_subtask) {
               case 'to-do':
                 categorizedTasks.todo.push(task);
@@ -63,10 +60,7 @@ export default function KanbanBoard() {
             }
           });
     
-          // Sort the 'todo' tasks by due date
           categorizedTasks.todo.sort((a, b) => a.dueDate - b.dueDate);
-    
-          // Update state with categorized tasks
           setTasks(categorizedTasks);
         } else {
           console.error(data.error); // Handle error
@@ -74,9 +68,8 @@ export default function KanbanBoard() {
       }
     };
     
-  
     fetchTasks();
-  }, [username]); // Depend on username to re-fetch if it changes
+  }, [username]);
 
   const moveTask = async (taskId, fromColumn, toColumn) => {
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
@@ -91,6 +84,40 @@ export default function KanbanBoard() {
       [fromColumn]: prev[fromColumn].filter((task) => task.id !== taskId),
       [toColumn]: [...prev[toColumn], taskToMove],
     }));
+
+    // Extract necessary data for updating the submission table
+    const [subtask, course_code, coursework_id] = taskId.split('-');
+    const statusMap = {
+      todo: 'to-do',
+      inProgress: 'in progress',
+      done: 'done'
+    };
+    const newStatus = statusMap[toColumn]; // Determine the new status based on the target column
+
+    // Update the status in the database
+    const updateResponse = await fetch('/api/updateSubtaskStatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        subtask,
+        course_code,
+        coursework_id,
+        username, // Include the username of the logged-in user
+        newStatus // New status to update
+      }),
+    });
+
+    if (!updateResponse.ok) {
+      console.error('Failed to update status in submission table');
+      // Optionally revert the optimistic update here if the API call fails
+      setTasks((prev) => ({
+        ...prev,
+        [toColumn]: prev[toColumn].filter((task) => task.id !== taskId),
+        [fromColumn]: [...prev[fromColumn], taskToMove],
+      }));
+    }
   };
 
   const Task = ({ task, fromColumn }) => {
@@ -99,9 +126,7 @@ export default function KanbanBoard() {
       item: { id: task.id, fromColumn },
     }));
 
-    // Format the due date as dd/mm/yyyy
     const formattedDueDate = `${String(task.dueDate.getDate()).padStart(2, '0')}/${String(task.dueDate.getMonth() + 1).padStart(2, '0')}/${task.dueDate.getFullYear()}`;
-
 
     return (
       <div ref={drag} className={styles.task}>
@@ -117,7 +142,6 @@ export default function KanbanBoard() {
     const [, drop] = useDrop({
       accept: ItemTypes.TASK,
       drop: (item) => {
-        // Move the task from one column to another
         moveTask(item.id, item.fromColumn, columnName);
       },
     });
@@ -125,7 +149,7 @@ export default function KanbanBoard() {
     return (
       <div className={styles.column} ref={drop}>
         <h3>
-          {title} ({tasks.length}) {/* Show the total count of tasks */}
+          {title} ({tasks.length})
         </h3>
         <hr style={{ width: "100.5%", marginLeft: "0", marginBottom: "15px" }} />
         {tasks.map((task) => (
