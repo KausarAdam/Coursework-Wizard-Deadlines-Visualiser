@@ -76,7 +76,7 @@ export default function KanbanBoard() {
 
     if (!taskToMove || fromColumn === toColumn) {
       return;
-    }
+    } 
 
     // Update the task state optimistically
     setTasks((prev) => ({
