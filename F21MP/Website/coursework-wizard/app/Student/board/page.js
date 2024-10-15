@@ -19,34 +19,70 @@ export default function KanbanBoard() {
     done: [],
   });
 
-  const courseworkWeeks = [
-    { subtasks: [{ id: 1, text: "F21SF - ST1", title: "Subtask title", dueDate: new Date("2024-09-20") }] },
-    { subtasks: [{ id: 2, text: "F21SF - ST2", title: "Subtask title", dueDate: new Date("2024-09-27") }] },
-  ];
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
 
-  // On mount, load coursework subtasks if no tasks are in "todo"
+  // Fetch unlocked subtasks for the logged-in user
   useEffect(() => {
-    if (tasks.todo.length === 0) {
-      const allSubtasks = courseworkWeeks.flatMap(coursework => coursework.subtasks);
-      setTasks((prev) => ({
-        ...prev,
-        todo: allSubtasks.map(subtask => ({ 
-          id: subtask.id, 
-          text: subtask.text, 
-          title: subtask.title, 
-          dueDate: subtask.dueDate, 
-        })),
-      }));
-    }
-  }, []); // Empty dependency array ensures it runs only on mount
+    const fetchTasks = async () => {
+      if (username) {
+        const response = await fetch(`/api/getKanban?username=${username}`);
+        const data = await response.json();
+  
+        if (response.ok) {
+          // Reset tasks to empty arrays
+          const categorizedTasks = {
+            todo: [],
+            inProgress: [],
+            done: [],
+          };
+  
+          // Categorize subtasks based on their status
+          data.forEach(subtask => {
+            const task = {
+              id: `${subtask.subtask}-${subtask.course_code}-${subtask.coursework_id}`, // Create a unique ID
+              course: subtask.course_code,
+              text: subtask.title,
+              dueDate: new Date(subtask.end_date),
+              status_subtask: subtask.status || 'to-do', // Default to 'to-do' if status is undefined
+            };
+  
+            // Assign task to the correct column based on submission status
+            switch (task.status_subtask) { // Accessing status from the task object
+              case 'to-do':
+                categorizedTasks.todo.push(task);
+                break;
+              case 'in progress':
+                categorizedTasks.inProgress.push(task);
+                break;
+              case 'done':
+                categorizedTasks.done.push(task);
+                break;
+              default:
+                categorizedTasks.todo.push(task); // Default to TODO if status is unknown
+                break;
+            }
+          });
+  
+          // Update state with categorized tasks
+          setTasks(categorizedTasks);
+        } else {
+          console.error(data.error); // Handle error
+        }
+      }
+    };
+  
+    fetchTasks();
+  }, [username]); // Depend on username to re-fetch if it changes
+  
+
 
   const moveTask = async (taskId, fromColumn, toColumn) => {
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
-  
+
     if (!taskToMove || fromColumn === toColumn) {
       return;
     }
-  
+
     // Update the task state optimistically
     setTasks((prev) => ({
       ...prev,
@@ -65,7 +101,7 @@ export default function KanbanBoard() {
       <div ref={drag} className={styles.task}>
         <div className={styles.taskTitle}>{task.text}</div>
         <div className={styles.taskDetails}>
-          {task.title}
+          {task.course}
           <br />
           Due on {task.dueDate.toLocaleDateString('en-GB', {
             weekday: 'long',
@@ -85,19 +121,17 @@ export default function KanbanBoard() {
         moveTask(item.id, item.fromColumn, columnName);
       },
     });
-  
+
     return (
       <div className={styles.column} ref={drop}>
         <h3>{title}</h3>
-        <hr style={{ width: "100.5%", marginLeft: "0", marginBottom: "15px"}} />
+        <hr style={{ width: "100.5%", marginLeft: "0", marginBottom: "15px" }} />
         {tasks.map((task) => (
           <Task key={task.id} task={task} fromColumn={columnName} />
         ))}
       </div>
     );
   };
-
-  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
 
   return (
     <div className={styles.container}>
