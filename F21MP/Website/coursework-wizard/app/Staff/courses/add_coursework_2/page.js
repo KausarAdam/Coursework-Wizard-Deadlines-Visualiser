@@ -13,7 +13,7 @@ import { useSearchParams } from 'next/navigation';
 // Get today's date formatted as YYYY-MM-DD for date inputs
 const today = new Date();
 
-export default function AddCoursework() {
+export default function AddCoursework({ params }) {
 
   const searchParams = useSearchParams();
   const courseworkName = searchParams.get('courseworkName');

@@ -5,27 +5,34 @@ import StudentMenu from "../../student_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../student_notification";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { useSearchParams } from 'next/navigation';
 
 export default function Coursework({ params }) {
-  const { courseId } = params;
   const router = useRouter();
   const fileInputRef = useRef(null);
+  const searchParams = useSearchParams();
+  const courseCode = searchParams.get('code');
+
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
+  
+  console.log(username + " " + courseCode);
+
 
   // Sample data
   const isOnTrack = true; // Change based on your logic
-  const courseworkWeeks = [
-    { week: 1, subtasks: [{ id: 1, text: "F21SF - Subtask 1.1", dueDate: new Date("2024-09-20") }] },
-    { week: 2, subtasks: [{ id: 2, text: "F21SF - Subtask 2.1", dueDate: new Date("2024-09-27") }] },
-    { week: 3, subtasks: [{ id: 3, text: "F21SF - Subtask 3.1", dueDate: new Date("2024-09-27") }] },
-    { week: 4, subtasks: [{ id: 4, text: "F21SF - Subtask 4.1", dueDate: new Date("2024-09-27") }] },
-    { week: 5, subtasks: [{ id: 5, text: "F21SF - Subtask 5.1", dueDate: new Date("2024-10-05") }] },
-    { week: 6, subtasks: [{ id: 6, text: "F21SF - Subtask 6.1", dueDate: new Date("2024-10-12") }] },
+  const courseworkSubtasks = [
+    { id: 1, subtasks: [{ id: 1, text: "F21SF - Subtask 1.1", dueDate: new Date("2024-09-20") }] },
+    { id: 2, subtasks: [{ id: 2, text: "F21SF - Subtask 2.1", dueDate: new Date("2024-09-27") }] },
+    { id: 3, subtasks: [{ id: 3, text: "F21SF - Subtask 3.1", dueDate: new Date("2024-09-27") }] },
+    { id: 4, subtasks: [{ id: 4, text: "F21SF - Subtask 4.1", dueDate: new Date("2024-09-27") }] },
+    { id: 5, subtasks: [{ id: 5, text: "F21SF - Subtask 5.1", dueDate: new Date("2024-10-05") }] },
+    { id: 6, subtasks: [{ id: 6, text: "F21SF - Subtask 6.1", dueDate: new Date("2024-10-12") }] },
   ];
 
   const completedTasks = 3; // Example: Total completed tasks
-  const totalTasks = courseworkWeeks.flatMap(week => week.subtasks).length;
+  const totalTasks = courseworkSubtasks.flatMap(id => id.subtasks).length;
   const completedPercentage = (completedTasks / totalTasks) * 100;
 
   // Trigger file input when "Resubmit" button is clicked
@@ -47,8 +54,8 @@ export default function Coursework({ params }) {
   };
 
   // Determine next subtask deadline dynamically
-  const nextDeadline = courseworkWeeks
-    .flatMap(week => week.subtasks)
+  const nextDeadline = courseworkSubtasks
+    .flatMap(id => id.subtasks)
     .filter(subtask => new Date(subtask.dueDate) > new Date())
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))[0]?.dueDate;
 
@@ -96,7 +103,7 @@ export default function Coursework({ params }) {
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
 
             {/* Group subtasks into insideBox3 divs based on the max of 3 per row */}
-            {courseworkWeeks.flatMap(week => week.subtasks).reduce((acc, subtask, index) => {
+            {courseworkSubtasks.flatMap(id => id.subtasks).reduce((acc, subtask, index) => {
               if (index % 3 === 0) {
                 acc.push([]); // Start a new row
               }
