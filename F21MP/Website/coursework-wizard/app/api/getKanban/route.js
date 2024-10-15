@@ -6,6 +6,17 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get("username"); // Get the username from query params
 
+    // Unlock subtasks if their start date has passed
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+
+    // SQL query to unlock subtasks
+    await pool.query(`
+      UPDATE subtask
+      SET is_locked = 0
+      WHERE start_date <= ?
+      AND is_locked = 1
+    `, [today]); // Update is_locked to 0 for relevant subtasks
+
     // SQL query to fetch unlocked subtasks and relevant submissions
     const [rows] = await pool.query(`
       SELECT 
@@ -19,7 +30,7 @@ export async function GET(request) {
         submission.submission_id,
         submission.student_username,
         submission.status,
-        course.name AS course_name  -- Fetch the course name from the course table
+        course.name AS course_name
       FROM 
         subtask
       LEFT JOIN 
@@ -29,7 +40,7 @@ export async function GET(request) {
         course ON subtask.course_code = course.course_code
       WHERE 
         subtask.is_locked = 0 
-        AND (submission.student_username = ? OR submission.student_username IS NULL)  -- Check for submissions by the logged-in user
+        AND (submission.student_username = ? OR submission.student_username IS NULL)
     `, [username]); // Use parameterized queries to prevent SQL injection
 
     return NextResponse.json(rows); // Use NextResponse to send JSON response

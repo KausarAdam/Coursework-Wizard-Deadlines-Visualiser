@@ -27,7 +27,7 @@ export default function KanbanBoard() {
       if (username) {
         const response = await fetch(`/api/getKanban?username=${username}`);
         const data = await response.json();
-  
+    
         if (response.ok) {
           // Reset tasks to empty arrays
           const categorizedTasks = {
@@ -35,7 +35,7 @@ export default function KanbanBoard() {
             inProgress: [],
             done: [],
           };
-  
+    
           // Categorize subtasks based on their status
           data.forEach(subtask => {
             const task = {
@@ -45,9 +45,9 @@ export default function KanbanBoard() {
               dueDate: new Date(subtask.end_date),
               status_subtask: subtask.status || 'to-do', // Default to 'to-do' if status is undefined
             };
-  
+    
             // Assign task to the correct column based on submission status
-            switch (task.status_subtask) { // Accessing status from the task object
+            switch (task.status_subtask) {
               case 'to-do':
                 categorizedTasks.todo.push(task);
                 break;
@@ -62,7 +62,10 @@ export default function KanbanBoard() {
                 break;
             }
           });
-  
+    
+          // Sort the 'todo' tasks by due date
+          categorizedTasks.todo.sort((a, b) => a.dueDate - b.dueDate);
+    
           // Update state with categorized tasks
           setTasks(categorizedTasks);
         } else {
@@ -70,11 +73,10 @@ export default function KanbanBoard() {
         }
       }
     };
+    
   
     fetchTasks();
   }, [username]); // Depend on username to re-fetch if it changes
-  
-
 
   const moveTask = async (taskId, fromColumn, toColumn) => {
     const taskToMove = tasks[fromColumn].find((task) => task.id === taskId);
@@ -97,17 +99,15 @@ export default function KanbanBoard() {
       item: { id: task.id, fromColumn },
     }));
 
+    // Format the due date as dd/mm/yyyy
+    const formattedDueDate = `${String(task.dueDate.getDate()).padStart(2, '0')}/${String(task.dueDate.getMonth() + 1).padStart(2, '0')}/${task.dueDate.getFullYear()}`;
+
+
     return (
       <div ref={drag} className={styles.task}>
-        <div className={styles.taskTitle}>{task.text}</div>
-        <div className={styles.taskDetails}>
-          {task.course}
-          <br />
-          Due on {task.dueDate.toLocaleDateString('en-GB', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'short',
-          })}
+        <div className={styles.taskContent}>
+          <div className={styles.taskTitle}>{task.course} - {task.text}</div>
+          <span className={styles.taskDetails}>{formattedDueDate}</span>
         </div>
       </div>
     );
@@ -124,7 +124,9 @@ export default function KanbanBoard() {
 
     return (
       <div className={styles.column} ref={drop}>
-        <h3>{title}</h3>
+        <h3>
+          {title} ({tasks.length}) {/* Show the total count of tasks */}
+        </h3>
         <hr style={{ width: "100.5%", marginLeft: "0", marginBottom: "15px" }} />
         {tasks.map((task) => (
           <Task key={task.id} task={task} fromColumn={columnName} />

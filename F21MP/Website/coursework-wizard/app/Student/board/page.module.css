@@ -62,7 +62,7 @@
 .task {
   background-color: #F5F5F5;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 13px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -85,11 +85,19 @@
   font-size: 15px;
 }
 
+.taskContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .taskDetails {
   margin-top: 3px;
   font-size: 12px;
   color: #1F4E47;
   font-family: 'Verdana', sans-serif;
+  text-align: right;
+  margin-left: auto;
 }
 
 .lockedTasks {
