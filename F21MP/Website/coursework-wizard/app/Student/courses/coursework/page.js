@@ -231,7 +231,7 @@ export default function Coursework({ params }) {
                         <p className={styles.text}>Due on {subtask.end.toLocaleDateString("en-GB")}</p>
                       </div>
                       <div className={styles.third}>
-                        <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>View Subtask</button>
+                        <button onClick={() => handleSubmit("/subtask_sample.pdf")} className={styles.button}>View Subtask</button>
                         <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button>
                       </div>
                     </div>
