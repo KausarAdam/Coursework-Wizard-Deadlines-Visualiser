@@ -12,15 +12,15 @@ import { useSearchParams } from 'next/navigation';
 export default function Course() {
   const searchParams = useSearchParams();
   const courseCode = searchParams.get('code');
-  const [courseName, setCourseName] = useState(""); // State to hold course name
-  const [coursework, setCoursework] = useState([]); // State to hold coursework details
-  const [submissionData, setSubmissionData] = useState({}); // State to hold submission data
+  const [courseName, setCourseName] = useState("");
+  const [coursework, setCoursework] = useState([]);
+  const [submissionData, setSubmissionData] = useState({});
+  const [unlockedSubtasks, setUnlockedSubtasks] = useState({}); // New state to hold unlocked subtasks
   const router = useRouter();
-  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   
   useEffect(() => {
     if (courseCode) {
-      // Fetch course details based on the courseCode
       if (courseCode === "F21SF") {
         setCourseName("Software Engineering");
       } else if (courseCode === "F21AD") {
@@ -30,7 +30,7 @@ export default function Course() {
       } else if (courseCode === "F21EC") {
         setCourseName("E-Commerce");
       } else {
-        setCourseName("Unnamed Course"); // Fallback if no course name is found
+        setCourseName("Unnamed Course");
       }
     }
   }, [courseCode]);
@@ -52,7 +52,7 @@ export default function Course() {
           coursework_sequence: coursework.coursework_sequence
         }));
   
-        setCoursework(mappedCoursework); // Set individually saved coursework data
+        setCoursework(mappedCoursework);
       } catch (error) {
         console.error("Failed to fetch coursework:", error);
       }
@@ -61,33 +61,50 @@ export default function Course() {
     if (courseCode) {
       fetchCoursework();
     }
-  }, [courseCode, courseName]); // Include courseName in the dependency array if used
+  }, [courseCode, courseName]);
   
-
-  // Fetch submission data based on courseCode and studentUsername
+  // Fetch submission data and unlocked subtasks based on courseCode and username
   useEffect(() => {
     const fetchSubmissionData = async () => {
       try {
-        const response = await fetch(`/api/getSubmissions?courseCode=${courseCode}&studentUsername=${username}`);
-        const data = await response.json();
+        // Fetch submission data
+        const submissionResponse = await fetch(`/api/getSubmissions?courseCode=${courseCode}&studentUsername=${username}`);
+        const submissionData = await submissionResponse.json();
         
+        // Map submission data to count subtasks
         const submissionMap = {};
-        data.forEach((submission) => {
+        submissionData.forEach((submission) => {
           if (!submissionMap[submission.coursework_id]) {
             submissionMap[submission.coursework_id] = {
-              totalSubtasks: 0,
-              submittedSubtasks: 0
+              submittedSubtasks: 0,
             };
           }
-          submissionMap[submission.coursework_id].totalSubtasks += 1;
           if (submission.status === "done") {
             submissionMap[submission.coursework_id].submittedSubtasks += 1;
           }
         });
 
-        setSubmissionData(submissionMap); // Store the submission data for coursework
+        setSubmissionData(submissionMap);
+
+        // Fetch unlocked subtasks (is_locked = 0)
+        const unlockedResponse = await fetch(`/api/getUnlockedSubtasks?courseCode=${courseCode}`);
+        const unlockedData = await unlockedResponse.json();
+
+        const unlockedMap = {};
+        unlockedData.forEach((subtask) => {
+          if (!unlockedMap[subtask.coursework_id]) {
+            unlockedMap[subtask.coursework_id] = {
+              totalUnlocked: 0,
+            };
+          }
+          if (subtask.is_locked === 0) {
+            unlockedMap[subtask.coursework_id].totalUnlocked += 1;
+          }
+        });
+
+        setUnlockedSubtasks(unlockedMap); // Store the unlocked subtasks
       } catch (error) {
-        console.error("Failed to fetch submission data:", error);
+        console.error("Failed to fetch data:", error);
       }
     };
 
@@ -99,16 +116,24 @@ export default function Course() {
 
   // Calculate progress percentage and assign the correct class
   const calculateProgress = (courseworkId) => {
-    const submission = submissionData[courseworkId];
-    if (submission) {
-      const { totalSubtasks, submittedSubtasks } = submission;
-      const progressPercentage = totalSubtasks > 0 ? (submittedSubtasks / totalSubtasks) * 100 : 0;
-      const progressClass = progressPercentage >= 50 ? styles.onTime : styles.late;
-      return { progressPercentage, progressClass };
-    }
-    return { progressPercentage: 0, progressClass: styles.late };
-  };
+    const submission = submissionData[courseworkId] || { submittedSubtasks: 0 };
+    const unlocked = unlockedSubtasks[courseworkId] || { totalUnlocked: 0 };
 
+    const { submittedSubtasks } = submission;
+    const { totalUnlocked } = unlocked;
+
+    let progressPercentage = totalUnlocked > 0 ? (submittedSubtasks / totalUnlocked) * 100 : 0;
+
+    // Ensure the progress bar is visible even if the percentage is 0
+    if (progressPercentage === 0 && totalUnlocked > 0) {
+      progressPercentage = 3;
+    }
+
+    console.log("% " + progressPercentage);
+    const progressClass = progressPercentage >= 50 ? styles.onTime : styles.late;
+    
+    return { progressPercentage, progressClass };
+  };
 
   return (
     <div className={styles.container}>
@@ -151,7 +176,7 @@ export default function Course() {
                     </div>
                     <div className={styles.third}>
                       <Link href={`/Student/courses/coursework?code=${courseCode}`} className={styles.Link}>
-                        <button className={styles.button}>View/<br/>Submit</button>
+                        <button className={styles.button}>View/<br />Submit</button>
                       </Link>
                     </div>
                   </div>
