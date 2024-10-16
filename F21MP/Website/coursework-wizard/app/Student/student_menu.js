@@ -86,7 +86,6 @@ export default function StudentMenu() {
         console.error("Failed to fetch coursework");
       }
     };
-
     fetchCoursework(); // Call fetchCoursework when the component mounts
   }, []); // Add any dependencies as needed
 
