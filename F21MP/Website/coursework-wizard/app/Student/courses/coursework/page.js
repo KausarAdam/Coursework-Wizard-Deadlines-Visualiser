@@ -21,6 +21,7 @@ export default function Coursework({ params }) {
   const [submissionData, setSubmissionData] = useState({});
   const [unlockedSubtasks, setUnlockedSubtasks] = useState({});
   const [subtaskStatus, setSubtaskStatus] = useState({});
+  const [nextDeadline, setNextDeadline] = useState(null);
 
   useEffect(() => {
     const fetchSubtasks = async () => {
@@ -42,6 +43,7 @@ export default function Coursework({ params }) {
   
         // Set the mapped coursework in state
         setCourseworkSubtasks(mappedCoursework);
+
       } catch (error) {
         console.error('Error fetching subtasks:', error);
       }
@@ -107,13 +109,38 @@ export default function Coursework({ params }) {
         console.error("Failed to fetch submission data:", error);
       }
     };
+
+    const fetchNextDeadline = async () => {
+      try {
+        const deadlineResponse = await fetch(`/api/getCourseworkSubtasksWithStatus?username=${username}&course_code=${courseCode}&coursework_id=${courseworkId}`);
+        if (!deadlineResponse.ok) throw new Error('Failed to fetch next deadline');
+        
+        const deadlineData = await deadlineResponse.json();
+        console.log("Fetched deadline data:", deadlineData); // Log fetched deadline data
+        
+        if (deadlineData.length > 0) {
+          const nextDeadline = new Date(deadlineData[0].end_date); // Directly get the end_date from the first (and only) object
+          setNextDeadline(nextDeadline); // Set the next deadline
+        } else {
+          setNextDeadline(null); // If no data is returned, set deadline to null
+        }
+        
+      } catch (error) {
+        console.error("Failed to fetch next deadline:", error);
+      }
+    };
+    
+    
   
     // Fetch subtasks and submission data
     fetchSubtasks();
   
     if (courseCode && username) {
       fetchSubmissionData();
+      fetchNextDeadline();
     }
+
+    
   }, [courseCode, courseworkId, username]);
   
 
@@ -167,7 +194,8 @@ export default function Coursework({ params }) {
             </div>
 
             <div className={styles.box}>
-              <h3 className={`${styles.heading3} ${styles.heading33}`}>Next deadline</h3>
+              <h3 className={`${styles.heading3} ${styles.heading333}`}>
+                {nextDeadline ? nextDeadline.toLocaleDateString("en-GB") : "No upcoming deadlines"}</h3>
               <br />
               <div className={styles.subheading}>Next Subtask Deadline</div>
             </div>
