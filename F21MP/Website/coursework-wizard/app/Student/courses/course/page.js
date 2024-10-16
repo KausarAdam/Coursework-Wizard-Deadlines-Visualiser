@@ -175,7 +175,7 @@ export default function Course() {
                       <div className={styles.progressBar} style={{ width: `${progressPercentage}%` }}></div>
                     </div>
                     <div className={styles.third}>
-                      <Link href={`/Student/courses/coursework?code=${courseCode}`} className={styles.Link}>
+                      <Link href={`/Student/courses/coursework?code=${courseCode}&courseworkId=${cw.coursework_id}`} className={styles.Link}>
                         <button className={styles.button}>View/<br />Submit</button>
                       </Link>
                     </div>

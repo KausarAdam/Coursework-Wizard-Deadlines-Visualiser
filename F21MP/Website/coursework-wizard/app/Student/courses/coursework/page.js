@@ -14,26 +14,113 @@ export default function Coursework({ params }) {
   const fileInputRef = useRef(null);
   const searchParams = useSearchParams();
   const courseCode = searchParams.get('code');
-
+  const courseworkId = searchParams.get('courseworkId');
   const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Retrieve username from local storage
+
+  const [courseworkSubtasks, setCourseworkSubtasks] = useState([]);
+  const [submissionData, setSubmissionData] = useState({});
+  const [unlockedSubtasks, setUnlockedSubtasks] = useState({});
+  const [subtaskStatus, setSubtaskStatus] = useState({});
+
+  useEffect(() => {
+    const fetchSubtasks = async () => {
+      try {
+        const response = await fetch(`/api/getCourseworkSubtasks?course_code=${courseCode}&coursework_id=${courseworkId}`);
+        if (!response.ok) throw new Error('Failed to fetch subtasks');
+        const data = await response.json();
   
-  console.log(username + " " + courseCode);
+        // Map the fetched data to the desired structure
+        const mappedCoursework = data.map((subtask) => ({
+          coursework_id: subtask.coursework_id,
+          title: subtask.title,
+          description: subtask.description,
+          start: new Date(subtask.start_date),
+          end: new Date(subtask.end_date),
+          course_code: subtask.course_code,
+          subtask: subtask.subtask,
+        }));
+  
+        // Set the mapped coursework in state
+        setCourseworkSubtasks(mappedCoursework);
+      } catch (error) {
+        console.error('Error fetching subtasks:', error);
+      }
+    };
+  
+    const fetchSubmissionData = async () => {
+      try {
+        const submissionResponse = await fetch(`/api/getSubmissions?courseCode=${courseCode}&studentUsername=${username}`);
+        if (!submissionResponse.ok) throw new Error('Failed to fetch submissions');
+        
+        const submissionData = await submissionResponse.json();
+  
+        // Map submissions to track submitted subtasks
+        const submissionMap = {};
+        submissionData.forEach((submission) => {
+          if (!submissionMap[submission.coursework_id]) {
+            submissionMap[submission.coursework_id] = {
+              submittedSubtasks: 0,
+            };
+          }
+          if (submission.status === "done") {
+            submissionMap[submission.coursework_id].submittedSubtasks += 1;
+          }
+        });
+  
+        setSubmissionData(submissionMap);
+  
+        // Map for status of each subtask
+        const statusMap = {};
+        submissionData.forEach((submission) => {
+          if (!statusMap[submission.coursework_id]) {
+            statusMap[submission.coursework_id] = {
+              statusSubtasks: [],
+            };
+          }
+          if (submission.status === "done") {
+            statusMap[submission.coursework_id].statusSubtasks.push(submission.subtask);
+          }
+        });
+  
+        setSubtaskStatus(statusMap);
+  
+        // Fetch and map unlocked subtasks
+        const unlockedResponse = await fetch(`/api/getUnlockedSubtasks?courseCode=${courseCode}`);
+        if (!unlockedResponse.ok) throw new Error('Failed to fetch unlocked subtasks');
+        
+        const unlockedData = await unlockedResponse.json();
+  
+        const unlockedMap = {};
+        unlockedData.forEach((subtask) => {
+          if (!unlockedMap[subtask.coursework_id]) {
+            unlockedMap[subtask.coursework_id] = {
+              totalUnlocked: 0,
+            };
+          }
+          if (subtask.is_locked === 0) {
+            unlockedMap[subtask.coursework_id].totalUnlocked += 1;
+          }
+        });
+  
+        setUnlockedSubtasks(unlockedMap);
+      } catch (error) {
+        console.error("Failed to fetch submission data:", error);
+      }
+    };
+  
+    // Fetch subtasks and submission data
+    fetchSubtasks();
+  
+    if (courseCode && username) {
+      fetchSubmissionData();
+    }
+  }, [courseCode, courseworkId, username]);
+  
 
-
-  // Sample data
-  const isOnTrack = true; // Change based on your logic
-  const courseworkSubtasks = [
-    { id: 1, subtasks: [{ id: 1, text: "F21SF - Subtask 1.1", dueDate: new Date("2024-09-20") }] },
-    { id: 2, subtasks: [{ id: 2, text: "F21SF - Subtask 2.1", dueDate: new Date("2024-09-27") }] },
-    { id: 3, subtasks: [{ id: 3, text: "F21SF - Subtask 3.1", dueDate: new Date("2024-09-27") }] },
-    { id: 4, subtasks: [{ id: 4, text: "F21SF - Subtask 4.1", dueDate: new Date("2024-09-27") }] },
-    { id: 5, subtasks: [{ id: 5, text: "F21SF - Subtask 5.1", dueDate: new Date("2024-10-05") }] },
-    { id: 6, subtasks: [{ id: 6, text: "F21SF - Subtask 6.1", dueDate: new Date("2024-10-12") }] },
-  ];
-
-  const completedTasks = 3; // Example: Total completed tasks
-  const totalTasks = courseworkSubtasks.flatMap(id => id.subtasks).length;
-  const completedPercentage = (completedTasks / totalTasks) * 100;
+  // Calculate completion percentage for each coursework
+  const totalUnlockedTasks = unlockedSubtasks[courseworkId]?.totalUnlocked || 0; // Get the total number of unlocked subtasks
+  const completedTasks = submissionData[courseworkId]?.submittedSubtasks || 0; // Get the number of submitted tasks
+  const completedPercentage = totalUnlockedTasks > 0 ? (completedTasks / totalUnlockedTasks) * 100 : 0; // Calculate completion percentage
 
   // Trigger file input when "Resubmit" button is clicked
   const handleResubmitClick = () => {
@@ -53,12 +140,6 @@ export default function Coursework({ params }) {
     window.open(filePath, "_blank");
   };
 
-  // Determine next subtask deadline dynamically
-  const nextDeadline = courseworkSubtasks
-    .flatMap(id => id.subtasks)
-    .filter(subtask => new Date(subtask.dueDate) > new Date())
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))[0]?.dueDate;
-
   return (
     <div className={styles.container}>
       <StudentMenu />
@@ -74,19 +155,19 @@ export default function Coursework({ params }) {
 
           <div className={styles.firstSetOfBoxes}>
             <div className={styles.box}>
-              <h3 className={`${styles.heading3} ${styles.heading33}`}>75%</h3>
+              <h3 className={`${styles.heading3} ${styles.heading33}`}>{completedPercentage.toFixed(0)}%</h3>
               <br />
               <div className={styles.subheading}>Work Completed</div>
             </div>
 
             <div className={styles.box}>
-              <Image src={isOnTrack ? "/happy.png" : "/sad.png"} alt={isOnTrack ? "Happy" : "Sad"} width="90" height="90" />
+              <Image src={completedPercentage < 50 ? "/sad.png" : "/happy.png"} alt={completedPercentage < 50 ? "Sad" : "Happy"} width={90} height={90} />
               <br />
-              <div className={styles.subheading}>{isOnTrack ? "You are on track!" : "Get back on track!"}</div>
+              <div className={styles.subheading}>{completedPercentage < 50 ? "Get back on track!" : "You are on track!"}</div>
             </div>
 
             <div className={styles.box}>
-              <h3 className={`${styles.heading3} ${styles.heading33}`}>{nextDeadline?.toLocaleDateString("en-GB") || "No deadlines"}</h3>
+              <h3 className={`${styles.heading3} ${styles.heading33}`}>Next deadline</h3>
               <br />
               <div className={styles.subheading}>Next Subtask Deadline</div>
             </div>
@@ -95,7 +176,7 @@ export default function Coursework({ params }) {
           <div className={styles.box3}>
             <div className={styles.courseworkProgressBox}>
               <h3 className={styles.heading3}>Coursework Progress</h3>
-              <div className={`${styles.progressBarContainer} ${completedPercentage < 100 ? styles.onTime : ""}`}>
+              <div className={`${styles.progressBarContainer} ${completedPercentage < 50 ? styles.late : styles.onTime}`}>
                 <div className={styles.progressBar} style={{ width: `${completedPercentage}%` }}></div>
               </div>
             </div>
@@ -103,7 +184,7 @@ export default function Coursework({ params }) {
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
 
             {/* Group subtasks into insideBox3 divs based on the max of 3 per row */}
-            {courseworkSubtasks.flatMap(id => id.subtasks).reduce((acc, subtask, index) => {
+            {courseworkSubtasks.reduce((acc, subtask, index) => {
               if (index % 3 === 0) {
                 acc.push([]); // Start a new row
               }
@@ -111,18 +192,23 @@ export default function Coursework({ params }) {
               return acc;
             }, []).map((subtaskRow, rowIndex) => (
               <div key={rowIndex} className={styles.insideBox3}>
-                {subtaskRow.map((subtask) => (
-                  <div key={subtask.id} className={`${styles.boxCourse} ${completedTasks ? styles.onTrack : styles.noWork}`}>
-                    <div className={styles.first}>
-                      <p className={styles.subheading2}>{subtask.text}</p>
-                      <p className={styles.text}>Due on {subtask.dueDate.toLocaleDateString('en-GB')}</p>
+                {subtaskRow.map((subtask) => {
+                  // Check if the current subtask is in the statusSubtasks array
+                  const isCompleted = subtaskStatus[subtask.coursework_id]?.statusSubtasks.includes(subtask.subtask);
+                  return(
+                    <div key={subtask.subtask} className={`${styles.boxCourse} ${isCompleted ? styles.onTrack : styles.noWork}`}>
+                      <div className={styles.first}>
+                        <p className={styles.subheading2}>{subtask.subtask} - {subtask.title}</p>
+                        <p className={styles.text}>{subtask.description}</p>
+                        <p className={styles.text}>Due on {subtask.end.toLocaleDateString("en-GB")}</p>
+                      </div>
+                      <div className={styles.third}>
+                        <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>View Subtask</button>
+                        <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button>
+                      </div>
                     </div>
-                    <div className={styles.third}>
-                      <button onClick={() => handleSubmit("/path/to/pdf")} className={styles.button}>View Subtask</button>
-                      <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ))}
           </div>
