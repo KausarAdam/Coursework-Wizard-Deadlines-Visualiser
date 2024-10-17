@@ -38,7 +38,7 @@ export async function GET(request) {
     // Prepare the SQL query with placeholders
     const placeholders = courseCodes.map(() => '?').join(',');
     const query = `
-      SELECT cw.title, cw.description, cw.end_date AS due_date, c.course_code, c.name AS course_name
+      SELECT cw.title, cw.coursework_id, cw.description, cw.end_date AS due_date, c.course_code, c.name AS course_name
       FROM coursework cw
       JOIN course c ON cw.course_code = c.course_code
       WHERE cw.course_code IN (${placeholders}) AND cw.coursework_sequence = 1
