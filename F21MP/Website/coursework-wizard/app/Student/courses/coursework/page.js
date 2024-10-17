@@ -105,6 +105,7 @@ export default function Coursework({ params }) {
         });
   
         setUnlockedSubtasks(unlockedMap);
+        console.log("Fetch successful");
       } catch (error) {
         console.error("Failed to fetch submission data:", error);
       }
@@ -149,23 +150,51 @@ export default function Coursework({ params }) {
   const completedTasks = submissionData[courseworkId]?.submittedSubtasks || 0; // Get the number of submitted tasks
   const completedPercentage = totalUnlockedTasks > 0 ? (completedTasks / totalUnlockedTasks) * 100 : 0; // Calculate completion percentage
 
-  // Trigger file input when "Resubmit" button is clicked
-  const handleResubmitClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click(); // Open file explorer
-    }
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type === "application/pdf") {
-      console.log("Selected file:", file);
-    }
-  };
-
-  const handleSubmit = (filePath) => {
+  const handleView = (filePath) => {
     window.open(filePath, "_blank");
   };
+
+  const handleFileSubmit = async (subtask) => {
+    const fileInput = fileInputRef.current;
+    fileInput.click(); // Trigger the file picker
+
+      fileInput.onchange = async () => {
+          const selectedFile = fileInput.files[0];
+          if (selectedFile) {
+              const filePath = `/${selectedFile.name}`; // Store the file name with a leading slash
+
+              try {
+                  const response = await fetch('/api/updateSubmission', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                          subtask: subtask.subtask, // Subtask ID
+                          course_code: courseCode,
+                          coursework_id: courseworkId,
+                          username,
+                          newStatus: 'done',
+                          filePath, // Only the file path
+                      }),
+                  });
+
+                  if (response.ok) {
+                      alert('Submitted');
+                      // router.push(`/Student/courses/coursework?code=${courseCode}&courseworkId=${subtask.coursework_id}`);
+                      // router.push(`/Student/dashboard`);
+                      window.location.href = `/Student/courses/coursework?code=${courseCode}&courseworkId=${subtask.coursework_id}`;
+                  } else {
+                      const result = await response.json();
+                      alert(`Error: ${result.error}`);
+                  }
+              } catch (error) {
+                  console.error("Failed to submit:", error);
+                  alert("Failed to submit");
+              }
+          }
+      };
+    };
 
   return (
     <div className={styles.container}>
@@ -188,9 +217,38 @@ export default function Coursework({ params }) {
             </div>
 
             <div className={styles.box}>
-              <Image src={completedPercentage < 50 ? "/sad.png" : "/happy.png"} alt={completedPercentage < 50 ? "Sad" : "Happy"} width={90} height={90} />
+            <Image
+              src={
+                completedPercentage === 100
+                  ? "/party.png"
+                  : completedPercentage >= 80
+                  ? "/happy.png"
+                  : completedPercentage >= 50
+                  ? "/neutral.png"
+                  : "/sad.png"
+              }
+              alt={
+                completedPercentage === 100
+                  ? "Party"
+                  : completedPercentage >= 80
+                  ? "Happy"
+                  : completedPercentage >= 50
+                  ? "Neutral"
+                  : "Sad"
+              }
+              width={90}
+              height={90}
+            />
               <br />
-              <div className={styles.subheading}>{completedPercentage < 50 ? "Get back on track!" : "You are on track!"}</div>
+              <div className={styles.subheading}>{
+              completedPercentage === 100
+              ? "Good Job!"
+              : completedPercentage >= 80
+              ? "Almost there!"
+              : completedPercentage >= 50
+              ? "Keep Going!"
+              : "Move Quickly!"
+              }</div>
             </div>
 
             <div className={styles.box}>
@@ -210,7 +268,9 @@ export default function Coursework({ params }) {
             </div>
 
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
-
+            
+            <input type="file" ref={fileInputRef} style={{ display: 'none' }} /> {/* Hidden file input */}
+            
             {/* Group subtasks into insideBox3 divs based on the max of 3 per row */}
             {courseworkSubtasks.reduce((acc, subtask, index) => {
               if (index % 3 === 0) {
@@ -231,8 +291,8 @@ export default function Coursework({ params }) {
                         <p className={styles.text}>Due on {subtask.end.toLocaleDateString("en-GB")}</p>
                       </div>
                       <div className={styles.third}>
-                        <button onClick={() => handleSubmit("/subtask_sample.pdf")} className={styles.button}>View Subtask</button>
-                        <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button>
+                        <button onClick={() => handleView("/subtask_sample.pdf")} className={styles.button}>View Subtask</button>
+                        <button onClick={() => handleFileSubmit(subtask)} className={styles.button}>Re/Submit</button>
                       </div>
                     </div>
                   );
@@ -241,14 +301,6 @@ export default function Coursework({ params }) {
             ))}
           </div>
         </div>
-
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          accept=".pdf"
-          onChange={handleFileChange}
-        />
 
         <Footer />
       </div>
