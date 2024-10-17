@@ -22,13 +22,26 @@ export default function Coursework({ params }) {
   const [unlockedSubtasks, setUnlockedSubtasks] = useState({});
   const [subtaskStatus, setSubtaskStatus] = useState({});
   const [nextDeadline, setNextDeadline] = useState(null);
+  const [courseworkTitle, setCourseworkTitle] = useState("");
 
   useEffect(() => {
     const fetchSubtasks = async () => {
       try {
+        // coursework subtasks
         const response = await fetch(`/api/getCourseworkSubtasks?course_code=${courseCode}&coursework_id=${courseworkId}`);
         if (!response.ok) throw new Error('Failed to fetch subtasks');
         const data = await response.json();
+
+        // Fetch unlocked subtasks
+        const unlockedResponse = await fetch(`/api/getUnlockedSubtasks?courseCode=${courseCode}`);
+        if (!unlockedResponse.ok) throw new Error('Failed to fetch unlocked subtasks');
+        const unlockedData = await unlockedResponse.json();
+
+        // Create a map of unlocked subtasks
+        const unlockedMap = {};
+        unlockedData.forEach((subtask) => {
+          unlockedMap[subtask.subtask] = subtask.is_locked === 0;
+        });
   
         // Map the fetched data to the desired structure
         const mappedCoursework = data.map((subtask) => ({
@@ -39,6 +52,7 @@ export default function Coursework({ params }) {
           end: new Date(subtask.end_date),
           course_code: subtask.course_code,
           subtask: subtask.subtask,
+          is_locked: unlockedMap[subtask.subtask] ? 0 : 1, // Set is_locked based on unlockedMap
         }));
   
         // Set the mapped coursework in state
@@ -130,18 +144,31 @@ export default function Coursework({ params }) {
         console.error("Failed to fetch next deadline:", error);
       }
     };
+
+    const fetchCourseworkTitle = async () => {
+      try {
+        const courseworkResponse = await fetch(`/api/getCoursework?username=${username}`);
+        if (!courseworkResponse.ok) throw new Error('Failed to fetch coursework details');
+        const courseworkData = await courseworkResponse.json();
+
+        // Assuming courseworkData is an array, you can set the title of the first coursework.
+        if (courseworkData.length > 0) {
+          const course = courseworkData[0]; // Adjust based on how your data is structured
+          setCourseworkTitle(course.title); // Assuming `title` is the key for coursework title
+        }
+      } catch (error) {
+        console.error('Error fetching coursework title:', error);
+      }
+    };
     
-    
-  
     // Fetch subtasks and submission data
     fetchSubtasks();
+    fetchCourseworkTitle();
   
     if (courseCode && username) {
       fetchSubmissionData();
       fetchNextDeadline();
     }
-
-    
   }, [courseCode, courseworkId, username]);
   
 
@@ -201,7 +228,7 @@ export default function Coursework({ params }) {
       <StudentMenu />
       <div className={styles.courseworkPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Competitor Application Coursework</h1>
+          <h1 className={styles.heading}>{courseCode} - {courseworkTitle} Coursework</h1>
           <Notification />
         </div>
 
@@ -283,8 +310,21 @@ export default function Coursework({ params }) {
                 {subtaskRow.map((subtask) => {
                   // Check if the current subtask is in the statusSubtasks array
                   const isCompleted = subtaskStatus[subtask.coursework_id]?.statusSubtasks.includes(subtask.subtask);
-                  return(
-                    <div key={subtask.subtask} className={`${styles.boxCourse} ${isCompleted ? styles.onTrack : styles.noWork}`}>
+                  const isLocked = subtask.is_locked === 1;
+
+                  console.log(subtask.subtask + "locked? " + subtask.is_locked);
+                  // Determine the appropriate style
+                  let subtaskStyle = "";
+                  if (isLocked) {
+                    subtaskStyle = styles.isLocked;
+                  } else if (isCompleted) {
+                    subtaskStyle = styles.onTrack;
+                  } else {
+                    subtaskStyle = styles.noWork;
+                  }
+
+                  return (
+                    <div key={subtask.subtask} className={`${styles.boxCourse} ${subtaskStyle}`}>
                       <div className={styles.first}>
                         <p className={styles.subheading2}>{subtask.subtask} - {subtask.title}</p>
                         <p className={styles.text}>{subtask.description}</p>
@@ -299,6 +339,7 @@ export default function Coursework({ params }) {
                 })}
               </div>
             ))}
+
           </div>
         </div>
 

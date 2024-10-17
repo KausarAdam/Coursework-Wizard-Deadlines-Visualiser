@@ -126,6 +126,26 @@
   background-color: #D0F4CF;
 }
 
+.isLocked {
+  position: relative;
+  background-color: #f1eeeef6;
+  filter: blur(0.9px);
+  pointer-events: none;
+}
+
+.isLocked::after {
+  content: '\1F512'; /* Unicode for lock emoji, you can replace with an actual image/icon */
+  font-size: 24px;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the lock icon */
+  background-color: rgba(255, 255, 255, 0.8); /* Light overlay to emphasize the lock */
+  padding: 10px;
+  border-radius: 50%; /* Circle around the lock */
+}
+
 .firstSetOfBoxes {
   display: flex;
   gap: 50px;

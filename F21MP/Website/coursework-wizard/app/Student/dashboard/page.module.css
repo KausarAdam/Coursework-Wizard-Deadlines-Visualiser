@@ -102,9 +102,10 @@
 }
 
 .box4 {
-  background-color: #f1eeee;
+  background-color: #f1eeeef6;
   border: 3px solid;
   padding: 10px;
+  padding-top: 6px;
   width: 49%;
   height: 90px;
   border-radius: 9px;
