@@ -58,7 +58,7 @@ export default function StudentMenu() {
       setActiveItem(item ? item.id : 2); // Default to Dashboard if no match
       setIsSidebarOpen(false); // Close sidebar for other pages
     }
-  }, [router.pathname, menuItems]);
+  }, [router.pathname]);
 
   const handleMenuClick = (id, link) => {
     setActiveItem(id);

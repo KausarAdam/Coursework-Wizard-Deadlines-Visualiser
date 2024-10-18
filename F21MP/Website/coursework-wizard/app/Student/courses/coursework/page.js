@@ -288,10 +288,10 @@ export default function Coursework({ params }) {
 
           <div className={styles.box3}>
             <div className={styles.courseworkProgressBox}>
-              <h3 className={styles.heading3}>Coursework Progress</h3>
-              <div className={`${styles.progressBarContainer} ${completedPercentage < 50 ? styles.late : styles.onTime}`}>
+              <h3 className={styles.heading3}>Work Progress</h3>
+              {/* <div className={`${styles.progressBarContainer} ${completedPercentage < 50 ? styles.late : styles.onTime}`}>
                 <div className={styles.progressBar} style={{ width: `${completedPercentage}%` }}></div>
-              </div>
+              </div> */}
             </div>
 
             <hr style={{ width: "99.5%", marginLeft: "0" }} />

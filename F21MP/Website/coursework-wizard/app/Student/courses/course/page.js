@@ -125,9 +125,9 @@ export default function Course() {
     let progressPercentage = totalUnlocked > 0 ? (submittedSubtasks / totalUnlocked) * 100 : 0;
 
     // Ensure the progress bar is visible even if the percentage is 0
-    if (progressPercentage === 0 && totalUnlocked > 0) {
-      progressPercentage = 3;
-    }
+    // if (progressPercentage === 0 && totalUnlocked > 0) {
+    //   progressPercentage = 3;
+    // }
 
     console.log("% " + progressPercentage);
     const progressClass = progressPercentage >= 50 ? styles.onTime : styles.late;
@@ -172,6 +172,7 @@ export default function Course() {
                       <p className={styles.text}>Due on {new Date(cw.end).toLocaleDateString('en-GB')}</p>
                     </div>
                     <div className={`${styles.progressBarContainer} ${progressClass}`}>
+                      <div className={styles.progressText}>{Math.round(progressPercentage)}%</div>
                       <div className={styles.progressBar} style={{ width: `${progressPercentage}%` }}></div>
                     </div>
                     <div className={styles.third}>

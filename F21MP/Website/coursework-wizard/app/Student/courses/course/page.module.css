@@ -131,6 +131,8 @@
   overflow: hidden;
   height: 25px;
   margin-top: 30px;
+  border: 2px solid #cbcbcb;
+  position: relative;
 }
 
 .onTime .progressBar {
@@ -139,6 +141,7 @@
 
 .late .progressBar {
   background-color: #E07E32;
+  border: 2px solid #E07E32; /*This will show the bar slightly even when progress is 0*/
 }
 
 .first {
@@ -153,4 +156,15 @@
 
 .Link {
   text-decoration: none;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #5c5c5c;
+  z-index: 1;
 }
