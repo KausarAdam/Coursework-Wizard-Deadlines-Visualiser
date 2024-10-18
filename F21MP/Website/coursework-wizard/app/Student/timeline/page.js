@@ -71,7 +71,7 @@ export default function Timeline() {
       }
     };    
     fetchSubtasks();
-  }, []);
+  }, [courseColours]);
   
   
 

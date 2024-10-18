@@ -58,7 +58,7 @@ export default function StudentMenu() {
       setActiveItem(item ? item.id : 2); // Default to Dashboard if no match
       setIsSidebarOpen(false); // Close sidebar for other pages
     }
-  }, [router.pathname]);
+  }, [router.pathname, menuItems]);
 
   const handleMenuClick = (id, link) => {
     setActiveItem(id);
@@ -87,7 +87,7 @@ export default function StudentMenu() {
       }
     };
     fetchCoursework(); // Call fetchCoursework when the component mounts
-  }, []); // Add any dependencies as needed
+  }, [username]); // Add any dependencies as needed
 
   return (
     <div className={styles.container}>

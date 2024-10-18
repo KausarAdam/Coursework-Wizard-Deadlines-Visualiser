@@ -31,7 +31,7 @@ export default function Help() {
       question: "I can’t find an answer to my question, what should I do?",
       answer: (
         <>
-          If you can't find an answer to your question, or your question hasn't been fully answered, then <a href="./contact/contact_us" className={styles.link}>click here</a> to submit your enquiry.
+          If you can&apos;t find an answer to your question, or your question hasn&apos;t been fully answered, then <a href="./contact/contact_us" className={styles.link}>click here</a> to submit your enquiry.
         </>
       )
     }

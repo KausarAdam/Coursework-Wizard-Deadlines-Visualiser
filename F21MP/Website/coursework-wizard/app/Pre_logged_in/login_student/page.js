@@ -80,7 +80,7 @@ export default function LoginStudent() {
         </form>
 
         <div className={styles.staffBox}>
-          If you're a staff member, please visit the{" "}
+          If you&apos;re a staff member, please visit the{" "}
           <a href="/Pre_logged_in/login_staff_1" className={styles.staffLink}>Staff Portal</a>.
         </div>
       </div>
