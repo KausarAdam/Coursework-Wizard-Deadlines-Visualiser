@@ -76,7 +76,7 @@ export default function Settings() {
 
       <div className={styles.settingsPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>Profile</h1>
+          <h1 className={styles.heading}>Settings</h1>
           <Notification />
         </div>
 
