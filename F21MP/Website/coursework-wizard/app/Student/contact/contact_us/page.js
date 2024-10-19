@@ -16,32 +16,31 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(null);
+    // setError(null);
+    // setSuccess(null);
 
-    const enquiryData = { subject, message };
+    // const enquiryData = { subject, message };
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(enquiryData),
-      });
+    // try {
+    //   const response = await fetch('/api/contact', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(enquiryData),
+    //   });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit enquiry.');
-      }
+    //   if (!response.ok) {
+    //     throw new Error('Failed to submit enquiry.');
+    //   }
 
-      setSuccess("Your enquiry has been submitted successfully!");
-      setSubject("");
-      setMessage("");
-
+    //   setSuccess("Your enquiry has been submitted successfully!");
+    //   setSubject("");
+    //   setMessage("");
       router.push('/Student/contact/contact_us_submitted');
-    } catch (err) {
-      setError(err.message);
-    }
+    // } catch (err) {
+    //   setError(err.message);
+    // }
   };
 
   return (
@@ -62,25 +61,28 @@ export default function ContactUs() {
             <hr style={{ marginBottom: "20px" }} />
             {error && <p className={styles.error}>{error}</p>}
             {success && <p className={styles.success}>{success}</p>}
-            <div className={styles.subheading}>Subject*</div>
-            <input 
-              type="text" 
-              placeholder="Enter enquiry subject here" 
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className={styles.inputField}
-              required
-            />
-            <div className={styles.subheading}>Message*</div>
-            <textarea 
-              placeholder="Enter details about your enquiry here" 
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
-              required
-            />
-            <p className={styles.text}>*Required Fields</p>
-            <button onClick={handleSubmit} className={styles.button}>Submit</button>
+            
+            <form onSubmit={handleSubmit}>
+              <div className={styles.subheading}>Subject*</div>
+              <input 
+                type="text" 
+                placeholder="Enter enquiry subject here" 
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className={styles.inputField}
+                required
+              />
+              <div className={styles.subheading}>Message*</div>
+              <textarea 
+                placeholder="Enter details about your enquiry here" 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
+                required
+              />
+              <p className={styles.text}>*Required Fields</p>
+              <button type="submit" className={styles.button}>Submit</button>
+            </form>
           </div>
         </div>
 

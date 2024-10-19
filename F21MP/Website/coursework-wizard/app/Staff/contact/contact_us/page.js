@@ -15,33 +15,40 @@ export default function ContactUs() {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
+    e.preventDefault(); // Prevent the default form submission
+    // setError(null); // Reset error state
+    // setSuccess(null); // Reset success state
 
-    const enquiryData = { subject, message };
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(enquiryData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit enquiry.');
-      }
-
-      setSuccess("Your enquiry has been submitted successfully!");
-      setSubject("");
-      setMessage("");
-
-      router.push('/Staff/contact/contact_us_submitted');
-    } catch (err) {
-      setError(err.message);
+    // Check if subject or message is empty
+    if (!subject.trim() || !message.trim()) {
+      setError("Both subject and message are required.");
+      return; // Stop submission
     }
+
+    // const enquiryData = { subject, message };
+
+    // try {
+    //   const response = await fetch('/api/contact', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(enquiryData),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error('Failed to submit enquiry.');
+    //   }
+
+    //   setSuccess("Your enquiry has been submitted successfully!");
+    //   setSubject(""); // Clear subject input
+    //   setMessage(""); // Clear message input
+
+      // Redirect to the submitted page
+      router.push('/Staff/contact/contact_us_submitted');
+    // } catch (err) {
+    //   setError(err.message); // Set error message if submission fails
+    // }
   };
 
   return (
@@ -62,25 +69,27 @@ export default function ContactUs() {
             <hr style={{ marginBottom: "20px" }} />
             {error && <p className={styles.error}>{error}</p>}
             {success && <p className={styles.success}>{success}</p>}
-            <div className={styles.subheading}>Subject*</div>
-            <input 
-              type="text" 
-              placeholder="Enter enquiry subject here" 
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className={styles.inputField}
-              required
-            />
-            <div className={styles.subheading}>Message*</div>
-            <textarea 
-              placeholder="Enter details about your enquiry here" 
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
-              required
-            />
-            <p className={styles.text}>*Required Fields</p>
-            <button onClick={handleSubmit} className={styles.button}>Submit</button>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.subheading}>Subject*</div>
+              <input 
+                type="text" 
+                placeholder="Enter enquiry subject here" 
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className={styles.inputField}
+                required
+              />
+              <div className={styles.subheading}>Message*</div>
+              <textarea 
+                placeholder="Enter details about your enquiry here" 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className={`${styles.inputField} ${styles.inputFieldEnquiry}`}
+                required
+              />
+              <p className={styles.text}>*Required Fields</p>
+              <button type="submit" className={styles.button}>Submit</button>
+            </form>
           </div>
         </div>
 

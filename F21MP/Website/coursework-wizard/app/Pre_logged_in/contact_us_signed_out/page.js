@@ -3,9 +3,12 @@
 import styles from "./page.module.css";
 import { useState } from "react";
 import Header from "../../Header";
-import Router from "next/router";
+import Router from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export default function ContactUs() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,24 +29,24 @@ export default function ContactUs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+    // try {
+    //   const response = await fetch('/api/contact', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(formData)
+    //   });
 
-      if (response.ok) {
-        console.log('Form submitted successfully');
-        Router.push('/Pre_logged_in/contact_us_signed_out_2');
-      } else {
-        console.error('Error submitting form');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    //   if (response.ok) {
+    //   console.log('Form submitted successfully');
+        router.push('/Pre_logged_in/contact_us_signed_out_2');
+    //   } else {
+    //     console.error('Error submitting form');
+    //   }
+    // } catch (error) {
+    //   console.error('Error submitting form:', error);
+    // }
   };
 
 
