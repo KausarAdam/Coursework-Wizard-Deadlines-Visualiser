@@ -4,9 +4,14 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [verificationCode, setVerificationCode] = useState("");
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('username');
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     setVerificationCode(e.target.value);
@@ -19,7 +24,14 @@ export default function ForgotPassword() {
       return;
     }
 
+    if (verificationCode === "123") {
+      console.log("Correct code");
+    } else {
+      alert("The verification code you entered is incorrect.");
+      return;
+    }
     console.log('Verification Code:', verificationCode);
+    router.push(`/Pre_logged_in/forgot_password_4?username=${userId}`);
   };
 
   return (
@@ -49,9 +61,9 @@ export default function ForgotPassword() {
             onChange={handleInputChange}
           />
           
-          <Link href="/Pre_logged_in/forgot_password_4" onClick={handleNext}>
-            <button className={styles.button}>Next</button>
-          </Link>
+          {/* <Link href={`/Pre_logged_in/forgot_password_4?username=${userId}`} onClick={handleNext}> */}
+            <button className={styles.button} onClick={handleNext}>Next</button>
+          {/* </Link> */}
           <Link href="/">
             <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
           </Link>

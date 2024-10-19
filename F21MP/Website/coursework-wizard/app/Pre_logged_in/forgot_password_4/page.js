@@ -4,12 +4,17 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('username');
+  const router = useRouter();
 
-  const handleNext = () => {
+  const handleNext = async () => {
 
     if (!newPassword || !confirmPassword) {
       alert("Please fill in both fields.");
@@ -20,9 +25,35 @@ export default function ForgotPassword() {
       return;
     }
 
+    try {
+      const response = await fetch(`/api/updatePassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: userId,
+          newPassword,
+        }),
+      });
 
-    console.log('New Password:', newPassword);
+      // Parse the response JSON
+      const result = await response.json();
+
+      // Handle success or error responses
+      if (response.ok) {
+          console.log(result.message); // Success message
+          router.push(`/Pre_logged_in/forgot_password_5`); // Redirect to next page
+      } else {
+          console.error(result.error); // Log the error message
+          alert(result.error); // Optionally, show an alert with the error
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      alert("There was an error updating your password. Please try again.");
+    }
   };
+
 
   return (
     <div>
@@ -63,9 +94,9 @@ export default function ForgotPassword() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           
-          <Link href="/Pre_logged_in/forgot_password_5" onClick={handleNext}>
-            <button className={styles.button}>Next</button>
-          </Link>
+          {/* <Link href="/Pre_logged_in/forgot_password_5" onClick={handleNext}> */}
+            <button className={styles.button} onClick={handleNext}>Next</button>
+          {/* </Link> */}
           <Link href="/">
             <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
           </Link>

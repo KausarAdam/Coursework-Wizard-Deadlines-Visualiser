@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "../../Header";
+import { useRouter } from 'next/navigation';
 
 // Dynamically import the ReCAPTCHA component
 const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
@@ -13,6 +14,7 @@ export default function ForgotPassword() {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
   const [userId, setUserId] = useState("");
   const [recaptchaValue, setRecaptchaValue] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -24,13 +26,35 @@ export default function ForgotPassword() {
     setUserId(e.target.value);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!userId || !recaptchaValue) {
-      alert("Please enter your ID and complete the CAPTCHA.");
+      alert("Please enter your username or ID and complete the CAPTCHA.");
       return;
     }
 
-    console.log('User ID:', userId);
+    try {
+      // Call the API to check if the username exists
+      const response = await fetch('/api/checkUsername', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: userId }),
+      });
+
+      const data = await response.json();
+      
+      if (data.exists) {
+        // Username exists, proceed to the next page
+        router.push(`/Pre_logged_in/forgot_password_2?username=${(userId)}`);
+      } else {
+        // Username does not exist, show an alert
+        alert("Username does not exist. Please check and try again.");
+      }
+    } catch (error) {
+      console.error('Error checking username:', error);
+      alert('An error occurred while checking the username.');
+    }
   };
 
   return (
@@ -71,9 +95,9 @@ export default function ForgotPassword() {
             />
           )}
           
-          <Link href="/Pre_logged_in/forgot_password_2" onClick={handleNext}>
-            <button className={styles.button}>Next</button>
-          </Link>
+          {/* <Link href="/Pre_logged_in/forgot_password_2" onClick={handleNext}> */}
+            <button className={styles.button} onClick={handleNext}>Next</button>
+          {/* </Link> */}
           <Link href="/">
             <button className={`${styles.button} ${styles.cancel}`}>Cancel</button>  
           </Link>

@@ -85,7 +85,7 @@ export default function Modal({ isOpen, onClose, subtask }) {
 
         <div className={styles.buttonContainer}>
           <button onClick={() => handleView("/subtask_sample.pdf")} className={styles.button}>View Subtask</button>
-          <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button>
+          {/* <button onClick={handleResubmitClick} className={styles.button}>Re/Submit</button> */}
           <input ref={fileInputRef} type="file" style={{ display: 'none' }} /> {/* Hidden file input */}
         </div>
       </div>
