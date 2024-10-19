@@ -156,7 +156,7 @@ export default function Coursework({ params }) {
 
     const fetchCourseworkTitle = async () => {
       try {
-        const courseworkResponse = await fetch(`/api/getCoursework?username=${username}`);
+        const courseworkResponse = await fetch(`/api/getCourseworkTitle?coursework_id=${courseworkId}`);
         if (!courseworkResponse.ok) throw new Error('Failed to fetch coursework details');
         const courseworkData = await courseworkResponse.json();
 
@@ -341,7 +341,7 @@ export default function Coursework({ params }) {
                     <div key={subtask.subtask} className={`${styles.boxCourse} ${subtaskStyle}`}>
                       <div className={styles.first}>
                         <p className={styles.subheading2}>{subtask.subtask} - {subtask.title}</p>
-                        <p className={styles.text}>{subtask.description}</p>
+                        {/* <p className={styles.text}>{subtask.description}</p> */}
                         <p className={styles.text}>Due on {subtask.end.toLocaleDateString("en-GB")}</p>
                       </div>
                       <div className={styles.third}>

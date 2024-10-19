@@ -73,9 +73,9 @@
   border: 1px solid #ACC8C4;
   padding: 20px;
   padding-top: 2px;
-  margin-top: 25px;
+  margin-top: 20px;
   width: 97.5%;
-  height: 280px;
+  height: 286px;
   border-radius: 13px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: left;
@@ -167,7 +167,7 @@
 
 .boxCourse {
   width: 31%;
-  margin-bottom: 5px;;
+  margin-bottom: 8px;;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid #ACC8C4;
   border-radius: 13px;

@@ -16,19 +16,27 @@ export default function Help() {
 
   const faqItems = [
     {
-      question: "How do I personalise my account?",
-      answer: "To personalise your account, go to your account settings and update your preferences."
+      question: "How do I submit a subtask?",
+      answer: "To submit a subtask, select the course from the side menu and click on the coursework. Then, click the Re/Submit button for the specific subtask you wish to submit."
     },
     {
-      question: "How can I reset my password?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      question: "Why are subtasks locked?",
+      answer: "Subtasks are automatically locked until the relevant material is taught in class. Once the material is covered, the system will unlock the subtasks and send notifications to inform you."
     },
     {
-      question: "How can I reset my password?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      question: "I missed the deadline of the subtask. What should I do now?",
+      answer: "If you missed the deadline for a subtask, you can still submit it as long as the overall coursework deadline has not passed."
     },
     {
-      question: "I can’t find an answer to my question, what should I do?",
+      question: "How can I edit my profile?",
+      answer: "To edit your profile, select 'Account' from the side menu and click on 'Profile.' Once the page loads, click on 'Edit Profile,' make your changes, and remember to save them."
+    },
+    {
+      question: "What are the stars on my account?",
+      answer: "Stars are rewards you earn for submitting subtasks on time. At the end of the semester, you can exchange these stars for prizes."
+    },
+    {
+      question: "I can't find an answer to my question. What should I do?",
       answer: (
         <>
           If you can&apos;t find an answer to your question, or your question hasn&apos;t been fully answered, then <a href="./contact/contact_us" className={styles.link}>click here</a> to submit your enquiry.
