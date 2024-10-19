@@ -126,3 +126,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Verdana', sans-serif;
 }
+
+.passwordContainer {
+  position: relative;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 30px;
+  top: 35%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 12px;
+  color:grey;
+}

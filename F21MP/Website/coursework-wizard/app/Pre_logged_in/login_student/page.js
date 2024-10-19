@@ -10,6 +10,7 @@ export default function LoginStudent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,14 +60,22 @@ export default function LoginStudent() {
               onChange={(e) => setUsername(e.target.value)}
             />
             
-            <p className={styles.username}>Password</p>
-            <input 
-              type="password" 
-              placeholder="Enter password here" 
-              className={styles.inputField} 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className={styles.passwordContainer}>
+              <p className={styles.username}>Password</p>
+              <input 
+                type={showPassword ? "text" : "password"} // Change type based on state
+                placeholder="Enter password here" 
+                className={styles.inputField} 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span 
+                className={styles.eyeIcon} 
+                onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+              >
+                {showPassword ? "hide" : "show"}
+              </span>
+            </div>
             
             <a href="/Pre_logged_in/forgot_password" className={styles.forgotPassword}>
               Forgot your password?

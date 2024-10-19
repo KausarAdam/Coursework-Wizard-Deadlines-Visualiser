@@ -10,6 +10,7 @@ export default function LoginStaff() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const staffID = sessionStorage.getItem('staffID');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,13 +50,21 @@ export default function LoginStaff() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <input 
-              type="password" 
-              placeholder="Enter password here" 
-              className={styles.inputField} 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} // Update password state
-            />
+            <div className={styles.passwordContainer}>
+              <input 
+                type={showPassword ? "text" : "password"} // Change type based on state
+                placeholder="Enter password here" 
+                className={styles.inputField} 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Update password state
+              />
+              <span 
+                className={styles.eyeIcon} 
+                onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+              >
+                {showPassword ? "hide" : "show"}
+              </span>
+            </div>
 
             <a href="/Pre_logged_in/forgot_password" className={styles.forgotPassword}>
               Forgot your password?
