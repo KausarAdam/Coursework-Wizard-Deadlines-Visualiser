@@ -20,11 +20,20 @@ export default function Coursework({ params }) {
   const [courseworkSubtasks, setCourseworkSubtasks] = useState([]);
   const [submissionData, setSubmissionData] = useState({});
   const [unlockedSubtasks, setUnlockedSubtasks] = useState({});
-  const [subtaskStatus, setSubtaskStatus] = useState({});
+  const [subtaskStatus, setSubtaskStatus] = useState({}); 
   const [nextDeadline, setNextDeadline] = useState(null);
   const [courseworkTitle, setCourseworkTitle] = useState("");
+  let [cookieCount, setCookieCount] = useState(0);
 
   useEffect(() => {
+
+    // Fetch cookie count from local storage
+    const count = localStorage.getItem('cookieCount');
+    setCookieCount(count ? parseInt(count) : 0); // Parse to integer or default to 0
+    console.log("cookie: " + cookieCount);
+    // cookieCount++;
+    // console.log("cookie after: " + cookieCount);
+
     const fetchSubtasks = async () => {
       try {
         // coursework subtasks
@@ -207,6 +216,11 @@ export default function Coursework({ params }) {
                   });
 
                   if (response.ok) {
+                      setCookieCount((prevCount) => {
+                        const newCount = prevCount + 1; // Increment cookie count
+                        localStorage.setItem('cookieCount', newCount); // Update local storage
+                        return newCount; // Update state
+                      });
                       alert('Submitted');
                       // router.push(`/Student/courses/coursework?code=${courseCode}&courseworkId=${subtask.coursework_id}`);
                       // router.push(`/Student/dashboard`);
@@ -229,7 +243,7 @@ export default function Coursework({ params }) {
       <div className={styles.courseworkPage}>
         <div className={styles.header}>
           <h1 className={styles.heading}>{courseCode} - {courseworkTitle} Coursework</h1>
-          <Notification />
+          <Notification cookieCount={cookieCount}/>
         </div>
 
         <div className={styles.withoutFooter}>

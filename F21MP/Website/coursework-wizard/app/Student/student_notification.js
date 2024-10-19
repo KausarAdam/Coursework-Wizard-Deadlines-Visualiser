@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from './studentNotification.module.css';
 import Image from 'next/image';
 
-export default function Notification() {
+export default function Notification({ cookieCount = 4}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNotifications = () => {
@@ -13,6 +13,14 @@ export default function Notification() {
 
   return (
     <div className={styles.notificationContainer}>
+
+      <div className={styles.cookieIcon} title= "Keep submitting on time to get more stars and exchange them for prizes!">
+        <span role="img" aria-label="cookie" className={styles.cookieEmoji} >
+          ⭐
+        </span>
+        <span className={styles.cookieCount}>{cookieCount}</span>
+      </div>
+
       <div className={styles.bellIcon} onClick={toggleNotifications}>
         <Image
           src="/Black/notification.png"

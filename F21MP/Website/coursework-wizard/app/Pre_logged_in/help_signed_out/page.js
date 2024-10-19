@@ -14,19 +14,29 @@ export default function HelpPage() {
 
   const faqItems = [
     {
-      question: "How do I personalise my account?",
-      answer: "To personalise your account, go to your account settings and update your preferences."
+      question: "How do I log in?",
+      answer: "Click on the login button on the home page to get to the login screen. If you are a staff member, please click on the 'Staff Portal' link."
     },
     {
       question: "How can I reset my password?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      answer: (
+        <span>
+          Click on &apos;Forgot Password&apos; on the login page and follow the instructions to reset your password. In case you are unable to change your password, please submit an inquiry {" "}
+          <a href="/Pre_logged_in/contact_us_signed_out" className={styles.link}> here</a>.
+        </span>
+      )
     },
     {
-      question: "How can I reset my password?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      question: "I forgot my username or staff ID. What should I do now?",
+      answer: (
+        <span>
+          Please submit an inquiry {" "}
+          <a href="/Pre_logged_in/contact_us_signed_out" className={styles.link}> here</a> and we will get in touch with you soon.
+        </span>
+      )
     },
     {
-      question: "I can't find an answer to my question, what should I do?",
+      question: "I can't find an answer to my question. What should I do?",
       answer: (
         <>
           If you can&apos;t find an answer to your question, or your question hasn&apos;t been fully answered, then <a href="/Pre_logged_in/contact_us_signed_out" className={styles.link}>click here</a> to submit your enquiry.

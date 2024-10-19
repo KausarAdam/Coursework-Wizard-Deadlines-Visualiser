@@ -156,7 +156,7 @@ export default function Dashboard() {
       key={coursework.coursework_id} // Use coursework.coursework_id here
       className={styles.box4}
       onClick={() => goToCourseworkPage(coursework.coursework_id, coursework.course_code)} // Pass coursework.coursework_id
-      style={{ border: `5px solid ${borderColors[index]}`, '--border-color': borderColors[index] }}
+      style={{ border: `3.5px solid ${borderColors[index]}`, '--border-color': borderColors[index] }}
     >
       <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
       <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
@@ -172,7 +172,7 @@ export default function Dashboard() {
                   key={coursework.coursework_id + index} // Use coursework.coursework_id for the second set as well
                   className={styles.box4}
                   onClick={() => goToCourseworkPage(coursework.coursework_id, coursework.course_code)} // Pass coursework.coursework_id
-                  style={{ border: `5px solid ${borderColors[index + 2]}`, '--border-color': borderColors[index + 2] }} // Adjusted for the second set
+                  style={{ border: `3.5px solid ${borderColors[index + 2]}`, '--border-color': borderColors[index + 2] }} // Adjusted for the second set
                 >
                   <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
                   <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
