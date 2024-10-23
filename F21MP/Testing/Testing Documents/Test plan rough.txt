@@ -1,0 +1,17 @@
+Procedure:
+1. Introduction and Information sheet
+2. Consent form
+3. Task sheet
+4. Test
+5. Post-usability questionnaire
+6. SUS
+
+
+Tasks:
+1. Login
+2. Submit subtask for coursework
+3. Edit profile
+4. Forget password
+5. Timeline
+6. Progress board
+7. Explore the website / visit all remaining pages and features (help, contact, notifications
