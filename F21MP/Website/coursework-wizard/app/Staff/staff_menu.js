@@ -12,7 +12,7 @@ export default function StaffMenu() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for sidebar
   const [courseCodes, setCourseCodes] = useState([]); // State for course codes
   const [courseNames, setCourseNames] = useState([]); // State for course names
-  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Check if in the browser
+  const username = typeof window !== 'undefined' ? localStorage.getItem('staffID') : null; // Check if in the browser
   
   const handleLogout = () => {
     localStorage.clear(); // Clear all temporary storage variables
@@ -35,8 +35,8 @@ export default function StaffMenu() {
   ];
 
   const courseLinks = [
-    { name: "F21SF - Software Engineering", link: "/Staff/courses/course" },
-    { name: "F21AD - Advanced Interaction Design", link: "/Staff/courses/course" },
+    { name: "F21SF - Software Engineering", link: "/Staff/courses/course?code=F21SF" },
+    { name: "F21AD - Advanced Interaction Design", link: "/Staff/courses/course?code=F21AD" },
 
   ];
 

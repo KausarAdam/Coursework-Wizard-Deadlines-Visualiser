@@ -36,35 +36,15 @@ export default function Dashboard() {
             setStaffName(data.name); // Set the staff's name
           }
         } else {
-          console.error("Failed to fetch student name");
+          console.error("Failed to fetch staff name");
         }
       }
     };
 
-    // const fetchCoursework = async () => {
-    //   if (username) {
-    //     const res = await fetch(`/api/getCoursework?username=${username}`);
-    //     if (res.ok) {
-    //       const data = await res.json();
-    //       setCourseworkList(data); // Set the coursework list from the response
-
-    //       // Set course codes and names in temporary storage
-    //       const codes = data.map(coursework => coursework.course_code);
-    //       const names = data.map(coursework => coursework.course_name);
-    //       const ids = data.map(coursework => coursework.coursework_id);
-    //       setCourseCodes(codes);
-    //       setCourseNames(names);
-    //       setCourseworkId(ids);
-    //     } else {
-    //       console.error("Failed to fetch coursework");
-    //     }
-    //   }
-    // };
-
     // const fetchNextDeadline = async () => {
     //   if (username) {
     //     try {
-    //       const res = await fetch(`/api/getSubtaskDeadline?username=${username}`);
+    //       const res = await fetch(`/api/getStaffSubtaskDeadline?username=${username}`);
     //       if (res.ok) {
     //         const subtasks = await res.json();
     //         if (subtasks.length > 0) {
