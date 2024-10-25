@@ -1,8 +1,11 @@
+"use client";
+
 import StaffMenu from "../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
 import Notification from "../staff_notification";
 import DoughnutChart from "../DoughnutChart";
+import { useEffect, useState } from 'react';
 
 // Create a legend component to display the same legend for all graphs
 function DoughnutLegend() {
@@ -18,6 +21,76 @@ function DoughnutLegend() {
 }
 
 export default function Dashboard() {
+  const username = typeof window !== 'undefined' ? localStorage.getItem('staffID') : null; // Check if in the browser
+  console.log(username);
+
+  const [staffName, setStaffName] = useState("John Doe"); // Default name
+
+  useEffect(() => {
+    const fetchStaffName = async () => {
+      if (username) {
+        const res = await fetch(`/api/getStaffName?username=${username}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.name) {
+            setStaffName(data.name); // Set the staff's name
+          }
+        } else {
+          console.error("Failed to fetch student name");
+        }
+      }
+    };
+
+    // const fetchCoursework = async () => {
+    //   if (username) {
+    //     const res = await fetch(`/api/getCoursework?username=${username}`);
+    //     if (res.ok) {
+    //       const data = await res.json();
+    //       setCourseworkList(data); // Set the coursework list from the response
+
+    //       // Set course codes and names in temporary storage
+    //       const codes = data.map(coursework => coursework.course_code);
+    //       const names = data.map(coursework => coursework.course_name);
+    //       const ids = data.map(coursework => coursework.coursework_id);
+    //       setCourseCodes(codes);
+    //       setCourseNames(names);
+    //       setCourseworkId(ids);
+    //     } else {
+    //       console.error("Failed to fetch coursework");
+    //     }
+    //   }
+    // };
+
+    // const fetchNextDeadline = async () => {
+    //   if (username) {
+    //     try {
+    //       const res = await fetch(`/api/getSubtaskDeadline?username=${username}`);
+    //       if (res.ok) {
+    //         const subtasks = await res.json();
+    //         if (subtasks.length > 0) {
+    //           // Set the first upcoming deadline and corresponding course code
+    //           setNextDeadline(subtasks[0].end_date);
+    //           setNextCourseCode(subtasks[0].course_code);
+    //         } else {
+    //           console.log('No upcoming deadlines found');
+    //         }
+    //       } else {
+    //         console.error('Failed to fetch subtasks');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error fetching next deadline:', error);
+    //     }
+    //   }
+    // };    
+
+    fetchStaffName();
+    // fetchCoursework();
+    // fetchNextDeadline(); // call fetch functions
+  }, [username]);
+
+
+
+
   return (
     <div className={styles.container}>
       <StaffMenu />
@@ -30,7 +103,7 @@ export default function Dashboard() {
 
         <div className={styles.withoutFooter}>
           <hr style={{ width: "100.5%", marginLeft: "0" }} />
-          <h2 className={styles.subheading}>Hello, Professor John Doe!</h2>
+          <h2 className={styles.subheading}>Hello, Professor {staffName}!</h2>
 
           <div className={styles.firstSetOfBoxes}>
             <div className={styles.box}>

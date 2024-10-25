@@ -151,18 +151,18 @@ export default function Dashboard() {
 
             {/* First Row */}
             <div className={styles.secondSetOfBoxes}>
-  {courseworkList.slice(0, 2).map((coursework, index) => (
-    <div
-      key={coursework.coursework_id} // Use coursework.coursework_id here
-      className={styles.box4}
-      onClick={() => goToCourseworkPage(coursework.coursework_id, coursework.course_code)} // Pass coursework.coursework_id
-      style={{ border: `3.5px solid ${borderColors[index]}`, '--border-color': borderColors[index] }}
-    >
-      <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
-      <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
-      <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</div>
-    </div>
-  ))}
+              {courseworkList.slice(0, 2).map((coursework, index) => (
+                <div
+                  key={coursework.coursework_id} // Use coursework.coursework_id here
+                  className={styles.box4}
+                  onClick={() => goToCourseworkPage(coursework.coursework_id, coursework.course_code)} // Pass coursework.coursework_id
+                  style={{ border: `3.5px solid ${borderColors[index]}`, '--border-color': borderColors[index] }}
+                >
+                  <div className={`${styles.subheading} ${styles.subheading2}`}>{coursework.title}</div>
+                  <div className={styles.text}>{coursework.course_code} - {coursework.course_name}</div>
+                  <div className={styles.text}>Due on {new Date(coursework.due_date).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</div>
+                </div>
+              ))}
             </div>
 
             {/* Second Row */}

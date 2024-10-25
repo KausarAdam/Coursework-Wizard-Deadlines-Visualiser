@@ -23,7 +23,8 @@ export default function LoginStaff() {
 
     const data = await res.json();
     if (data.success) {
-      sessionStorage.setItem('staffID', staffID);
+      //sessionStorage.setItem('staffID', staffID);
+      localStorage.setItem('staffID', staffID); // Save username in localStorage
       router.push('/Pre_logged_in/login_staff_2'); 
     } else {
       alert("Invalid Staff ID");

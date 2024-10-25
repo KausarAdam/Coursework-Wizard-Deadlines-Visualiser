@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 export default function LoginStaff() {
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const staffID = sessionStorage.getItem('staffID');
+  const staffID = localStorage.getItem('staffID');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {

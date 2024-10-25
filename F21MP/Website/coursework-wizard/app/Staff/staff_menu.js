@@ -10,9 +10,12 @@ export default function StaffMenu() {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState(2);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for sidebar
-
+  const [courseCodes, setCourseCodes] = useState([]); // State for course codes
+  const [courseNames, setCourseNames] = useState([]); // State for course names
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null; // Check if in the browser
+  
   const handleLogout = () => {
-    // Perform any necessary logout actions here (like clearing session data)
+    localStorage.clear(); // Clear all temporary storage variables
     router.push("/"); // Redirect to homepage after logout
   };
 
