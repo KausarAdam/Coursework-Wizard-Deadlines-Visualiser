@@ -53,14 +53,14 @@ export default function Modal({ isOpen, onClose, subtask }) {
 
   // Mapping of courseId to course names
   const courseNames = {
-    1: "Software Engineering - Coursework 1",
-    2: "Advanced Interaction Design - Coursework 1",
-    3: "Software Engineering - Coursework 2",
-    4: "Advanced Interaction Design - Coursework 2"
+    1: "Advanced Interaction Design - Coursework 1",
+    2: "Advanced Interaction Design - Coursework 2",
+    3: "Software Engineering - Coursework 1",
+    4: "Software Engineering - Coursework 2"
   };
 
   // Get the course name based on the subtask's courseId
-  const courseName = courseNames[subtask.courseId];
+  const courseName = courseNames[subtask.coursework_id];
 
   return (
     <div className={styles.modalOverlay}

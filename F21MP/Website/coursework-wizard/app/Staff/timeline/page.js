@@ -62,7 +62,7 @@ export default function Timeline() {
               color: courseColours[subtask.coursework_id], // Assign class name here
               type: subtask.task_type,  // task_type distinguishes independent/dependent tasks
               description: subtask.description,
-              course_nam: getCourseNameByCode(subtask.course_code),  // Use the fetched course name
+              course_name: getCourseNameByCode(subtask.coursework_id),  // Use the fetched course name
             };
           });
   
@@ -202,15 +202,15 @@ export default function Timeline() {
     setModalOpen(true);
   };
 
-  const getCourseNameByCode = (courseCode) => {
+  const getCourseNameByCode = (coursework_id) => {
     const courseNames = {
-      'F21AD': 'Advanced Interaction Design',
-      'F21DF': 'Database and Information Systems',
-      'F21EC': 'E-Commerce',
-      'F21SF': 'Software Engineering',
+      1: "Advanced Interaction Design - Coursework 1",
+      2: "Software Engineering - Coursework 1",
+      3: "Advanced Interaction Design - Coursework 2",
+      4: "Software Engineering - Coursework 2",
     };
     
-    return courseNames[courseCode] || 'Unknown Course'; // Default to 'Unknown Course' if not found
+    return courseNames[coursework_id] || 'Unknown Course'; // coursework_id directly
   };
 
   
