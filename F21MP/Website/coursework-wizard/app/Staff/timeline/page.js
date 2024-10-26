@@ -14,6 +14,69 @@ export default function Timeline() {
   const timelineRef = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSubtask, setSelectedSubtask] = useState(null);
+  const [subtasks, setSubtasks] = useState([]);
+
+  // Updated colors based on coursework_id
+  const courseColours = {
+    1: "colour1", // Course 1 colour class
+    2: "colour3", // Course 2 colour class
+    3: "colour2", // Course 3 colour class
+    4: "colour4", // Course 4 colour class
+  };
+
+  
+  useEffect(() => {
+    const fetchSubtasks = async () => {
+      try {
+        const response = await fetch('/api/subtasks');
+        if (response.ok) {
+          const data = await response.json();
+          
+          // Filter for specific coursework_ids
+          const filteredData = data.filter(subtask => 
+            [1, 2, 3, 4].includes(subtask.coursework_id)
+          );
+          
+          const courseCodeToId = {};
+          let nextCourseId = 1;
+  
+          // Format data and assign courseIds dynamically
+          const formattedData = filteredData.map(subtask => {
+            const { course_code, course_name } = subtask;  // Include course_name
+            
+            // Assign courseId if not already mapped
+            if (!courseCodeToId[course_code]) {
+              courseCodeToId[course_code] = nextCourseId++;
+            }
+  
+            const courseId = courseCodeToId[course_code]; // Get the dynamic courseId
+  
+            return {
+              subtask_number: subtask.subtask,
+              title: subtask.title,
+              coursework_id: subtask.coursework_id,
+              start: new Date(subtask.start_date),
+              end: new Date(subtask.end_date),
+              course_code: subtask.course_code,  // Fetch course code from the API
+              courseId,     // The dynamic courseId assigned
+              color: courseColours[subtask.coursework_id], // Assign class name here
+              type: subtask.task_type,  // task_type distinguishes independent/dependent tasks
+              description: subtask.description,
+              course_nam: getCourseNameByCode(subtask.course_code),  // Use the fetched course name
+            };
+          });
+  
+          setSubtasks(formattedData);
+        } else {
+          console.error('Failed to fetch subtasks');
+        }
+      } catch (error) {
+        console.error('Error fetching subtasks:', error);
+      }
+    };    
+    fetchSubtasks();
+  }, [courseColours]);
+  
 
   useEffect(() => {
     // Generate weeks and days for each month
@@ -64,27 +127,15 @@ export default function Timeline() {
     }
   }, [months]);
 
-  const subtasks = [
-    { title: "ST 1", courseId: 1, start: new Date(2024, 8, 5), end: new Date(2024, 9, 10), color: styles.course1, type: 'dependent' },
-    { title: "ST 2", courseId: 1, start: new Date(2024, 9, 11), end: new Date(2024, 9, 20), color: styles.course1, type: 'independent' },
-    { title: "ST 3", courseId: 2, start: new Date(2024, 9, 5), end: new Date(2024, 9, 10), color: styles.course2, type: 'dependent' },
-    { title: "ST 4", courseId: 2, start: new Date(2024, 9, 8), end: new Date(2024, 9, 12), color: styles.course2, type: 'independent' },
-    { title: "ST 5", courseId: 3, start: new Date(2024, 10, 6), end: new Date(2024, 10, 10), color: styles.course3, type: 'independent' },
-    { title: "ST 6", courseId: 4, start: new Date(2024, 11, 3), end: new Date(2024, 11, 18), color: styles.course4, type: 'dependent' },
-    { title: "ST 7", courseId: 1, start: new Date(2024, 11, 3), end: new Date(2024, 11, 18), color: styles.course1, type: 'dependent' },
-    { title: "ST 8", courseId: 1, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course1, type: 'dependent' },
-    { title: "ST 8", courseId: 4, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course4, type: 'independent' },
-    { title: "ST 8", courseId: 2, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course2, type: 'dependent' },
-    { title: "ST 8", courseId: 2, start: new Date(2024, 10, 3), end: new Date(2024, 10, 18), color: styles.course2, type: 'independent' },
-  ];
 
-  // Function to calculate width of a subtask
   const calculateWidth = (subtask) => {
     const timelineStart = new Date(2024, 8, 2); // Starting date of the timeline
+    const timelineEnd = new Date(2024, 11, 29); // Endiing date of the timeline
+
     const totalWidth = 100; // Total width of the timeline (in percentage)
 
     const duration = (subtask.end - subtask.start) / (1000 * 60 * 60 * 24); // Duration in days
-    const totalDays = (new Date(2024, 11, 29) - timelineStart) / (1000 * 60 * 60 * 24); // Total days in the timeline
+    const totalDays = (timelineEnd - timelineStart) / (1000 * 60 * 60 * 24); // Total days in the timeline
 
     // Calculate startOffset correctly to ensure it reflects the start month accurately
     const startOffset = ((subtask.start - timelineStart) / (1000 * 60 * 60 * 24)) / totalDays * 100; // Start offset in percentage
@@ -100,10 +151,10 @@ export default function Timeline() {
   // Function to organize subtasks into 8 course lines for 4 courses
   const organizeSubtasks = () => {
     const organizedSubtasks = Array.from({ length: 8 }, () => []);
-    
+  
     subtasks.forEach(subtask => {
       let weekIndex = -1;
-
+  
       // Determine which week the subtask starts in
       months.forEach((month) => {
         month.weeks.forEach((week, index) => {
@@ -112,21 +163,36 @@ export default function Timeline() {
           }
         });
       });
-
+  
       // Check if weekIndex was found
       if (weekIndex === -1) return; // Skip if not found
-
-      // Ensure courseId is valid
-      const courseLineIndex = (subtask.courseId - 1) * 2 + (subtask.type === 'dependent' ? 0 : 1); // Assign based on dependency type
+  
+      // Determine the correct line based on coursework_id and task type
+      let courseLineIndex;
+      if (subtask.coursework_id === 1) {
+        courseLineIndex = subtask.type === 'dependent' ? 0 : 1; // Dependent on 1st line, independent on 2nd
+      } else if (subtask.coursework_id === 3) {
+        courseLineIndex = subtask.type === 'dependent' ? 2 : 3; // Dependent on 3rd line, independent on 4th
+      } else if (subtask.coursework_id === 2) {
+        courseLineIndex = subtask.type === 'dependent' ? 4 : 5; // Dependent on 5th line, independent on 6th
+      } else if (subtask.coursework_id === 4) {
+        courseLineIndex = subtask.type === 'dependent' ? 6 : 7; // Dependent on 7th line, independent on 8th
+      } else {
+        console.error(`Unknown coursework_id: ${subtask.coursework_id}`);
+        return; // Skip if coursework_id is not recognized
+      }
+  
+      // Ensure courseLineIndex is valid and push the subtask
       if (courseLineIndex >= 0 && courseLineIndex < organizedSubtasks.length) {
         organizedSubtasks[courseLineIndex].push(subtask);
       } else {
         console.error(`Invalid courseLineIndex: ${courseLineIndex} for subtask: ${subtask.title}`);
       }
     });
-
+  
     return organizedSubtasks;
   };
+  
   
   const organizedSubtasks = organizeSubtasks();
 
@@ -135,6 +201,19 @@ export default function Timeline() {
     setSelectedSubtask(subtask);
     setModalOpen(true);
   };
+
+  const getCourseNameByCode = (courseCode) => {
+    const courseNames = {
+      'F21AD': 'Advanced Interaction Design',
+      'F21DF': 'Database and Information Systems',
+      'F21EC': 'E-Commerce',
+      'F21SF': 'Software Engineering',
+    };
+    
+    return courseNames[courseCode] || 'Unknown Course'; // Default to 'Unknown Course' if not found
+  };
+
+  
 
   return (
     <div className={styles.container}>
@@ -199,19 +278,19 @@ export default function Timeline() {
               {organizedSubtasks.map((tasks, index) => (
                 <div key={index} className={styles.courseLine}>
                   {/* Subtasks with dynamic width based on duration */}
-                  {tasks.map(subtask => {
+                  {tasks.map((subtask, taskIndex) => {
                     const { startOffset, widthPercentage } = calculateWidth(subtask);
                     return (
                       <div
                         key={subtask.title}
-                        className={`${styles.subTask} ${subtask.color}`}
+                        className={`${styles.subTask} ${styles[subtask.color]}`}
                         style={{
                           left: `${startOffset}%`,
                           width: `${widthPercentage}%`,
                         }}
                         onClick={() => handleTaskClick(subtask)} //modal open
                       >
-                        {subtask.title}
+                        {subtask.subtask_number}
                       </div>
                     );
                   })}
@@ -227,10 +306,10 @@ export default function Timeline() {
             />
 
             <div className={styles.courseNames}>
-              <div className={`${styles.course} ${styles.course1}`}>Software Engineering - <br/>Coursework 1</div>
-              <div className={`${styles.course} ${styles.course2}`}>Advanced Interaction Design - <br/>Coursework 1</div>
-              <div className={`${styles.course} ${styles.course3}`}>Software Engineering - <br/>Coursework 2</div>
-              <div className={`${styles.course} ${styles.course4}`}>Advanced Interaction Design - <br/>Coursework 2</div>
+              <div className={`${styles.course} ${styles.course1}`}>Coursework 1<br/>Advanced Interaction Design</div>
+              <div className={`${styles.course} ${styles.course2}`}>Coursework 1<br/>Software Engineering</div>
+              <div className={`${styles.course} ${styles.course3}`}>Coursework 2<br/>Advanced Interaction Design</div>
+              <div className={`${styles.course} ${styles.course4}`}>Coursework 2<br/>Software Engineering</div>
             </div>
 
           </div>

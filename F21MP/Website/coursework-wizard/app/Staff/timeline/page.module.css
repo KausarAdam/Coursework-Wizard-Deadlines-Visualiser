@@ -171,6 +171,7 @@
   width: 23%;
   margin-top:15px;
   height: 50px;
+  text-align: center;
 }
 
 .course1 {
@@ -212,22 +213,22 @@
   border-width: 2px;
 }
 
-.subTask1 {
+.colour1 {
   border: 1px solid #BEDFE4;
   background-color: #D1F9FF;
 }
 
-.subTask2 {
+.colour2 {
   border: 1px solid #D8BFEA;
   background-color: #ECD1FF;
 }
 
-.subTask3 {
+.colour3 {
   border: 1px solid #E8EDC1;
   background-color: #FAFFD1;
 }
 
-.subTask4 {
+.colour4 {
   border: 1px solid #ECC2D1;
   background-color: #FFD3E3;
 }

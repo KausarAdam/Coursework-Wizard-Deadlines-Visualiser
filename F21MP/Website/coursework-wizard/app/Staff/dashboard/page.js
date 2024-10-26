@@ -111,20 +111,14 @@ export default function Dashboard() {
 
             <div className={styles.graphBoxMain}>
               <div className={styles.graphBox}>
-                <DoughnutChartF21SF1 />
-                <div className={styles.subheadingSmall}>Competitor Application</div>
-                <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
-              </div>
-
-              <div className={styles.graphBox}>
                 <DoughnutChartF21AD1 />
                 <div className={styles.subheadingSmall}>Application Design</div>
                 <div className={styles.subheadingSmaller}>F21AD - Advanced Interaction Design</div>
               </div>
 
               <div className={styles.graphBox}>
-                <DoughnutChartF21SF2 />
-                <div className={styles.subheadingSmall}>Application GUI</div>
+                <DoughnutChartF21SF1 />
+                <div className={styles.subheadingSmall}>Competitor Application</div>
                 <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
               </div>
 
@@ -132,6 +126,12 @@ export default function Dashboard() {
                 <DoughnutChartF21AD2 />
                 <div className={styles.subheadingSmall}>Application Evaluation</div>
                 <div className={styles.subheadingSmaller}>F21AD - Advanced Interaction Design</div>
+              </div>
+
+              <div className={styles.graphBox}>
+                <DoughnutChartF21SF2 />
+                <div className={styles.subheadingSmall}>Application GUI</div>
+                <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
               </div>
             </div>
           </div>
