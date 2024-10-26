@@ -4,7 +4,12 @@ import StaffMenu from "../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../Footer";
 import Notification from "../staff_notification";
-import DoughnutChart from "../DoughnutChart";
+import DoughnutChartF21SF1 from "../DoughnutChartF21SF1";
+import DoughnutChartF21SF2 from "../DoughnutChartF21SF2";
+// import DoughnutChartF21AD1 from "../DoughnutChartF2AD1";
+// import DoughnutChartF21AD2 from "../DoughnutChartF2AD2";
+import DoughnutChartF21AD1 from "../DoughnutChartF21AD1";
+import DoughnutChartF21AD2 from "../DoughnutChartF21AD2";
 import { useEffect, useState } from 'react';
 
 // Create a legend component to display the same legend for all graphs
@@ -87,7 +92,7 @@ export default function Dashboard() {
 
           <div className={styles.firstSetOfBoxes}>
             <div className={styles.box}>
-              <h3 className={styles.heading3}>Students with zero submissions: 14</h3>
+              <h3 className={styles.heading3}>Students with zero submissions: 3</h3>
             </div>
 
             <div className={styles.box2}>
@@ -106,27 +111,27 @@ export default function Dashboard() {
 
             <div className={styles.graphBoxMain}>
               <div className={styles.graphBox}>
-                <DoughnutChart />
+                <DoughnutChartF21SF1 />
                 <div className={styles.subheadingSmall}>Competitor Application</div>
                 <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
               </div>
 
               <div className={styles.graphBox}>
-                <DoughnutChart />
-                <div className={styles.subheadingSmall}>Database Application</div>
-                <div className={styles.subheadingSmaller}>F21DB - Database Systems</div>
+                <DoughnutChartF21AD1 />
+                <div className={styles.subheadingSmall}>Application Design</div>
+                <div className={styles.subheadingSmaller}>F21AD - Advanced Interaction Design</div>
               </div>
 
               <div className={styles.graphBox}>
-                <DoughnutChart />
+                <DoughnutChartF21SF2 />
                 <div className={styles.subheadingSmall}>Application GUI</div>
                 <div className={styles.subheadingSmaller}>F21SF - Software Engineering</div>
               </div>
 
               <div className={styles.graphBox}>
-                <DoughnutChart />
-                <div className={styles.subheadingSmall}>PostgreSQL Project</div>
-                <div className={styles.subheadingSmaller}>F21DB - Database Systems</div>
+                <DoughnutChartF21AD2 />
+                <div className={styles.subheadingSmall}>Application Evaluation</div>
+                <div className={styles.subheadingSmaller}>F21AD - Advanced Interaction Design</div>
               </div>
             </div>
           </div>
