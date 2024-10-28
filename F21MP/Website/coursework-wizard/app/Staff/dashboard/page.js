@@ -30,6 +30,13 @@ export default function Dashboard() {
   console.log(username);
 
   const [staffName, setStaffName] = useState("John Doe"); // Default name
+  const [nextDeadline, setNextDeadline] = useState(null);
+  const [nextCourseCode, setNextCourseCode] = useState(null);
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-GB"); // Using "en-GB" for dd/mm/yyyy format
+  };
 
   useEffect(() => {
     const fetchStaffName = async () => {
@@ -46,31 +53,29 @@ export default function Dashboard() {
       }
     };
 
-    // const fetchNextDeadline = async () => {
-    //   if (username) {
-    //     try {
-    //       const res = await fetch(`/api/getStaffSubtaskDeadline?username=${username}`);
-    //       if (res.ok) {
-    //         const subtasks = await res.json();
-    //         if (subtasks.length > 0) {
-    //           // Set the first upcoming deadline and corresponding course code
-    //           setNextDeadline(subtasks[0].end_date);
-    //           setNextCourseCode(subtasks[0].course_code);
-    //         } else {
-    //           console.log('No upcoming deadlines found');
-    //         }
-    //       } else {
-    //         console.error('Failed to fetch subtasks');
-    //       }
-    //     } catch (error) {
-    //       console.error('Error fetching next deadline:', error);
-    //     }
-    //   }
-    // };    
+    const fetchNextDeadline = async () => {
+      if (username) {
+        try {
+          const res = await fetch(`/api/getStaffSubtaskDeadline?username=${username}`);
+          if (res.ok) {
+            const subtasks = await res.json();
+            if (subtasks && subtasks.end_date) {
+              setNextDeadline(subtasks.end_date);
+              setNextCourseCode(subtasks.course_code);
+            } else {
+              console.log('No upcoming deadlines found');
+            }
+          } else {
+            console.error('Failed to fetch subtasks');
+          }
+        } catch (error) {
+          console.error('Error fetching next deadline:', error);
+        }
+      }
+    }; 
 
     fetchStaffName();
-    // fetchCoursework();
-    // fetchNextDeadline(); // call fetch functions
+    fetchNextDeadline(); // call fetch functions
   }, [username]);
 
 
@@ -96,9 +101,11 @@ export default function Dashboard() {
             </div>
 
             <div className={styles.box2}>
-              <h3 className={styles.heading3}>24th September</h3>
+              <h3 className={`${styles.heading3} ${styles.heading33}`}>
+                {nextDeadline ? formatDate(nextDeadline) : 'No upcoming deadlines'}
+              </h3>
               <br />
-              <div className={styles.subheading33}>Next Subtask Deadline</div>
+              <div className={styles.subheading33}>{"Next Subtask Deadline for " + nextCourseCode}</div>
             </div>
           </div>
 
