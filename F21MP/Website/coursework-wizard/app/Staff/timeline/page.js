@@ -143,7 +143,7 @@ export default function Timeline() {
     // const startOffset = leftValue + 1.2;
 
     // Ensure that the width is always a positive value and capped by totalWidth
-    const widthPercentage = Math.max(0, Math.min((duration / totalDays) * totalWidth, totalWidth)); // Width in percentage
+    const widthPercentage = Math.max(0, Math.min((duration / totalDays) * totalWidth, totalWidth))-1; // Width in percentage
 
     return { startOffset, widthPercentage };
   };
