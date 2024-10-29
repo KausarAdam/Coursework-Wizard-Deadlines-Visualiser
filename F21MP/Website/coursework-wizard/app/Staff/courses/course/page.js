@@ -18,11 +18,33 @@ export default function Course({ params }) {
   const [submissionData, setSubmissionData] = useState({});
   const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   
-  const handleSubmit = (courseworkFile, action) => {
+  const handleSubmit = async (courseworkId, action) => {
+    console.log("Delete action initiated for courseworkId:", courseworkId); // Debugging
+
     if (action === "delete") {
-      console.log("Deleting coursework:", courseworkFile);
+        try {
+            const response = await fetch(`/api/deleteCoursework?coursework_id=${courseworkId}`, {
+                method: 'DELETE',
+            });
+
+            console.log("Response status:", response.status); // Debugging response status
+            const result = await response.json(); // Parse response
+
+            if (!response.ok) {
+                console.error("Failed to delete coursework:", result.error); // Log error if not ok
+                throw new Error('Failed to delete coursework');
+            }
+
+            console.log("Coursework deleted successfully", result.message); // Success log
+            setCoursework(coursework.filter(cw => cw.coursework_id !== courseworkId));
+
+        } catch (error) {
+            console.error("Error deleting coursework:", error);
+        }
     }
-  };
+};
+
+  
 
   useEffect(() => {
     if (courseCode) {
@@ -117,7 +139,7 @@ export default function Course({ params }) {
                       <Link href={`/Staff/courses/coursework?course_code=${courseCode}&coursework_id=${cw.coursework_id}`} className={styles.Link}>
                         <button className={styles.button}>View</button>
                       </Link>
-                      <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
+                      <button onClick={() => handleSubmit(cw.coursework_id, "delete")} className={styles.button}>Delete</button>
                     </div>
                   </div>
                 );
