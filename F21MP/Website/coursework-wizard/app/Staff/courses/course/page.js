@@ -22,27 +22,36 @@ export default function Course({ params }) {
     console.log("Delete action initiated for courseworkId:", courseworkId); // Debugging
 
     if (action === "delete") {
-        try {
-            const response = await fetch(`/api/deleteCoursework?coursework_id=${courseworkId}`, {
-                method: 'DELETE',
-            });
+      // Ask for confirmation before proceeding
+      const isConfirmed = window.confirm("Are you sure you want to delete this coursework?");
 
-            console.log("Response status:", response.status); // Debugging response status
-            const result = await response.json(); // Parse response
+      if (!isConfirmed) {
+          console.log("Deletion cancelled."); // User cancelled the deletion
+          return; // Exit the function
+      }
 
-            if (!response.ok) {
-                console.error("Failed to delete coursework:", result.error); // Log error if not ok
-                throw new Error('Failed to delete coursework');
-            }
+      try {
+        const response = await fetch(`/api/deleteCoursework?coursework_id=${courseworkId}`, {
+          method: 'DELETE',
+        });
 
-            console.log("Coursework deleted successfully", result.message); // Success log
-            setCoursework(coursework.filter(cw => cw.coursework_id !== courseworkId));
+        console.log("Response status:", response.status); // Debugging response status
+        const result = await response.json(); // Parse response
 
-        } catch (error) {
-            console.error("Error deleting coursework:", error);
+        if (!response.ok) {
+          console.error("Failed to delete coursework:", result.error); // Log error if not ok
+          throw new Error('Failed to delete coursework');
         }
+
+        console.log("Coursework deleted successfully", result.message); // Success log
+        setCoursework(coursework.filter(cw => cw.coursework_id !== courseworkId));
+
+      } catch (error) {
+        console.error("Error deleting coursework:", error);
+      }
     }
-};
+  };
+
 
   
 
