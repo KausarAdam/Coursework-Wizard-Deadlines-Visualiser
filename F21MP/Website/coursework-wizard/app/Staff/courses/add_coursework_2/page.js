@@ -20,6 +20,9 @@ export default function AddCoursework({ params }) {
   const submissionDate = searchParams.get('date');
   const courseworkDetails = searchParams.get('details');
 
+  // Convert submissionDate to a Date object
+  const submissionDateObj = new Date(submissionDate);
+
   const [subtaskTotal, setSubtaskTotal] = useState("");
   const [subtaskDependent, setSubtaskDependent] = useState("");
   const [subtaskIndependent, setSubtaskIndependent] = useState("");
@@ -34,6 +37,13 @@ export default function AddCoursework({ params }) {
   });
 
   const router = useRouter();
+
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with zero
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-11, so add 1) and pad with zero
+    const year = date.getFullYear(); // Get year
+    return `${day}/${month}/${year}`; // Return formatted date
+  }
 
   const moveUp = (index) => {
     if (index === 0) return; // Prevent moving the first item up
@@ -155,16 +165,38 @@ export default function AddCoursework({ params }) {
         return;
       }
   
-      // Check if 'from' date is older than 'to' date (unchanged)
+      // Check if 'from' date is older than 'to' date
       if (new Date(subtask.from) >= new Date(subtask.to)) {
         window.alert("The 'From' date for dependent subtasks must be earlier than the 'To' date.");
         return;
       }
   
-      // Ensure neither date can be before today (unchanged)
+      // Ensure neither date can be before today
       if (new Date(subtask.from) < today || new Date(subtask.to) < today) {
         window.alert("Dependent subtask dates cannot be before today.");
         return;
+      }
+
+      // Ensure both 'from' and 'to' dates are before `submissionDate`
+      if (new Date(subtask.from) >= submissionDateObj || new Date(subtask.to) >= submissionDateObj) {
+        const formattedSubmissionDate = formatDate(submissionDateObj);
+        window.alert(`Subtask dates must be before the submission date ${formattedSubmissionDate}.`);
+        return;
+      }
+    }
+
+    // Check for overlapping dependent subtasks
+    for (let i = 0; i < dependentSubtasks.length; i++) {
+      const subtaskA = dependentSubtasks[i];
+      for (let j = i + 1; j < dependentSubtasks.length; j++) {
+          const subtaskB = dependentSubtasks[j];
+
+          // Check if the 'from' date of subtask A is before the 'to' date of subtask B
+          // and vice versa, indicating an overlap
+          if (new Date(subtaskA.from) < new Date(subtaskB.to) && new Date(subtaskB.from) < new Date(subtaskA.to)) {
+              window.alert("Dependent subtasks cannot overlap in their date ranges.");
+              return;
+          }
       }
     }
   
@@ -176,15 +208,22 @@ export default function AddCoursework({ params }) {
         return;
       }
   
-      // Check if 'from' date is older than 'to' date (unchanged)
+      // Check if 'from' date is older than 'to' date
       if (new Date(independentSubtask.from) >= new Date(independentSubtask.to)) {
         window.alert("The 'From' date for the independent subtask must be earlier than the 'To' date.");
         return;
       }
   
-      // Ensure neither date can be before today (unchanged)
+      // Ensure neither date can be before today
       if (new Date(independentSubtask.from) < today || new Date(independentSubtask.to) < today) {
         window.alert("Independent subtask dates cannot be before today.");
+        return;
+      }
+
+      // Ensure both 'from' and 'to' dates are before `submissionDate`
+      if (new Date(independentSubtask.from) >= submissionDateObj || new Date(independentSubtask.to) >= submissionDateObj) {
+        const formattedSubmissionDate = formatDate(submissionDateObj);
+        window.alert(`Subtask dates must be before the submission date ${formattedSubmissionDate}.`);
         return;
       }
     }
@@ -315,6 +354,7 @@ export default function AddCoursework({ params }) {
                       minDate={new Date()} // Prevent selection of past dates
                       placeholderText="From (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
+                      portalId="date-picker-portal" // Use portal to render above other elements
                       required
                     />
                     <DatePicker
@@ -323,6 +363,7 @@ export default function AddCoursework({ params }) {
                       minDate={new Date()} // Prevent selection of past dates
                       placeholderText="To (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
+                      portalId="date-picker-portal" // Use portal to render above other elements
                       required
                     />
                     <input
