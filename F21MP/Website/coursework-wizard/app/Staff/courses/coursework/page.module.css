@@ -102,7 +102,7 @@
 
 .boxCourse {
   width: 31%;
-  margin-bottom: 5px;;
+  margin-bottom: -21px;;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: 2px solid #ACC8C4;
   border-radius: 13px;
@@ -120,6 +120,7 @@
 .insideBox3 {
   width:100.9%;
   display: flex;
+  flex-wrap: wrap; /* Allow the items to wrap onto multiple lines */
   gap: 30px;
   margin-bottom: 5px;
   padding-left: 10px;

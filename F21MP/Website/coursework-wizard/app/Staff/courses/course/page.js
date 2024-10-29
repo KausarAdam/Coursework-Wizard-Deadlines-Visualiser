@@ -6,10 +6,17 @@ import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../staff_notification";
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from "react";
 
 export default function Course({ params }) {
-  const { courseId } = params;
+  const searchParams = useSearchParams();
+  const courseCode = searchParams.get('code');
   const router = useRouter();
+  const [courseName, setCourseName] = useState("");
+  const [coursework, setCoursework] = useState([]);
+  const [submissionData, setSubmissionData] = useState({});
+  const username = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   
   const handleSubmit = (courseworkFile, action) => {
     if (action === "delete") {
@@ -17,13 +24,58 @@ export default function Course({ params }) {
     }
   };
 
+  useEffect(() => {
+    if (courseCode) {
+      if (courseCode === "F21SF") {
+        setCourseName("Software Engineering");
+      } else if (courseCode === "F21AD") {
+        setCourseName("Advanced Interaction Design");
+      } else if (courseCode === "F21DF") {
+        setCourseName("Database and Information Systems");
+      } else if (courseCode === "F21EC") {
+        setCourseName("E-Commerce");
+      } else {
+        setCourseName("Unnamed Course");
+      }
+    }
+  }, [courseCode]);
+
+  // Fetch coursework details based on courseCode
+  useEffect(() => {
+    const fetchCoursework = async () => {
+      try {
+        const response = await fetch(`/api/getCoursePageCoursework?courseCode=${courseCode}`);
+        const data = await response.json();
+  
+        const mappedCoursework = data.map((coursework) => ({
+          coursework_id: coursework.coursework_id,
+          title: coursework.title,
+          description: coursework.description,
+          start: new Date(coursework.start_date),
+          end: new Date(coursework.end_date),
+          course_code: coursework.course_code,
+          coursework_sequence: coursework.coursework_sequence
+        }));
+  
+        setCoursework(mappedCoursework);
+      } catch (error) {
+        console.error("Failed to fetch coursework:", error);
+      }
+    };
+  
+    if (courseCode) {
+      fetchCoursework();
+    }
+  }, [courseCode, courseName]);
+
+
   return (
     <div className={styles.container}>
       <StaffMenu />
 
       <div className={styles.coursePage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Software Engineering</h1>
+          <h1 className={styles.heading}>{courseCode} - {courseName}</h1>
           <Notification />
         </div>
 
@@ -48,34 +100,31 @@ export default function Course({ params }) {
                 <button className={styles.button}>+ New</button>
               </Link>
             </div>
-            <hr style={{ width: "99.5%", marginLeft: "0" }} />
-            <div className={styles.boxCourse}>
-              <div className={styles.first}>
-                <p className={styles.subheading2}>Competitor Application</p>
-                <p className={styles.text}>Details</p>
-                <p className={styles.text}>Due on Tuesday, 21st October</p>
-              </div>
-              <div className={styles.third}>
-                <Link href={`/Staff/courses/coursework`} className={styles.Link}>
-                  <button className={styles.button}>View</button>
-                </Link>
-                <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
-              </div>
-            </div>
 
-            <div className={styles.boxCourse}>
-              <div className={styles.first}>
-                <p className={styles.subheading2}>Application GUI</p>
-                <p className={styles.text}>Details</p>
-                <p className={styles.text}>Due on Tuesday, 26th November</p>
-              </div>
-              <div className={styles.third}>
-                <Link href={`/Staff/courses/coursework`} className={styles.Link}>
-                  <button className={styles.button}>View</button>
-                </Link>
-                <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
-              </div>
-            </div>
+            <hr style={{ width: "99.5%", marginLeft: "0" }} />
+
+            {coursework.length > 0 ? (
+              coursework.map((cw) => {
+
+                return (
+                  <div key={cw.coursework_id} className={styles.boxCourse}>
+                    <div className={styles.first}>
+                      <p className={styles.subheading2}>{cw.title}</p>
+                      <p className={styles.text}>{cw.description}</p>
+                      <p className={styles.text}>Due on {new Date(cw.end).toLocaleDateString('en-GB')}</p>
+                    </div>
+                    <div className={styles.third}>
+                      <Link href={`/Staff/courses/coursework?course_code=${courseCode}&coursework_id=${cw.coursework_id}`} className={styles.Link}>
+                        <button className={styles.button}>View</button>
+                      </Link>
+                      <button onClick={() => handleSubmit("/path/to/pdf", "delete")} className={styles.button}>Delete</button>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No coursework available for this course.</p>
+            )}
           </div>
         </div>
 
