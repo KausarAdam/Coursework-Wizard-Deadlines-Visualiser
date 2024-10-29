@@ -8,6 +8,7 @@ import Footer from "../../Footer";
 import Notification from "../../staff_notification";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSearchParams } from 'next/navigation';
 
 export default function AddCoursework() {
   const [courseworkName, setCourseworkName] = useState("");
@@ -16,6 +17,9 @@ export default function AddCoursework() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const courseCode = searchParams.get('courseCode');
+  const courseName = searchParams.get('courseName');
 
   const handleNameChange = (e) => {
     setCourseworkName(e.target.value);
@@ -42,7 +46,7 @@ export default function AddCoursework() {
 
     // Manually append query params to the URL
     router.push(
-      `/Staff/courses/add_coursework_2?courseworkName=${encodeURIComponent(courseworkName)}&date=${encodeURIComponent(submissionDate.toISOString())}&details=${encodeURIComponent(courseworkDetails)}`
+      `/Staff/courses/add_coursework_2?courseworkName=${encodeURIComponent(courseworkName)}&date=${encodeURIComponent(submissionDate.toISOString())}&details=${encodeURIComponent(courseworkDetails)}&courseCode=${courseCode}&courseName=${courseName}`
     );
   };
 
@@ -59,7 +63,7 @@ export default function AddCoursework() {
 
       <div className={styles.addCourseworkPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Software Engineering</h1>
+          <h1 className={styles.heading}>{courseCode} - {courseName}</h1>
           <Notification />
         </div>
 

@@ -22,6 +22,8 @@ export default function AddCoursework() {
   const independentSubtask = JSON.parse(independentSubtaskString);
   const fileNames = JSON.parse(decodeURIComponent(searchParams.get('fileNames') || '[]'));
   const fileNameInd = searchParams.get('fileNameInd');
+  const courseCode = searchParams.get('courseCode');
+  const courseName = searchParams.get('courseName');
 
   // Date formatting function
   const formatDate = (date) => {
@@ -38,7 +40,7 @@ export default function AddCoursework() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    router.push("/Staff/courses/add_coursework_4");
+    router.push(`/Staff/courses/add_coursework_4?courseCode=${courseCode}&courseName=${courseName}`);
   };
 
   const handleBack = () => {
@@ -51,7 +53,7 @@ export default function AddCoursework() {
 
       <div className={styles.addCourseworkPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Software Engineering</h1>
+          <h1 className={styles.heading}>{courseCode} - {courseName}</h1>
           <Notification />
         </div>
 

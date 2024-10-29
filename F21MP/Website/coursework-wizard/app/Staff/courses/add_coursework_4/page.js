@@ -6,9 +6,14 @@ import StaffMenu from "../../staff_menu";
 import styles from "./page.module.css";
 import Footer from "../../Footer";
 import Notification from "../../staff_notification";
+import { useSearchParams } from "next/navigation";
 
 
 export default function AddCoursework() {
+  const searchParams = useSearchParams();
+  const courseCode = searchParams.get('courseCode');
+  const courseName = searchParams.get('courseName');
+
 
   const router = useRouter();
   
@@ -24,7 +29,7 @@ export default function AddCoursework() {
       <div className={styles.addCourseworkPage}>
 
       <div className={styles.header}>
-        <h1 className={styles.heading}>F21SF - Software Engineering</h1>
+        <h1 className={styles.heading}>{courseCode} - {courseName}</h1>
         <Notification />
       </div>
 

@@ -127,7 +127,7 @@ export default function Course({ params }) {
           <div className={styles.box3}>
             <div className={styles.insideBox3}>
               <h3 className={styles.heading3}>Coursework</h3>
-              <Link href={`/Staff/courses/add_coursework_1`} className={styles.Link}>
+              <Link href={`/Staff/courses/add_coursework_1?courseCode=${courseCode}&courseName=${courseName}`} className={styles.Link}>
                 <button className={styles.button}>+ New</button>
               </Link>
             </div>

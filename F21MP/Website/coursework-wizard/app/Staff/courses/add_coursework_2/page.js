@@ -19,6 +19,8 @@ export default function AddCoursework({ params }) {
   const courseworkName = searchParams.get('courseworkName');
   const submissionDate = searchParams.get('date');
   const courseworkDetails = searchParams.get('details');
+  const courseCode = searchParams.get('courseCode');
+  const courseName = searchParams.get('courseName');
 
   // Convert submissionDate to a Date object
   const submissionDateObj = new Date(submissionDate);
@@ -272,7 +274,8 @@ export default function AddCoursework({ params }) {
       `subtaskIndependent=${encodeURIComponent(subtaskIndependent)}&` +
       `independentSubtask=${encodeURIComponent(JSON.stringify(independentSubtaskData))}&` +
       `fileNames=${encodeURIComponent(JSON.stringify(fileNames))}&` +
-      `fileNameInd=${encodeURIComponent(JSON.stringify(independentSubtaskRow.fileNameInd))}&`
+      `fileNameInd=${encodeURIComponent(JSON.stringify(independentSubtaskRow.fileNameInd))}&` +
+      `&courseCode=${courseCode}&courseName=${courseName}`
     );
   };
   
@@ -287,7 +290,7 @@ export default function AddCoursework({ params }) {
 
       <div className={styles.addCourseworkPage}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>F21SF - Software Engineering</h1>
+          <h1 className={styles.heading}>{courseCode} - {courseName}</h1>
           <Notification />
         </div>
 
