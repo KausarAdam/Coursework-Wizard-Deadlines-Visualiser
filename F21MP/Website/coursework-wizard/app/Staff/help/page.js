@@ -16,19 +16,19 @@ export default function Help() {
 
   const faqItems = [
     {
-      question: "How do I personalise my account?",
-      answer: "To personalise your account, go to your account settings and update your preferences."
+      question: "How can I edit my profile?",
+      answer: "To edit your profile, select 'Account' from the side menu and click on 'Profile.' Once the page loads, click on 'Edit Profile,' make your changes, and remember to save them."
     },
     {
-      question: "How can I reset my password?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      question: "How can I upload coursework?",
+      answer: "To upload a coursework, go to the course page and click on the 'New' button. Enter the details of the coursework and click on 'Publish' when done. Please note that every coursework can have a maximum of 6 subtasks and only 1 independent subtask is allowed. 2 or more dependent subtasks cannot run concurrently."
     },
     {
-      question: "How do I upload coursework?",
-      answer: "Click on 'Forgot Password' on the login page and follow the instructions to reset your password."
+      question: "How can I edit coursework?",
+      answer: "This feature is currently not supported. You will have to delete the coursework and re-upload it."
     },
     {
-      question: "I can’t find an answer to my question, what should I do?",
+      question: "I can't find an answer to my question. What should I do?",
       answer: (
         <>
           If you can&apos;t find an answer to your question, or your question hasn&apos;t been fully answered, then <a href="./contact/contact_us" className={styles.link}>click here</a> to submit your enquiry.

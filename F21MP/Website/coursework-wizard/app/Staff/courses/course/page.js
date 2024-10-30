@@ -145,10 +145,10 @@ export default function Course({ params }) {
                       <p className={styles.text}>Due on {new Date(cw.end).toLocaleDateString('en-GB')}</p>
                     </div>
                     <div className={styles.third}>
+                      <button onClick={() => handleSubmit(cw.coursework_id, "delete")} className={styles.button}>Delete</button>
                       <Link href={`/Staff/courses/coursework?course_code=${courseCode}&coursework_id=${cw.coursework_id}`} className={styles.Link}>
                         <button className={styles.button}>View</button>
                       </Link>
-                      <button onClick={() => handleSubmit(cw.coursework_id, "delete")} className={styles.button}>Delete</button>
                     </div>
                   </div>
                 );
