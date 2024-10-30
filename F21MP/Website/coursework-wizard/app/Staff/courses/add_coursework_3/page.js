@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import StaffMenu from "../../staff_menu";
 import styles from "./page.module.css";
@@ -38,10 +38,63 @@ export default function AddCoursework() {
 
   const router = useRouter();
 
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    router.push(`/Staff/courses/add_coursework_4?courseCode=${courseCode}&courseName=${courseName}`);
+    e.preventDefault();
+  
+    const courseworkData = {
+      courseCode: courseCode,
+      title: courseworkName,
+      description: courseworkDetails,
+      startDate: new Date(), // Use the current date
+      endDate: submissionDate,
+      courseworkSequence: 2,
+    };
+  
+    const subtaskData = {
+      courseCode: courseCode,
+      courseworkId: courseCode === 'F21AD' ? 2 : 4,
+      dependentSubtasks: dependentSubtasks.map((subtask, index) => ({
+        subtask: `ST${index + 1}`,
+        title: subtask.name,
+        description: subtask.name,
+        startDate: subtask.from,
+        endDate: subtask.to,
+        taskType: 'dependent',
+        fileAttachment: `/${fileNames[index]}`,
+        weight: subtask.weight,
+        isLocked: 1,
+      })),
+      independentSubtask: subtaskIndependent === "1" ? {
+        subtask: `ST${dependentSubtasks.length + 1}`,
+        title: independentSubtask.name,
+        description: independentSubtask.name,
+        startDate: independentSubtask.from,
+        endDate: independentSubtask.to,
+        taskType: 'independent',
+        fileAttachment: `/${fileNameInd}`,
+        weight: independentSubtask.weight,
+        isLocked: 1,
+      } : null,
+    };
+  
+    try {
+      const response = await fetch('/api/addCoursework', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ courseworkData, subtaskData }),
+      });
+  
+      if (response.ok) {
+        router.push(`/Staff/courses/add_coursework_4?courseCode=${courseCode}&courseName=${courseName}`);
+      } else {
+        console.error('Failed to add coursework');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
+  
 
   const handleBack = () => {
     router.push("/Staff/courses/course");
