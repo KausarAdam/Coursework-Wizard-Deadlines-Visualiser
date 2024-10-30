@@ -12,7 +12,7 @@ const DoughnutChart = () => {
     datasets: [
       {
         label: '# of Students',
-        data: [2, 1, 1], // Hardcoded
+        data: [2, 2, 0], // Hardcoded
         backgroundColor: [
           'rgba(75, 192, 192, 0.2)', // Green (Completed)
           'rgba(255, 206, 86, 0.2)',  // Yellow (In Progress)

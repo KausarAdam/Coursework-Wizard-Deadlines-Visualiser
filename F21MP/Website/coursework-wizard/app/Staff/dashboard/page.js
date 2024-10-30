@@ -97,7 +97,7 @@ export default function Dashboard() {
 
           <div className={styles.firstSetOfBoxes}>
             <div className={styles.box}>
-              <h3 className={styles.heading3}>Students with zero submissions: 3</h3>
+              <h3 className={styles.heading3}>Students with zero submissions: 5</h3>
             </div>
 
             <div className={styles.box2}>

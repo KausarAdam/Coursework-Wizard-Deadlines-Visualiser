@@ -3,11 +3,12 @@ import pool from '../../../lib/db';
 
 export async function POST(request) {
   const { username, password } = await request.json();
+  const role = 'Student';
 
   if (username && password) {
     const [rows] = await pool.query(
-      'SELECT * FROM user WHERE username = ? AND password = ?',
-      [username, password]
+      'SELECT * FROM user WHERE username = ? AND password = ? AND role = ?',
+      [username, password, role]
     );
 
     if (rows.length > 0) {

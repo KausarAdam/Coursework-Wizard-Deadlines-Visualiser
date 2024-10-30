@@ -12,16 +12,16 @@ const studentData = [
   { id: 1, name: "Selena Gomez", courseName: "F21SF", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 3, remainingSubtasks: 2 },
   { id: 2, name: "Justin Timberlake", courseName: "F21SF", coursework: "Coursework 1", status: "In Progress", completedSubtasks: 3, remainingSubtasks: 2 },
   { id: 2, name: "Justin Timberlake", courseName: "F21SF", coursework: "Coursework 2", status: "No Submission", completedSubtasks: 0, remainingSubtasks: 5 },
-  { id: 3, name: "Charles Dickens", courseName: "F21SF", coursework: "Coursework 1", status: "No Submission", completedSubtasks: 0, remainingSubtasks: 5 },
+  { id: 3, name: "Charles Dickens", courseName: "F21SF", coursework: "Coursework 1", status: "In Progress", completedSubtasks: 0, remainingSubtasks: 5 },
   { id: 3, name: "Charles Dickens", courseName: "F21SF", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 2, remainingSubtasks: 3 },
   { id: 4, name: "Mona Lisa", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 6, remainingSubtasks: 0 },
-  { id: 4, name: "Mona Lisa", courseName: "F21AD", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 4, remainingSubtasks: 2 },
-  { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
+  { id: 4, name: "Mona Lisa", courseName: "F21AD", coursework: "Coursework 2", status: "No Submission", completedSubtasks: 4, remainingSubtasks: 2 },
+  { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 1", status: "No Submission", completedSubtasks: 5, remainingSubtasks: 0 },
   { id: 5, name: "Victoria Justice", courseName: "F21AD", coursework: "Coursework 2", status: "No Submission", completedSubtasks: 0, remainingSubtasks: 5 },
   { id: 6, name: "Elvis Presley", courseName: "F21SF", coursework: "Coursework 1", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
   { id: 6, name: "Elvis Presley", courseName: "F21SF", coursework: "Coursework 2", status: "In Progress", completedSubtasks: 3, remainingSubtasks: 2 },
   { id: 7, name: "Agatha Christie", courseName: "F21AD", coursework: "Coursework 1", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
-  { id: 7, name: "Agatha Christie", courseName: "F21AD", coursework: "Coursework 2", status: "Completed", completedSubtasks: 5, remainingSubtasks: 0 },
+  { id: 7, name: "Agatha Christie", courseName: "F21AD", coursework: "Coursework 2", status: "No Submission", completedSubtasks: 5, remainingSubtasks: 0 },
 ];
 
 export default function Students() {
@@ -57,7 +57,9 @@ export default function Students() {
 
   const sortedStudents = filteredStudents.sort((a, b) => {
     const isAsc = sortOrder === "asc";
-    if (sortField === "name") {
+    if (sortField === "status") {
+      return isAsc ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
+    } else if (sortField === "name") {
       return isAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
     } else if (sortField === "coursework") {
       return isAsc ? a.coursework.localeCompare(b.coursework) : b.coursework.localeCompare(a.coursework);
@@ -66,6 +68,7 @@ export default function Students() {
     }
     return isAsc ? a[sortField] - b[sortField] : b[sortField] - a[sortField];
   });
+  
 
   const getSortIndicator = (field) => {
     if (field === "id") {
@@ -109,7 +112,7 @@ export default function Students() {
 
           <div className={styles.box}>
             <div className={styles.filterContainer}>
-              <select onChange={(e) => setSelectedCourse(e.target.value)} value={selectedCourse}>
+              <select onChange={(e) => setSelectedCourse(e.target.value)} value={selectedCourse} className={styles.filterInput}>
                 <option value="F21SF - Coursework 1">F21SF - Coursework 1</option>
                 <option value="F21SF - Coursework 2">F21SF - Coursework 2</option>
                 <option value="F21AD - Coursework 1">F21AD - Coursework 1</option>

@@ -33,7 +33,7 @@ export default function ForgotPassword() {
         return;
       }
     } else if (verificationMethod === "email") {
-      if (contactInfo === "student@gmail.com") {
+      if (contactInfo === "user@gmail.com") {
         console.log("Email address correct");
       } else {
         alert("The email address you entered is incorrect.");

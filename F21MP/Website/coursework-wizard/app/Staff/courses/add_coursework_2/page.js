@@ -306,7 +306,7 @@ export default function AddCoursework({ params }) {
               onChange={(e) => setSubtaskTotal(e.target.value)}
               className={styles.inputField}
               required
-              max="7" // Limit the input to a maximum of 7
+              max="6" // Limit the input to a maximum of 7
             />
             
             <div className={styles.subheading}>Total Number of Dependent Subtasks</div>
@@ -318,7 +318,7 @@ export default function AddCoursework({ params }) {
               className={styles.inputField}
               required
               min="0" // Set minimum value
-              max="6" // Set maximum value
+              max="5" // Set maximum value
             />
             
             {dependentSubtasks.length > 0 && (
@@ -357,7 +357,7 @@ export default function AddCoursework({ params }) {
                       minDate={new Date()} // Prevent selection of past dates
                       placeholderText="From (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
-                      portalId="date-picker-portal" // Use portal to render above other elements
+                      popperPlacement="top"
                       required
                     />
                     <DatePicker
@@ -366,7 +366,7 @@ export default function AddCoursework({ params }) {
                       minDate={new Date()} // Prevent selection of past dates
                       placeholderText="To (date)"
                       className={`${styles.inputField2} ${styles.inputDate}`}
-                      portalId="date-picker-portal" // Use portal to render above other elements
+                      popperPlacement="top"
                       required
                     />
                     <input

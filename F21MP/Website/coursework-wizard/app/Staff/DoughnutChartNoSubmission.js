@@ -51,7 +51,7 @@ const DoughnutChartCompleted = () => {
     const fontSize = (chart.height / 100).toFixed(2);
     ctx.font = `${fontSize * 15}px Arial`; // Font size
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = 'rgba(255, 206, 86, 1)';
+    ctx.fillStyle = 'rgba(255, 99, 132, 1)';
     ctx.fillText(`${noSubmissionPercentage}%`, chart.width / 3.5, chart.height / 2); // Center text
     ctx.restore();
   };
