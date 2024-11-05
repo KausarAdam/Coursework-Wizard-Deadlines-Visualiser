@@ -135,11 +135,14 @@ export default function Dashboard() {
 
             <div className={styles.box2}>
               <h3 className={`${styles.heading3} ${styles.heading33}`}>
-                {nextDeadline ? formatDate(nextDeadline) : 'No upcoming deadlines'}
+                14/11/2024
+                {/* {nextDeadline ? formatDate(nextDeadline) : 'No upcoming deadlines'} */}
+
               </h3>
               <br />
               <div className={styles.subheading}>
-                Next Subtask Deadline for {nextCourseCode ? nextCourseCode : 'N/A'}
+                Next Subtask Deadline for F21AD
+                {/* {nextCourseCode ? nextCourseCode : 'N/A'} */}
               </div>
             </div>
 

@@ -57,8 +57,9 @@ export default function Coursework() {
     fetchCourseworkTitle();
   }, [courseCode, courseworkId]);
 
-  const handleClick = (filePath) => {
-    window.open(filePath, "_blank");
+  // Function to handle viewing
+  const handleView = (path) => {
+    window.open(path, '_blank');
   };
 
   return (
@@ -101,7 +102,7 @@ export default function Coursework() {
             <hr style={{ width: "99.5%", marginLeft: "0" }} />
             <div className={styles.insideBox3}>
               {subtasks.map((subtask) => (
-                <div key={subtask.id} className={styles.boxCourse} onClick={() => handleClick(subtask.file_attachment)}>
+                <div key={subtask.id} className={styles.boxCourse} onClick={() => handleView("/subtask_sample.pdf")}>
                   <div className={styles.first}>
                     <p className={styles.subheading2}>{subtask.subtask} - {subtask.title}</p>
                     <p className={styles.text}>Due on {new Date(subtask.end_date).toLocaleDateString('en-GB')}</p>
