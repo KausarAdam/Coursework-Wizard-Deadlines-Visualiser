@@ -1,0 +1,424 @@
+Message-ID: <1664378808.5.1731108725366@41090a74378f>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_4_452262147.1731108725366"
+
+------=_Part_4_452262147.1731108725366
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Sprint 8 Retrospective</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Sprint 8 Retrospective</h1>
+    <div class=3D"Section1">
+        <h2 id=3D"Sprint8Retrospective-Overview"><img class=3D"emoticon emo=
+ticon-blue-star" data-emoji-id=3D"1f4cb" data-emoji-shortname=3D":clipboard=
+:" data-emoji-fallback=3D"\uD83D\uDCCB" src=3D"fede7f9831c72428c941a272a7c6=
+4200c11f88bb2bf79a357101fe44d9d191ce" width=3D"16" height=3D"16" data-emoti=
+con-name=3D"blue-star" alt=3D"(blue star)">&nbsp;Overview</h2>
+<p>Reflect on past work and identify opportunities for improvement by follo=
+wing the instructions for the <a class=3D"external-link" href=3D"https://ww=
+w.atlassian.com/team-playbook/plays/retrospective" rel=3D"nofollow">Retrosp=
+ective Play</a>.</p>
+<div class=3D"plugin-tabmeta-details">
+<div class=3D"table-wrap">
+<table data-layout=3D"default" data-local-id=3D"066e1355-24ee-4f36-ac0f-2bd=
+7def912b8" class=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 240.0px;">
+<col style=3D"width: 486.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Date</strong></p></th>
+<td class=3D"confluenceTd">
+<p><time datetime=3D"2024-10-31" class=3D"date-past">31 Oct 2024</time></p>=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Team</strong></p></th>
+<td class=3D"confluenceTd">
+<p><a class=3D"external-link" href=3D"https://kausaradam.atlassian.net/peop=
+le/team/cd5791df-e4cb-455c-ab93-ea35fcaa8560" rel=3D"nofollow">Coursework W=
+izard</a> (<a class=3D"confluence-userlink user-mention current-user-mentio=
+n" data-account-id=3D"712020:0261be7e-dcf5-473f-b33c-ab1cbad4317e" href=3D"=
+https://kausaradam.atlassian.net/wiki/people/712020:0261be7e-dcf5-473f-b33c=
+-ab1cbad4317e?ref=3Dconfluence" target=3D"_blank" data-linked-resource-id=
+=3D"65864" data-linked-resource-version=3D"1" data-linked-resource-type=3D"=
+userinfo" data-base-url=3D"https://kausaradam.atlassian.net/wiki">Kausar Ad=
+am</a>)</p></td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">
+<p><strong>Participants</strong></p></th>
+<td class=3D"confluenceTd">
+<p><a class=3D"confluence-userlink user-mention current-user-mention" data-=
+account-id=3D"712020:0261be7e-dcf5-473f-b33c-ab1cbad4317e" href=3D"https://=
+kausaradam.atlassian.net/wiki/people/712020:0261be7e-dcf5-473f-b33c-ab1cbad=
+4317e?ref=3Dconfluence" target=3D"_blank" data-linked-resource-id=3D"65864"=
+ data-linked-resource-version=3D"1" data-linked-resource-type=3D"userinfo" =
+data-base-url=3D"https://kausaradam.atlassian.net/wiki">Kausar Adam</a></p>=
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id=3D"Sprint8Retrospective-Retrospective"><img class=3D"emoticon emotic=
+on-blue-star" data-emoji-id=3D"1f4ad" data-emoji-shortname=3D":thought_ball=
+oon:" data-emoji-fallback=3D"\uD83D\uDCAD" src=3D"ca8096d9e45d3f72f766c520d=
+ad3a8c0979e7b01e615f4eb2a5d31ab5a1aaf51" width=3D"16" height=3D"16" data-em=
+oticon-name=3D"blue-star" alt=3D"(blue star)">&nbsp;Retrospective</h2>
+<div class=3D"confluence-information-macro confluence-information-macro-inf=
+ormation">
+<span class=3D"aui-icon aui-icon-small aui-iconfont-info confluence-informa=
+tion-macro-icon"></span>
+<div class=3D"confluence-information-macro-body">
+<p>Add your Start doing, Stop doing, and Keep doing items to the table belo=
+w. We'll use these to talk about how we can improve our process going forwa=
+rd.</p>
+</div>
+</div>
+<div class=3D"table-wrap">
+<table data-table-width=3D"760" data-layout=3D"default" data-local-id=3D"23=
+ef5fd3-2527-4a6b-9967-71552152c320" class=3D"confluenceTable">
+<tbody>
+<tr>
+<th data-highlight-colour=3D"var(--ds-background-accent-green-subtlest, #e3=
+fcef)" class=3D"confluenceTh">
+<p><strong>Start doing</strong></p></th>
+<th data-highlight-colour=3D"var(--ds-background-accent-red-subtlest, #ffeb=
+e6)" class=3D"confluenceTh">
+<p><strong>Stop doing</strong></p></th>
+<th data-highlight-colour=3D"var(--ds-background-accent-teal-subtlest, #e6f=
+cff)" class=3D"confluenceTh">
+<p><strong>Keep doing</strong></p></th>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Working on the report</p></li>
+</ul></td>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Trying to multitask</p></li>
+</ul></td>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Working daily</p></li>
+</ul></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p></p></td>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Delaying tasks because they seem difficult</p></li>
+</ul></td>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Prioritising tasks</p></li>
+</ul></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">
+<p></p></td>
+<td class=3D"confluenceTd">
+<p></p></td>
+<td class=3D"confluenceTd">
+<ul>
+<li>
+<p>Updating jira, github and journal</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id=3D"Sprint8Retrospective-Actionitems"><img class=3D"emoticon emoticon=
+-blue-star" data-emoji-id=3D"2705" data-emoji-shortname=3D":white_check_mar=
+k:" data-emoji-fallback=3D"=E2=9C=85" src=3D"9c3ffede73e0215a9045474fbacd01=
+033e0f209fa6f24d6f3f6457753769d0aa" width=3D"16" height=3D"16" data-emotico=
+n-name=3D"blue-star" alt=3D"(blue star)">&nbsp;Action items</h2>
+<p></p>
+<ul class=3D"inline-task-list" data-inline-tasks-content-id=3D"26148866">
+<li data-inline-task-id=3D"1"><span class=3D"placeholder-inline-tasks">Staf=
+f portal testing</span></li>
+<li data-inline-task-id=3D"7"><span class=3D"placeholder-inline-tasks">Repo=
+rt</span></li>
+<li data-inline-task-id=3D"8"><span class=3D"placeholder-inline-tasks">Diag=
+rams</span></li>
+<li data-inline-task-id=3D"9"><span class=3D"placeholder-inline-tasks">Test=
+ cases</span></li>
+</ul>
+    </div>
+</body>
+</html>
+------=_Part_4_452262147.1731108725366
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/9c3ffede73e0215a9045474fbacd01033e0f209fa6f24d6f3f6457753769d0aa
+
+iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAARVBMVEVHcEx3slV3slV3slV3slV3
+slX///93slWAt2D3+vSRwHXM4r+72aqz1J/u9eqIvGrm8d+qz5WZxYDd7NXV58rE3bWiyor8Z4cF
+AAAABnRSTlMAYO8gz79WeQLOAAABcUlEQVR4Xu3YWY6DQAwEUEjA7pV1uf9RR1lGcjqtFGr3SPOR
+OsCD+imEm1vanhXp2+aRa8fKdNe7c2F1Ljep4wrpmqblKmmbvg7UN1wpfwZ9IbO4GtDoicgGNTRa
+usdroZWemXVQpN9MCMLFnlFBG9WBDuFsCshYAR0KaEteCEO4mDXlkBkEFLkc2oWzcjm0yGJjAimK
+FUMhKVYKORJxCmgSTuBySBabGECniymgVTg7l0NROIMph+Sa0cIAUhQDECiGILxmGHLekvUGrBmG
+jseTrcNrlofSBtaBYgCKRLlvqE/WDEMrCQmsGYaklF8zDO0k4z/MNIBGSqR8MQxxeJeGzJphiOOr
+tJr8mmGI51dpkqwD0EfpQzEA8WLzzsAISuPy0gIhLOXXDEM8Tu/FTAnEZsoVwxCWPBdCbDzhNcNQ
+ukIHKyAhbayCOIhiKohne3MGx1qITQxh/n+/ol+o2pGl2tmn1iGq2mms3rGu2vnwB/HSjdEb7tSV
+AAAAAElFTkSuQmCC
+------=_Part_4_452262147.1731108725366
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/fede7f9831c72428c941a272a7c64200c11f88bb2bf79a357101fe44d9d191ce
+
+iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAPFBMVEVHcEzM1t3M1t3M1t3M1t3M
+1t2Zoqg9REgpLzPM1t3M1t3M1t3BaU/BaU/BaU/CcFjgtKf////M1dqZqrWLZiLOAAAADnRSTlMA
+IJ/v/zD///8QUN9Q360w504AAADiSURBVHgB7dhVgoUwEERRIIVrw/7XOoI7HRl9fRdwgKS+8J7y
+AwWowPcsCxX6VGjn+ApRnCRxBOVbQQGipC9CYAUpxAMUQ9k4KZCMAZ52WY6lBZrLM6aDVcunreNJ
+OVYth70uZ57Luun6t90BRVn11WBUDZXFiVNNcaG+o1SaQeUBqsyg6s9ADRGBERE1txDxIfprELPf
+BgnUdie1BlB3mjPoxz6Nn+zovtbw+o99I2T/abKjv78j2ZHsSHYkUOvqsLvT3EPmnyY7aohdcwMZ
+9Beg0swpD1BhBhWnP1m0KxfnHV+T0IbfZ3ihAAAAAElFTkSuQmCC
+------=_Part_4_452262147.1731108725366
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/ca8096d9e45d3f72f766c520dad3a8c0979e7b01e615f4eb2a5d31ab5a1aaf51
+
+iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAM1BMVEVHcEy93fS93fS93fS93fS9
+3fS93fS93fS93fS93fS93fS93fS93fS93fS93fS93fS93fSov3vyAAAAEHRSTlMAII9wv88w758Q
+r99QQIBg/5/+pQAAAUlJREFUeF7t18tuxCAMBVATHuaV6f3/r61UIdERmclge1OpZ8niKhhiGfpD
+ks/hR32cJHZmxm/1iyS+IhbtQbtSwKXWacsDL+VCHysVb0T3cU7EW5wEOZqkiluxFF8ZALj6sl/n
+qd2XP2Efd1oFSBzrfQZskiKEOj05IcXPFc8QyzT1zJArNJwNKn7kHFCqszo6PL5Hbxy7TVAzCuow
+CsowwHNn+uOHBW8VVIyCMtkEcTG6Rn1pQ6pW201y9Hvjru7V63xyQCzQk6xraCbfRIO6+dOi56YM
+msyCWFfsKeiOf/KyhrZy2OboUhXuTD9DJnrhEM98qukvlt3JP8bdnOukWEq8z7mv03G9WjbffTWN
+1YoJIdEnnA8MABy8e7e6cpkBzo6UEs+3mIZjDOxIIy8jvBAvjUoIEyyD7LdmX2z747e/kJpfRO/f
+N20ms7m0AGmsAAAAAElFTkSuQmCC
+------=_Part_4_452262147.1731108725366--
