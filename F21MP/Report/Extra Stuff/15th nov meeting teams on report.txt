@@ -1,0 +1,53 @@
+◆ Usability evaluation: as an objective means to track use patterns, errors, navigation paths and time on task
+
+
+LTDI - system log data page 62
+
+
+will LR statements be in future tense or past tense? A progress bar was implemented in Coursework Wizard to visualize student progress.
+
+
+
+
+other parts were ignored, 
+
+progress bar image: origina picture for inspirtation in appendix
+
+requirements: what changes were made and why (chapter 3). include original. how i went back and changed them. 
+
+
+take text from industrial development thing RP
+
+role of client played by the supervisor
+
+sprint: good learning experinece, made mistakes after sprint image. reflection
+
+personas: what they are, role of personas, describe them, how it guided me, add in appendix (refer to it for role of...)
+
+no code snippets
+
+assumptions in implementation and limitation in conclusions (separate them) (dont belong together)
+
+
+unit testing and what i did, not more than one sentence (same for integration testing).
+
+
+test cases: a similar testing approach was taken for modulenumber modules. 
+
+
+full erd can be in the main document if i have space
+
+
+give only one or two sentences on intro of subject and then jump into what was done
+
+show the bad prototype and mention it as it shows iteration
+
+no need to compare the final project with the objectives set.
+
+add the future work document thingy in conclusion. conclusion will refelect in genereal, what went good, and what went bad, summarise challenges and highligh high bits about it
+future work: where do you go from here. couple of lines. run this pilot for one semester. one lecturer adopts this for one semester. To see in action instead of just 20 mins. 
+
+for mp, 
+
+
+dd112 lesson 4 shark1

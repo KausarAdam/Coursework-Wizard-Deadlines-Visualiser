@@ -1,0 +1,39 @@
+- does not support group projects
+- assuming the deadline time is before midnight
+- refelected on backups, github crash (final report)
+- revised lit review, methodology, evaluation,
+
+
+4/10/24
+Mention student or instructor dashboard
+
+student:
+-keep the colours of the courses same (timeline and dashboard), make the dashboard coursework colour light grey and only the border colour different 
+-coursework progress bar colour does not match with a darker shade of the tabs
+-competitor application coursework (heading)
+-board renamed progress board
+
+
+students only focus on deadlines not on the process. this tool will help them in work life since it is a mix of lms with project management tool (kanban). 
+Justify and reflect how your tool evolved
+use journals to show progress 
+mention all issues
+include the approach, agile solo, considering supervisor as a client
+screenshots in appendix
+
+
+
+
+07/10/24
+Make the  borders thicker for the student dashboard boxes
+Leave the sharing part
+Add all students in one course
+Testing for students on 21st October
+10 students
+5 professors
+For students, print consent, 2 questionnaires, and task sheet
+Ask if screen recording is allowed
+All testing I did should be there in the report. The ones i have done so far during development. Consult GitHub and make those test cases. The failed ones and passed ones. Justify failing
+One questionnaire will be SUS and second will be specific asking them how important this feature is, etc... to get feedback
+29th nov is the submission
+

@@ -1,0 +1,19 @@
+Abstract, Introduction, Motivation (10%)
+7% Excellent
+The abstract describes the project clearly. The introduction also highlights the existing gaps and motivates properly the project. The issue of coursework time management for students and meeting deadlines is clearly explained. Aims and objectives of the project are clear.
+
+
+Literature Review (40%)
+29% Excellent
+The literature review thoroughly covers the necessary background, related works, and offers a critical analysis that connects well with the proposed work, however, bit of the lit is not relevant to the project.
+
+
+Requirements and/or Proposed Methodology (incl. Evaluation) (30%)
+22% Excellent
+The project requirements are clearly specified and well-organized. The proposed methodology is outlined, and the inclusion of diagrams and figures enhances clarity. However, a clearer diagram or table illustrating the project scope in a step-by-step fashion could have added further clarity and potentially earned additional marks.
+Information about how the proposed work would be evaluated is provided, this included metrics and information on the process of the evaluation experiment.
+
+
+Project Plan (incl. Professional, Legal, Ethical, and Social Issues) (20%)
+12% Good
+The project requirements lack realistic task breakdowns and timelines. Creating a system prototype in just a couple of days seems unlikely. There is an appropriate risk analysis in place. The main PLES issues are clearly highlighted.
